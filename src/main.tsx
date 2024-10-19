@@ -31,7 +31,6 @@ const Main = () => {
           path='/detail/:id'
           element={<DetailPage />}
         />
-        {/* Add the new route for EditDataPage */}
         <Route
           path='/encode-data'
           element={<EncodeDataPage />}
