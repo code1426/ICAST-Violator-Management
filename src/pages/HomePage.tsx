@@ -1,7 +1,8 @@
-import React, { FC, useState } from 'react';
-import ClickableRow from '../components/clickablerows';
+import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import SortButton from '../components/sort';
+
+import SortButton from '../components/SortButton';
+import ViolatorCard from '../components/ViolatorCard';
 
 interface Entry {
   id: number;
@@ -10,7 +11,7 @@ interface Entry {
   date: string;
 }
 
-const LandingPage: FC = () => {
+const HomePage = () => {
   const initialEntries: Entry[] = [
     { id: 1001, name: 'Gerona, John Patrick', address: 'Balabago', date: '10/20/2024' },
     { id: 1002, name: 'Alair, Shawn Khennee', address: 'Lapaz', date: '10/21/2024' },
@@ -46,7 +47,7 @@ const LandingPage: FC = () => {
         </div>
 
         {entries.map(entry => (
-          <ClickableRow
+          <ViolatorCard
             key={entry.id}
             id={entry.id}
             name={entry.name}
@@ -60,4 +61,4 @@ const LandingPage: FC = () => {
   );
 };
 
-export default LandingPage;
+export default HomePage;

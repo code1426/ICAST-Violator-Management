@@ -1,4 +1,4 @@
-import React, { FC, useState } from 'react';
+import React, { useState } from 'react';
 
 interface Entry {
   id: number;
@@ -12,7 +12,7 @@ interface SortButtonProps {
   setEntries: React.Dispatch<React.SetStateAction<Entry[]>>;
 }
 
-const SortButton: FC<SortButtonProps> = ({ entries, setEntries }) => {
+const SortButton = ({ entries, setEntries }: SortButtonProps) => {
   const [isDropdownOpen, setDropdownOpen] = useState(false);
 
   const toggleDropdown = () => {
