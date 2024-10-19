@@ -3,8 +3,8 @@ import ReactDOM from 'react-dom/client';
 import { BrowserRouter, Route, Routes, useNavigate } from 'react-router-dom';
 import './global.css';
 import IcastEncoder from './pages/Encoder';
-import PoliceHome from './pages/policehome';
-import DetailPage from './pages/detailpage';
+import PoliceHome from './pages/PoliceHome';
+import DetailPage from './pages/DetailPage';
 
 const App = () => {
   const [username, setUsername] = useState('');
@@ -17,8 +17,7 @@ const App = () => {
     // Check the username and password
     if (username === 'admin' && password === 'password123') {
       navigate('/icastencoder');
-    }
-    if (username === 'police' && password === 'password123') {
+    } else if (username === 'police' && password === 'password123') {
       navigate('/policehome');
     } else {
       alert('Invalid username or password');
