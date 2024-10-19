@@ -13,10 +13,29 @@ interface Entry {
 
 const HomePage = () => {
   const initialEntries: Entry[] = [
-    { id: 1001, name: 'Gerona, John Patrick', address: 'Balabago', date: '10/20/2024' },
-    { id: 1002, name: 'Alair, Shawn Khennee', address: 'Lapaz', date: '10/21/2024' },
-    { id: 1003, name: 'Casio, John Rofer', address: 'Pavia', date: '10/22/2024' },
-    { id: 1004, name: 'Vergara, Kimly John', address: 'Calinog', date: '10/23/2024' },
+    { 
+      id: 1001, name: 'Gerona, John Patrick',
+      address: 'Balabago', 
+      date: '10/20/2024' 
+    },
+    { 
+      id: 1002, 
+      name: 'Alair, Shawn Khennee', 
+      address: 'Lapaz', 
+      date: '10/21/2024' 
+    },
+    { 
+      id: 1003, 
+      name: 'Casio, John Rofer', 
+      address: 'Pavia', 
+      date: '10/22/2024' 
+    },
+    { 
+      id: 1004, 
+      name: 'Vergara, Kimly John', 
+      address: 'Calinog', 
+      date: '10/23/2024' 
+    },
   ];
 
   const [entries, setEntries] = useState<Entry[]>(initialEntries);
