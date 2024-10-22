@@ -1,7 +1,9 @@
-import React, { FC, useState } from 'react';
-import ClickableRow from '../components/clickablerows';
+import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import SortButton from '../components/sort';
+
+import SortButton from '../components/SortButton';
+import ViolatorCard from '../components/ViolatorCard';
+import EncodeButton from '../components/EncodeButton';
 
 interface Entry {
   id: number;
@@ -10,12 +12,31 @@ interface Entry {
   date: string;
 }
 
-const LandingPage: FC = () => {
+const FormInputPage = () => {
   const initialEntries: Entry[] = [
-    { id: 1001, name: 'Gerona, John Patrick', address: 'Balabago', date: '10/20/2024' },
-    { id: 1002, name: 'Alair, Shawn Khennee', address: 'Lapaz', date: '10/21/2024' },
-    { id: 1003, name: 'Casio, John Rofer', address: 'Pavia', date: '10/22/2024' },
-    { id: 1004, name: 'Vergara, Kimly John', address: 'Calinog', date: '10/23/2024' },
+    { 
+      id: 1001, name: 'Gerona, John Patrick',
+      address: 'Balabago', 
+      date: '10/20/2024' 
+    },
+    { 
+      id: 1002, 
+      name: 'Alair, Shawn Khennee', 
+      address: 'Lapaz', 
+      date: '10/21/2024' 
+    },
+    { 
+      id: 1003, 
+      name: 'Casio, John Rofer', 
+      address: 'Pavia', 
+      date: '10/22/2024' 
+    },
+    { 
+      id: 1004, 
+      name: 'Vergara, Kimly John', 
+      address: 'Calinog', 
+      date: '10/23/2024' 
+    },
   ];
 
   const [entries, setEntries] = useState<Entry[]>(initialEntries);
@@ -33,7 +54,8 @@ const LandingPage: FC = () => {
           placeholder="Search..."
           className="border border-gray-300 rounded-lg p-2 w-1/2 shadow-sm focus:outline-none focus:ring-2 focus:ring-gray-500"
         />
-        <div className="w-5/6 flex justify-end mt-2">
+        <div className="w-5/6 flex justify-between mt-2">
+          <EncodeButton />
           <SortButton entries={entries} setEntries={setEntries} />
         </div>
       </div>
@@ -46,7 +68,7 @@ const LandingPage: FC = () => {
         </div>
 
         {entries.map(entry => (
-          <ClickableRow
+          <ViolatorCard
             key={entry.id}
             id={entry.id}
             name={entry.name}
@@ -60,4 +82,4 @@ const LandingPage: FC = () => {
   );
 };
 
-export default LandingPage;
+export default FormInputPage;

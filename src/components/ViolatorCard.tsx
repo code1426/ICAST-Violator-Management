@@ -1,7 +1,6 @@
-import React, { FC } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-interface ClickableRowProps {
+interface ViolatorProps {
   id: number; 
   name: string;
   address: string;
@@ -9,7 +8,7 @@ interface ClickableRowProps {
   onClick: () => void; 
 }
 
-const ClickableRow: FC<ClickableRowProps> = ({ id, name, address, date, onClick }) => {
+const ViolatorCard = ({ id, name, address, date, onClick }: ViolatorProps) => {
   const navigate = useNavigate();
 
   const handleClick = () => {
@@ -35,4 +34,4 @@ const ClickableRow: FC<ClickableRowProps> = ({ id, name, address, date, onClick 
   );
 };
 
-export default ClickableRow;
+export default ViolatorCard;

@@ -1,4 +1,3 @@
-import React from 'react';
 import { useParams } from 'react-router-dom';
 
 const entryData = [
@@ -23,7 +22,7 @@ const entryData = [
   },
 ];
 
-const DetailPage = () => {
+const ViolatorDetailPage = () => {
   const { id } = useParams<{ id: string }>();
 
   const entry = entryData.find((entry) => entry.id.toString() === id);
@@ -42,4 +41,4 @@ const DetailPage = () => {
   );
 };
 
-export default DetailPage;
+export default ViolatorDetailPage;
