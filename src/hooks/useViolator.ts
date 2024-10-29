@@ -10,11 +10,12 @@ export const useViolator = (violatorId: string) => {
   const [ loading, setLoading ] = useState(true);
 
   useEffect(() => {
-    const fetchViolations = async () => {
+    const fetchViolator = async () => {
         const { data, error } = await supabase.from("Violators")
-        .select(`*, Violations(*)`)
-        .eq("violator_id", violatorId)
+          .select(`*, Violations(*)`)
+          .eq("violator_id", violatorId)
         setLoading(false)
+
         if (error) {
           setError(error);
         } else if (data) {
@@ -22,7 +23,7 @@ export const useViolator = (violatorId: string) => {
       }
     };
 
-    fetchViolations();
+    fetchViolator();
   }, []);
 
   return { violator, loading, error };

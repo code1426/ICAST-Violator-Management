@@ -48,7 +48,7 @@ const HomePage = () => {
           <ViolatorCard
             key={violator.violator_id}
             id={violator.violator_id}
-            name={violator.first_name}
+            name={`${violator.first_name} ${violator.last_name}`}
             address={violator.address}
             date={violator.date_of_birth}
             onClick={() => navigate(`/detail/${violator.violator_id}`)}

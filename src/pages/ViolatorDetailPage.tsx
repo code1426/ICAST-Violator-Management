@@ -3,7 +3,6 @@ import { useViolator } from "../hooks/useViolator";
 
 const ViolatorDetailPage = () => {
   const { id } = useParams<{ id: string }>();
-
   const { violator, loading } = useViolator(id!);
 
   if (loading) {
