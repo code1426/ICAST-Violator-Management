@@ -1,11 +1,11 @@
-import React from 'react';
-import { useNavigate } from 'react-router-dom';
+import React from "react";
+import { useNavigate } from "react-router-dom";
 
 const EncodeButton: React.FC = () => {
   const navigate = useNavigate();
 
   const handleEncode = () => {
-    navigate('/formInput');
+    navigate("/formInput");
   };
 
   return (

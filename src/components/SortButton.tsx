@@ -23,9 +23,9 @@ const SortButton = ({ entries, setEntries }: SortButtonProps) => {
 
   const sortByDate = () => {
     const sortedEntries = [...entries].sort((a, b) => {
-      const dateA = new Date(a.date_of_birth);
-      const dateB = new Date(b.date_of_birth);
-      return dateA.getTime() - dateB.getTime();
+      const dateA = new Date(a.Violations.reverse()[0].violation_date);
+      const dateB = new Date(b.Violations.reverse()[0].violation_date);
+      return dateB.getTime() - dateA.getTime();
     });
     setEntries(sortedEntries);
     setDropdownOpen(false);

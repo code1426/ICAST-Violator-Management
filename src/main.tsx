@@ -1,7 +1,7 @@
 import ReactDOM from "react-dom/client";
 import { BrowserRouter, Route, Routes, Navigate } from "react-router-dom";
 
-import DetailPage from "./pages/ViolatorDetailPage";
+import ViolatorDetailPage from "./pages/ViolatorDetailPage";
 import HomePage from "./pages/HomePage";
 import LoginPage from "./pages/LoginPage";
 import FormInputPage from "./pages/FormInputPage";
@@ -14,7 +14,7 @@ const Main = () => {
         <Route path="/login" element={<LoginPage />} />
         <Route path="/formInput" element={<FormInputPage />} />
         <Route path="/home/:role" element={<HomePage />} />
-        <Route path="/detail/:id" element={<DetailPage />} />
+        <Route path="detail/:id" element={<ViolatorDetailPage />} />
       </Routes>
     </BrowserRouter>
   );

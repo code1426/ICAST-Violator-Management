@@ -1,4 +1,3 @@
-import { useNavigate } from "react-router-dom";
 import { useParams } from "react-router-dom";
 
 import SortButton from "../components/SortButton";
@@ -7,7 +6,6 @@ import { useViolators } from "../hooks/useViolators";
 import EncodeButton from "../components/EncodeButton";
 
 const HomePage = () => {
-  const navigate = useNavigate();
   const { role } = useParams<{ role: string }>();
   const { violators, setViolators, loading } = useViolators();
 
@@ -19,7 +17,7 @@ const HomePage = () => {
         </h1>
       </header>
 
-      <div className="flex flex-col items-center mb-4 m-6">
+      <div className="flex flex-col items-center mb-4">
         <input
           type="text"
           placeholder="Search..."
@@ -50,8 +48,7 @@ const HomePage = () => {
             id={violator.violator_id}
             name={`${violator.first_name} ${violator.last_name}`}
             address={violator.address}
-            date={violator.date_of_birth}
-            onClick={() => navigate(`/detail/${violator.violator_id}`)}
+            date={violator.Violations.reverse()[0].violation_date}
           />
         ))}
         {loading && (
