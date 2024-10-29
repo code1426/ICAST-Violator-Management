@@ -10,10 +10,8 @@ const LoginPage = () => {
     e.preventDefault();
 
     // Check the username and password
-    if (username === 'admin' && password === 'password123') {
-      navigate('/formInput');
-    } else if (username === 'police' && password === 'password123') {
-      navigate('/home');
+    if ((username === 'admin' || username === "police") && password === 'password123') {
+      navigate(`/home/${username}`);
     } else {
       alert('Invalid username or password');
     }
@@ -24,7 +22,7 @@ const LoginPage = () => {
       <div className='bg-white p-8 rounded-lg shadow-lg w-full max-w-md'>
         <div className='flex justify-center mb-4'>
           <img
-            src='src\assets\ICAST_Logo.png'
+            src='assets\ICAST_Logo.png'
             alt='Logo'
             className='w-32 h-32 rounded-full'
           />

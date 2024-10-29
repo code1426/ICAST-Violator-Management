@@ -1,38 +1,34 @@
-import React, { useState } from 'react';
-
-interface Entry {
-  id: number;
-  name: string;
-  address: string;
-  date: string;
-}
+import React, { useState } from "react";
+import { Violator } from "../types/violator";
 
 interface SortButtonProps {
-  entries: Entry[];
-  setEntries: React.Dispatch<React.SetStateAction<Entry[]>>;
+  entries: Violator[];
+  setEntries: React.Dispatch<React.SetStateAction<Violator[] | undefined>>;
 }
 
 const SortButton = ({ entries, setEntries }: SortButtonProps) => {
   const [isDropdownOpen, setDropdownOpen] = useState(false);
 
   const toggleDropdown = () => {
-    setDropdownOpen(prev => !prev);
+    setDropdownOpen((prev) => !prev);
   };
 
   const sortByName = () => {
-    const sortedEntries = [...entries].sort((a, b) => a.name.localeCompare(b.name));
+    const sortedEntries = [...entries].sort((a, b) =>
+      a.first_name.localeCompare(b.first_name)
+    );
     setEntries(sortedEntries);
-    setDropdownOpen(false); 
+    setDropdownOpen(false);
   };
 
   const sortByDate = () => {
     const sortedEntries = [...entries].sort((a, b) => {
-      const dateA = new Date(a.date);
-      const dateB = new Date(b.date);
+      const dateA = new Date(a.date_of_birth);
+      const dateB = new Date(b.date_of_birth);
       return dateA.getTime() - dateB.getTime();
     });
     setEntries(sortedEntries);
-    setDropdownOpen(false); 
+    setDropdownOpen(false);
   };
 
   return (
@@ -46,7 +42,12 @@ const SortButton = ({ entries, setEntries }: SortButtonProps) => {
 
       {isDropdownOpen && (
         <div className="absolute right-0 z-10 mt-2 w-48 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5">
-          <div className="py-1" role="menu" aria-orientation="vertical" aria-labelledby="options-menu">
+          <div
+            className="py-1"
+            role="menu"
+            aria-orientation="vertical"
+            aria-labelledby="options-menu"
+          >
             <button
               onClick={sortByName}
               className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 w-full text-left"

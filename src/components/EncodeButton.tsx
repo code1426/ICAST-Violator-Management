@@ -5,7 +5,7 @@ const EncodeButton: React.FC = () => {
   const navigate = useNavigate();
 
   const handleEncode = () => {
-    navigate('/encode-data');
+    navigate('/formInput');
   };
 
   return (

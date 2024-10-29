@@ -1,46 +1,26 @@
-import ReactDOM from 'react-dom/client';
-import { BrowserRouter, Route, Routes, Navigate } from 'react-router-dom';
+import ReactDOM from "react-dom/client";
+import { BrowserRouter, Route, Routes, Navigate } from "react-router-dom";
 
-import FormInputPage from './pages/FormInputPage';
-import DetailPage from './pages/ViolatorDetailPage';
-import HomePage from './pages/HomePage';
-import LoginPage from './pages/LoginPage';
-import EncodeDataPage from './pages/EncodeDataPage';
-
+import DetailPage from "./pages/ViolatorDetailPage";
+import HomePage from "./pages/HomePage";
+import LoginPage from "./pages/LoginPage";
+import FormInputPage from "./pages/FormInputPage";
 
 const Main = () => {
   return (
     <BrowserRouter>
       <Routes>
-        <Route 
-          path="/" 
-          element={<Navigate to="/login" replace />} />
-        <Route
-          path='/login'
-          element={<LoginPage />}
-        />
-        <Route
-          path='/formInput'
-          element={<FormInputPage />}
-        />
-        <Route
-          path='/home'
-          element={<HomePage />}
-        />
-        <Route
-          path='/detail/:id'
-          element={<DetailPage />}
-        />
-        <Route
-          path='/encode-data'
-          element={<EncodeDataPage />}
-        />
+        <Route path="/" element={<Navigate to="/login" replace />} />
+        <Route path="/login" element={<LoginPage />} />
+        <Route path="/formInput" element={<FormInputPage />} />
+        <Route path="/home/:role" element={<HomePage />} />
+        <Route path="/detail/:id" element={<DetailPage />} />
       </Routes>
     </BrowserRouter>
   );
 };
 
 const root = ReactDOM.createRoot(
-  document.getElementById('root') as HTMLElement
+  document.getElementById("root") as HTMLElement
 );
 root.render(<Main />);

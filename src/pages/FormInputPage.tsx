@@ -1,83 +1,266 @@
-import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import React, { useState } from "react";
 
-import SortButton from '../components/SortButton';
-import ViolatorCard from '../components/ViolatorCard';
-import EncodeButton from '../components/EncodeButton';
+const FormInputPage: React.FC = () => {
+  const [formData, setFormData] = useState({
+    firstName: "",
+    lastName: "",
+    middleName: "",
+    dateOfBirth: "",
+    address: "",
+    civilStatus: "",
+    sex: "",
+    institution: "",
+    location: "",
+    dateApprehended: "",
+    violatorType: "",
+    agentPolice: "",
+  });
 
-interface Entry {
-  id: number;
-  name: string;
-  address: string;
-  date: string;
-}
+  const [errors, setErrors] = useState({
+    firstName: "",
+    lastName: "",
+    middleName: "",
+    dateOfBirth: "",
+    address: "",
+    civilStatus: "",
+    sex: "",
+    institution: "",
+    location: "",
+    dateApprehended: "",
+    violatorType: "",
+    agentPolice: "",
+  });
 
-const FormInputPage = () => {
-  const initialEntries: Entry[] = [
-    { 
-      id: 1001, name: 'Gerona, John Patrick',
-      address: 'Balabago', 
-      date: '10/20/2024' 
-    },
-    { 
-      id: 1002, 
-      name: 'Alair, Shawn Khennee', 
-      address: 'Lapaz', 
-      date: '10/21/2024' 
-    },
-    { 
-      id: 1003, 
-      name: 'Casio, John Rofer', 
-      address: 'Pavia', 
-      date: '10/22/2024' 
-    },
-    { 
-      id: 1004, 
-      name: 'Vergara, Kimly John', 
-      address: 'Calinog', 
-      date: '10/23/2024' 
-    },
-  ];
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
+    setFormData({
+      ...formData,
+      [e.target.name]: e.target.value,
+    });
 
-  const [entries, setEntries] = useState<Entry[]>(initialEntries);
-  const navigate = useNavigate();
+    // Clear errors when user types/selects a value
+    if (e.target.value !== "") {
+      setErrors((prevErrors) => ({
+        ...prevErrors,
+        [e.target.name]: "",
+      }));
+    }
+  };
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+
+    let hasErrors = false;
+    const newErrors: any = {};
+
+    Object.keys(formData).forEach((key) => {
+      if (formData[key as keyof typeof formData] === "") {
+        newErrors[key] = `Please fill out the ${key.replace(/([A-Z])/g, " $1")}.`;
+        hasErrors = true;
+      }
+    });
+
+    setErrors(newErrors);
+
+    if (!hasErrors) {
+      console.log("Form Data:", formData);
+    }
+  };
 
   return (
-    <div className="min-h-screen bg-gray-50 p-0">
-      <header className="flex justify-center items-center mb-6 bg-beige-color">
-        <h1 className="text-2xl font-bold text-center">ILOILO CITY ANTI-SMOKING TASK FORCE</h1>
-      </header>
+    <div className="w-full max-w-lg mx-auto mt-10 p-6 border border-gray-300 rounded-lg shadow-md bg-white">
+      <h1 className="text-center text-lg font-semibold mb-4">ILOILO CITY ANTI-SMOKING TASK FORCE</h1>
+      <form onSubmit={handleSubmit} noValidate>
+        <div className="grid grid-cols-2 gap-4">
 
-      <div className="flex flex-col items-center mb-4 m-6">
-        <input
-          type="text"
-          placeholder="Search..."
-          className="border border-gray-300 rounded-lg p-2 w-1/2 shadow-sm focus:outline-none focus:ring-2 focus:ring-gray-500"
-        />
-        <div className="w-5/6 flex justify-between mt-2">
-          <EncodeButton />
-          <SortButton entries={entries} setEntries={setEntries} />
+          
+          <div className="col-span-2 font-semibold">Personal Details</div>
+          <div>
+            <label className="block text-sm">First Name:</label>
+            <input
+              type="text"
+              name="firstName"
+              value={formData.firstName}
+              onChange={handleChange}
+              className={`w-full px-3 py-2 border ${errors.firstName ? "border-red-500" : "border-gray-300"} rounded-md`}
+              required
+            />
+            {errors.firstName && <p className="text-red-500 text-sm">{errors.firstName}</p>}
+          </div>
+
+
+          <div>
+            <label className="block text-sm">Last Name:</label>
+            <input
+              type="text"
+              name="lastName"
+              value={formData.lastName}
+              onChange={handleChange}
+              className={`w-full px-3 py-2 border ${errors.lastName ? "border-red-500" : "border-gray-300"} rounded-md`}
+              required
+            />
+            {errors.lastName && <p className="text-red-500 text-sm">{errors.lastName}</p>}
+          </div>
+
+
+          <div>
+            <label className="block text-sm">Middle Name:</label>
+            <input
+              type="text"
+              name="middleName"
+              value={formData.middleName}
+              onChange={handleChange}
+              className={`w-full px-3 py-2 border ${errors.middleName ? "border-red-500" : "border-gray-300"} rounded-md`}
+              required
+            />
+            {errors.middleName && <p className="text-red-500 text-sm">{errors.middleName}</p>}
+          </div>
+
+
+          <div>
+            <label className="block text-sm">Date of Birth:</label>
+            <input
+              type="date"
+              name="dateOfBirth"
+              value={formData.dateOfBirth}
+              onChange={handleChange}
+              className={`w-full px-3 py-2 border ${errors.dateOfBirth ? "border-red-500" : "border-gray-300"} rounded-md`}
+              required
+            />
+            {errors.dateOfBirth && <p className="text-red-500 text-sm">{errors.dateOfBirth}</p>}
+          </div>
+
+
+          <div>
+            <label className="block text-sm">Address:</label>
+            <input
+              type="text"
+              name="address"
+              value={formData.address}
+              onChange={handleChange}
+              className={`w-full px-3 py-2 border ${errors.address ? "border-red-500" : "border-gray-300"} rounded-md`}
+              required
+            />
+            {errors.address && <p className="text-red-500 text-sm">{errors.address}</p>}
+          </div>
+
+
+          <div>
+            <label className="block text-sm">Institution:</label>
+            <input
+              type="text"
+              name="institution"
+              value={formData.institution}
+              onChange={handleChange}
+              className={`w-full px-3 py-2 border ${errors.institution ? "border-red-500" : "border-gray-300"} rounded-md`}
+              required
+            />
+            {errors.institution && <p className="text-red-500 text-sm">{errors.institution}</p>}
+          </div>
+
+
+          <div className="col-span-2 font-semibold">Violation Details</div>
+          <div>
+            <label className="block text-sm">Location:</label>
+            <input
+              type="text"
+              name="location"
+              value={formData.location}
+              onChange={handleChange}
+              className={`w-full px-3 py-2 border ${errors.location ? "border-red-500" : "border-gray-300"} rounded-md`}
+              required
+            />
+            {errors.location && <p className="text-red-500 text-sm">{errors.location}</p>}
+          </div>
+
+
+          <div>
+            <label className="block text-sm">Date Apprehended:</label>
+            <input
+              type="date"
+              name="dateApprehended"
+              value={formData.dateApprehended}
+              onChange={handleChange}
+              className={`w-full px-3 py-2 border ${errors.dateApprehended ? "border-red-500" : "border-gray-300"} rounded-md`}
+              required
+            />
+            {errors.dateApprehended && <p className="text-red-500 text-sm">{errors.dateApprehended}</p>}
+          </div>
+
+
+          <div>
+            <label className="block text-sm">Agent/Police:</label>
+            <input
+              type="text"
+              name="agentPolice"
+              value={formData.agentPolice}
+              onChange={handleChange}
+              className={`w-full px-3 py-2 border ${errors.agentPolice ? "border-red-500" : "border-gray-300"} rounded-md`}
+              required
+            />
+            {errors.agentPolice && <p className="text-red-500 text-sm">{errors.agentPolice}</p>}
+          </div>
+
+
+          <div>
+            <label className="block text-sm">Civil Status:</label>
+            <select
+              name="civilStatus"
+              value={formData.civilStatus}
+              onChange={handleChange}
+              className={`w-full px-3 py-2 border ${errors.civilStatus ? "border-red-500" : "border-gray-300"} rounded-md`}
+              required
+            >
+              <option value="">--Select--</option>
+              <option value="Single">Single</option>
+              <option value="Married">Married</option>
+            </select>
+            {errors.civilStatus && <p className="text-red-500 text-sm">{errors.civilStatus}</p>}
+          </div>
+
+
+          <div>
+            <label className="block text-sm">Sex:</label>
+            <select
+              name="sex"
+              value={formData.sex}
+              onChange={handleChange}
+              className={`w-full px-3 py-2 border ${errors.sex ? "border-red-500" : "border-gray-300"} rounded-md`}
+              required
+            >
+              <option value="">--Select--</option>
+              <option value="Male">Male</option>
+              <option value="Female">Female</option>
+            </select>
+            {errors.sex && <p className="text-red-500 text-sm">{errors.sex}</p>}
+          </div>
+
+         
+          <div>
+            <label className="block text-sm">Violator Type:</label>
+            <select
+              name="violatorType"
+              value={formData.violatorType}
+              onChange={handleChange}
+              className={`w-full px-3 py-2 border ${errors.violatorType ? "border-red-500" : "border-gray-300"} rounded-md`}
+              required
+            >
+              <option value="">--Select--</option>
+              <option value="Student">Student</option>
+              <option value="Civilian">Civilian</option>
+            </select>
+            {errors.violatorType && <p className="text-red-500 text-sm">{errors.violatorType}</p>}
+          </div>
         </div>
-      </div>
 
-      <div className="flex flex-col items-center">
-        <div className="flex justify-between bg-gray-300 p-3 rounded-t-lg shadow-md w-5/6">
-          <div className="flex-1 text-left"><span className="font-bold">Name</span></div>
-          <div className="flex-1 text-center"><span className="font-bold">Address</span></div>
-          <div className="flex-1 text-right"><span className="font-bold">Date</span></div>
+        <div className="flex justify-center mt-6">
+          <button
+            type="submit"
+            className="px-6 py-2 bg-gray-800 text-white font-semibold rounded-md hover:bg-gray-700"
+          >
+            Add
+          </button>
         </div>
-
-        {entries.map(entry => (
-          <ViolatorCard
-            key={entry.id}
-            id={entry.id}
-            name={entry.name}
-            address={entry.address}
-            date={entry.date}
-            onClick={() => navigate(`/detail/${entry.id}`)} 
-          />
-        ))}
-      </div>
+      </form>
     </div>
   );
 };
