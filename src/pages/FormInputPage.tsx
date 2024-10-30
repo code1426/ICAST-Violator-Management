@@ -31,7 +31,9 @@ const FormInputPage: React.FC = () => {
     agentPolice: "",
   });
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
+  ) => {
     setFormData({
       ...formData,
       [e.target.name]: e.target.value,
@@ -54,7 +56,10 @@ const FormInputPage: React.FC = () => {
 
     Object.keys(formData).forEach((key) => {
       if (formData[key as keyof typeof formData] === "") {
-        newErrors[key] = `Please fill out the ${key.replace(/([A-Z])/g, " $1")}.`;
+        newErrors[key] = `Please fill out the ${key.replace(
+          /([A-Z])/g,
+          " $1"
+        )}.`;
         hasErrors = true;
       }
     });
@@ -68,11 +73,11 @@ const FormInputPage: React.FC = () => {
 
   return (
     <div className="w-full max-w-lg mx-auto mt-10 p-6 border border-gray-300 rounded-lg shadow-md bg-white">
-      <h1 className="text-center text-lg font-semibold mb-4">ILOILO CITY ANTI-SMOKING TASK FORCE</h1>
+      <h1 className="text-center text-lg font-semibold mb-4">
+        ILOILO CITY ANTI-SMOKING TASK FORCE
+      </h1>
       <form onSubmit={handleSubmit} noValidate>
         <div className="grid grid-cols-2 gap-4">
-
-          
           <div className="col-span-2 font-semibold">Personal Details</div>
           <div>
             <label className="block text-sm">First Name:</label>
@@ -81,12 +86,15 @@ const FormInputPage: React.FC = () => {
               name="firstName"
               value={formData.firstName}
               onChange={handleChange}
-              className={`w-full px-3 py-2 border ${errors.firstName ? "border-red-500" : "border-gray-300"} rounded-md`}
+              className={`w-full px-3 py-2 border ${
+                errors.firstName ? "border-red-500" : "border-gray-300"
+              } rounded-md`}
               required
             />
-            {errors.firstName && <p className="text-red-500 text-sm">{errors.firstName}</p>}
+            {errors.firstName && (
+              <p className="text-red-500 text-sm">{errors.firstName}</p>
+            )}
           </div>
-
 
           <div>
             <label className="block text-sm">Last Name:</label>
@@ -95,12 +103,15 @@ const FormInputPage: React.FC = () => {
               name="lastName"
               value={formData.lastName}
               onChange={handleChange}
-              className={`w-full px-3 py-2 border ${errors.lastName ? "border-red-500" : "border-gray-300"} rounded-md`}
+              className={`w-full px-3 py-2 border ${
+                errors.lastName ? "border-red-500" : "border-gray-300"
+              } rounded-md`}
               required
             />
-            {errors.lastName && <p className="text-red-500 text-sm">{errors.lastName}</p>}
+            {errors.lastName && (
+              <p className="text-red-500 text-sm">{errors.lastName}</p>
+            )}
           </div>
-
 
           <div>
             <label className="block text-sm">Middle Name:</label>
@@ -109,12 +120,15 @@ const FormInputPage: React.FC = () => {
               name="middleName"
               value={formData.middleName}
               onChange={handleChange}
-              className={`w-full px-3 py-2 border ${errors.middleName ? "border-red-500" : "border-gray-300"} rounded-md`}
+              className={`w-full px-3 py-2 border ${
+                errors.middleName ? "border-red-500" : "border-gray-300"
+              } rounded-md`}
               required
             />
-            {errors.middleName && <p className="text-red-500 text-sm">{errors.middleName}</p>}
+            {errors.middleName && (
+              <p className="text-red-500 text-sm">{errors.middleName}</p>
+            )}
           </div>
-
 
           <div>
             <label className="block text-sm">Date of Birth:</label>
@@ -123,12 +137,15 @@ const FormInputPage: React.FC = () => {
               name="dateOfBirth"
               value={formData.dateOfBirth}
               onChange={handleChange}
-              className={`w-full px-3 py-2 border ${errors.dateOfBirth ? "border-red-500" : "border-gray-300"} rounded-md`}
+              className={`w-full px-3 py-2 border ${
+                errors.dateOfBirth ? "border-red-500" : "border-gray-300"
+              } rounded-md`}
               required
             />
-            {errors.dateOfBirth && <p className="text-red-500 text-sm">{errors.dateOfBirth}</p>}
+            {errors.dateOfBirth && (
+              <p className="text-red-500 text-sm">{errors.dateOfBirth}</p>
+            )}
           </div>
-
 
           <div>
             <label className="block text-sm">Address:</label>
@@ -137,12 +154,15 @@ const FormInputPage: React.FC = () => {
               name="address"
               value={formData.address}
               onChange={handleChange}
-              className={`w-full px-3 py-2 border ${errors.address ? "border-red-500" : "border-gray-300"} rounded-md`}
+              className={`w-full px-3 py-2 border ${
+                errors.address ? "border-red-500" : "border-gray-300"
+              } rounded-md`}
               required
             />
-            {errors.address && <p className="text-red-500 text-sm">{errors.address}</p>}
+            {errors.address && (
+              <p className="text-red-500 text-sm">{errors.address}</p>
+            )}
           </div>
-
 
           <div>
             <label className="block text-sm">Institution:</label>
@@ -151,12 +171,15 @@ const FormInputPage: React.FC = () => {
               name="institution"
               value={formData.institution}
               onChange={handleChange}
-              className={`w-full px-3 py-2 border ${errors.institution ? "border-red-500" : "border-gray-300"} rounded-md`}
+              className={`w-full px-3 py-2 border ${
+                errors.institution ? "border-red-500" : "border-gray-300"
+              } rounded-md`}
               required
             />
-            {errors.institution && <p className="text-red-500 text-sm">{errors.institution}</p>}
+            {errors.institution && (
+              <p className="text-red-500 text-sm">{errors.institution}</p>
+            )}
           </div>
-
 
           <div className="col-span-2 font-semibold">Violation Details</div>
           <div>
@@ -166,12 +189,15 @@ const FormInputPage: React.FC = () => {
               name="location"
               value={formData.location}
               onChange={handleChange}
-              className={`w-full px-3 py-2 border ${errors.location ? "border-red-500" : "border-gray-300"} rounded-md`}
+              className={`w-full px-3 py-2 border ${
+                errors.location ? "border-red-500" : "border-gray-300"
+              } rounded-md`}
               required
             />
-            {errors.location && <p className="text-red-500 text-sm">{errors.location}</p>}
+            {errors.location && (
+              <p className="text-red-500 text-sm">{errors.location}</p>
+            )}
           </div>
-
 
           <div>
             <label className="block text-sm">Date Apprehended:</label>
@@ -180,12 +206,15 @@ const FormInputPage: React.FC = () => {
               name="dateApprehended"
               value={formData.dateApprehended}
               onChange={handleChange}
-              className={`w-full px-3 py-2 border ${errors.dateApprehended ? "border-red-500" : "border-gray-300"} rounded-md`}
+              className={`w-full px-3 py-2 border ${
+                errors.dateApprehended ? "border-red-500" : "border-gray-300"
+              } rounded-md`}
               required
             />
-            {errors.dateApprehended && <p className="text-red-500 text-sm">{errors.dateApprehended}</p>}
+            {errors.dateApprehended && (
+              <p className="text-red-500 text-sm">{errors.dateApprehended}</p>
+            )}
           </div>
-
 
           <div>
             <label className="block text-sm">Agent/Police:</label>
@@ -194,12 +223,15 @@ const FormInputPage: React.FC = () => {
               name="agentPolice"
               value={formData.agentPolice}
               onChange={handleChange}
-              className={`w-full px-3 py-2 border ${errors.agentPolice ? "border-red-500" : "border-gray-300"} rounded-md`}
+              className={`w-full px-3 py-2 border ${
+                errors.agentPolice ? "border-red-500" : "border-gray-300"
+              } rounded-md`}
               required
             />
-            {errors.agentPolice && <p className="text-red-500 text-sm">{errors.agentPolice}</p>}
+            {errors.agentPolice && (
+              <p className="text-red-500 text-sm">{errors.agentPolice}</p>
+            )}
           </div>
-
 
           <div>
             <label className="block text-sm">Civil Status:</label>
@@ -207,16 +239,19 @@ const FormInputPage: React.FC = () => {
               name="civilStatus"
               value={formData.civilStatus}
               onChange={handleChange}
-              className={`w-full px-3 py-2 border ${errors.civilStatus ? "border-red-500" : "border-gray-300"} rounded-md`}
+              className={`w-full px-3 py-2 border ${
+                errors.civilStatus ? "border-red-500" : "border-gray-300"
+              } rounded-md`}
               required
             >
               <option value="">--Select--</option>
               <option value="Single">Single</option>
               <option value="Married">Married</option>
             </select>
-            {errors.civilStatus && <p className="text-red-500 text-sm">{errors.civilStatus}</p>}
+            {errors.civilStatus && (
+              <p className="text-red-500 text-sm">{errors.civilStatus}</p>
+            )}
           </div>
-
 
           <div>
             <label className="block text-sm">Sex:</label>
@@ -224,7 +259,9 @@ const FormInputPage: React.FC = () => {
               name="sex"
               value={formData.sex}
               onChange={handleChange}
-              className={`w-full px-3 py-2 border ${errors.sex ? "border-red-500" : "border-gray-300"} rounded-md`}
+              className={`w-full px-3 py-2 border ${
+                errors.sex ? "border-red-500" : "border-gray-300"
+              } rounded-md`}
               required
             >
               <option value="">--Select--</option>
@@ -234,21 +271,24 @@ const FormInputPage: React.FC = () => {
             {errors.sex && <p className="text-red-500 text-sm">{errors.sex}</p>}
           </div>
 
-         
           <div>
             <label className="block text-sm">Violator Type:</label>
             <select
               name="violatorType"
               value={formData.violatorType}
               onChange={handleChange}
-              className={`w-full px-3 py-2 border ${errors.violatorType ? "border-red-500" : "border-gray-300"} rounded-md`}
+              className={`w-full px-3 py-2 border ${
+                errors.violatorType ? "border-red-500" : "border-gray-300"
+              } rounded-md`}
               required
             >
               <option value="">--Select--</option>
               <option value="Student">Student</option>
               <option value="Civilian">Civilian</option>
             </select>
-            {errors.violatorType && <p className="text-red-500 text-sm">{errors.violatorType}</p>}
+            {errors.violatorType && (
+              <p className="text-red-500 text-sm">{errors.violatorType}</p>
+            )}
           </div>
         </div>
 

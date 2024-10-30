@@ -1,9 +1,11 @@
 import React, { useState } from "react";
-import { Violator } from "../types/violator";
+import { CaughtViolator } from "../types/violator";
 
 interface SortButtonProps {
-  entries: Violator[];
-  setEntries: React.Dispatch<React.SetStateAction<Violator[] | undefined>>;
+  entries: CaughtViolator[];
+  setEntries: React.Dispatch<
+    React.SetStateAction<CaughtViolator[] | undefined>
+  >;
 }
 
 const SortButton = ({ entries, setEntries }: SortButtonProps) => {

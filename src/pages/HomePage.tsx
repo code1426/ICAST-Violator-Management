@@ -7,7 +7,7 @@ import EncodeButton from '../components/EncodeButton';
 
 const HomePage = () => {
   const { role } = useParams<{ role: string }>();
-  const { violators, setViolators, loading } = useViolators();
+  const { caughtViolatorList, setViolators, loading } = useViolators();
 
   function getAge(dateString: string) {
     var today = new Date();
@@ -34,12 +34,14 @@ const HomePage = () => {
           placeholder='Search...'
           className='border border-gray-300 rounded-lg p-2 w-1/2 shadow-sm focus:outline-none focus:ring-2 focus:ring-gray-500'
         />
-        <div className='w-5/6 flex justify-between mt-2'>
-          {role === 'admin' && <EncodeButton />}
-          <SortButton
-            entries={violators!}
-            setEntries={setViolators}
-          />
+        <div
+          className={`w-5/6 flex mt-2 ${
+            role === "admin" ? "justify-between" : "justify-end"
+          }`}
+        >
+          {role === "admin" && <EncodeButton />}
+          <SortButton entries={caughtViolatorList!} setEntries={setViolators} />
+
         </div>
       </div>
 
@@ -74,19 +76,19 @@ const HomePage = () => {
           </div>
         </div>
 
-        {violators?.map((violator) => (
+        {caughtViolatorList?.map((caughtViolator) => (
           <ViolatorCard
-            key={violator.violator_id}
-            id={violator.violator_id}
-            name={`${violator.first_name} ${violator.last_name}`}
-            placeOfViolation={violator.address}
-            date={violator.Violations.reverse()[0].violation_date}
-            age={getAge(violator.date_of_birth)}
-            sex={violator.sex}
-            apprehendorType={violator.Violations.reverse()[0].apprehendor_type}
-            apprehendorName={violator.Violations.reverse()[0].apprehendor_name}
-            ORNumber={violator.Violations.reverse()[0].OR_number}
-            paidStatus={violator.Violations.reverse()[0].paid}
+            key={caughtViolator.id}
+            id={caughtViolator.id}
+            name={`${caughtViolator.first_name} ${caughtViolator.last_name}`}
+            placeOfViolation={caughtViolator.address}
+            date={caughtViolator.Violations.reverse()[0].violation_date}
+            age={getAge(caughtViolator.date_of_birth)}
+            sex={caughtViolator.sex}
+            apprehendorType={caughtViolator.Violations.reverse()[0].apprehendor_type}
+            apprehendorName={caughtViolator.Violations.reverse()[0].apprehendor_name}
+            ORNumber={caughtViolator.Violations.reverse()[0].OR_number}
+            paidStatus={caughtViolator.Violations.reverse()[0].paid}
           />
         ))}
         {loading && (
