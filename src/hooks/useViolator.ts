@@ -1,30 +1,30 @@
 import { useEffect, useState } from "react";
 import { PostgrestError } from "@supabase/supabase-js";
-import type { Violator } from "../types/violator";
+import type { CaughtViolator } from "../types/violator";
 
 import supabase from "../utils/supabase";
 
 export const useViolator = (violatorId: string) => {
-  const [ violator, setViolator ] = useState<Violator>();
+  const [ caughtViolator, setViolator ] = useState<CaughtViolator>();
   const [ error, setError ] = useState<PostgrestError | null>(null);
   const [ loading, setLoading ] = useState(true);
 
   useEffect(() => {
     const fetchViolator = async () => {
-        const { data, error } = await supabase.from("Violators")
-          .select(`*, Violations(*)`)
-          .eq("violator_id", violatorId)
-        setLoading(false)
+      const { data, error } = await supabase.from("CaughtViolators")
+        .select(`*, Violations(*)`)
+        .eq("id", violatorId)
+      setLoading(false)
 
-        if (error) {
-          setError(error);
-        } else if (data) {
-          setViolator(data[0]);
+      if (error) {
+        setError(error);
+      } else if (data) {
+        setViolator(data[0]);
       }
     };
 
     fetchViolator();
   }, []);
 
-  return { violator, loading, error };
+  return { caughtViolator, loading, error };
 };

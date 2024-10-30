@@ -7,7 +7,7 @@ import EncodeButton from "../components/EncodeButton";
 
 const HomePage = () => {
   const { role } = useParams<{ role: string }>();
-  const { violators, setViolators, loading } = useViolators();
+  const { caughtViolatorList, setViolators, loading } = useViolators();
 
   return (
     <div className="min-h-screen bg-gray-50 p-0">
@@ -23,9 +23,13 @@ const HomePage = () => {
           placeholder="Search..."
           className="border border-gray-300 rounded-lg p-2 w-1/2 shadow-sm focus:outline-none focus:ring-2 focus:ring-gray-500"
         />
-        <div className="w-5/6 flex justify-between mt-2">
-          {role === "admin" && (<EncodeButton />)}
-          <SortButton entries={violators!} setEntries={setViolators} />
+        <div
+          className={`w-5/6 flex mt-2 ${
+            role === "admin" ? "justify-between" : "justify-end"
+          }`}
+        >
+          {role === "admin" && <EncodeButton />}
+          <SortButton entries={caughtViolatorList!} setEntries={setViolators} />
         </div>
       </div>
 
@@ -42,13 +46,13 @@ const HomePage = () => {
           </div>
         </div>
 
-        {violators?.map((violator) => (
+        {caughtViolatorList?.map((caughtViolator) => (
           <ViolatorCard
-            key={violator.violator_id}
-            id={violator.violator_id}
-            name={`${violator.first_name} ${violator.last_name}`}
-            address={violator.address}
-            date={violator.Violations.reverse()[0].violation_date}
+            key={caughtViolator.id}
+            id={caughtViolator.id}
+            name={`${caughtViolator.first_name} ${caughtViolator.last_name}`}
+            address={caughtViolator.address}
+            date={caughtViolator.Violations.reverse()[0].violation_date}
           />
         ))}
         {loading && (
