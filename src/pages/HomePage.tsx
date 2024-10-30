@@ -85,8 +85,8 @@ const HomePage = () => {
             date={caughtViolator.Violations.reverse()[0].violation_date}
             age={getAge(caughtViolator.date_of_birth)}
             sex={caughtViolator.sex}
-            apprehendorType={caughtViolator.Violations.reverse()[0].apprehendor_type}
-            apprehendorName={caughtViolator.Violations.reverse()[0].apprehendor_name}
+            apprehendorType={caughtViolator.Violations.reverse()[0].apprehender_type}
+            apprehendorName={caughtViolator.Violations.reverse()[0].apprehender_name}
             ORNumber={caughtViolator.Violations.reverse()[0].OR_number}
             paidStatus={caughtViolator.Violations.reverse()[0].paid}
           />
