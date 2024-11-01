@@ -92,9 +92,7 @@ const FormInputPage: React.FC = () => {
         error: <b>Something went wrong!</b>,
       });
       setLoading(false);
-      setTimeout(() => {
-        navigate("/home/admin");
-      }, 2000);
+      setFormData(formInitialvalues)
     }
   };
 
@@ -425,7 +423,7 @@ const FormInputPage: React.FC = () => {
               {loading ? (
                 <Spinner size={10} color="#fff" animating={loading} />
               ) : (
-                "Button"
+                "Submit"
               )}
             </button>
           </div>
