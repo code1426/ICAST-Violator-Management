@@ -1,18 +1,17 @@
-import React from "react";
-import { useNavigate } from "react-router-dom";
+import React from 'react';
+import { useNavigate } from 'react-router-dom';
 
 const EncodeButton: React.FC = () => {
   const navigate = useNavigate();
 
   const handleEncode = () => {
-    navigate("/formInput");
+    navigate('/formInput');
   };
 
   return (
     <button
       onClick={handleEncode}
-      className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
-    >
+      className='bg-color1 hover:bg-color2 text-white py-2 px-4 rounded lg:text-base md:text-sm text-xs'>
       Encode
     </button>
   );
