@@ -156,6 +156,7 @@ const FormInputPage: React.FC = () => {
                 <input
                   type="text"
                   name="MiddleName"
+                  placeholder="Optional"
                   value={formData.MiddleName}
                   onChange={handleChange}
                   className={`w-full px-3 py-2 border ${
