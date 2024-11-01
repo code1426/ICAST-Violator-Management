@@ -57,7 +57,7 @@ const useInsertViolator = () => {
     }
   };
 
-  return { insertData, loading, error };
+  return { insertData, loading, setLoading, error };
 };
 
 export default useInsertViolator;

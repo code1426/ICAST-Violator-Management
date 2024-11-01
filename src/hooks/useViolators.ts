@@ -5,15 +5,18 @@ import { CaughtViolator } from "../types/violator";
 import supabase from "../utils/supabase";
 
 export const useViolators = () => {
-  const [ caughtViolatorList, setViolators ] = useState<CaughtViolator[] | undefined>([]);
-  const [ error, setError ] = useState<PostgrestError | null>(null);
-  const [ loading, setLoading ] = useState(true);
+  const [caughtViolatorList, setViolators] = useState<
+    CaughtViolator[] | undefined
+  >([]);
+  const [error, setError] = useState<PostgrestError | null>(null);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const fetchViolators = async () => {
-      const { data, error } = await supabase.from("CaughtViolators")
+      const { data, error } = await supabase
+        .from("CaughtViolators")
         .select(`*, Violations (*)`);
-      setLoading(false)
+      setLoading(false);
 
       if (error) {
         setError(error);

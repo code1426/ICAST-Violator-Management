@@ -1,7 +1,10 @@
-import { useParams } from 'react-router-dom';
-import { useViolator } from '../hooks/useViolator';
-import ViolationsCard from '../components/ViolationsCard';
-import Header from '../components/Header';
+import { useParams } from "react-router-dom";
+import { useViolator } from "../hooks/useViolator";
+import ViolationsCard from "../components/ViolationsCard";
+import Header from "../components/Header";
+
+import { Spinner } from "react-activity";
+import "react-activity/dist/Spinner.css";
 
 const ViolatorDetailPage = () => {
   const { id } = useParams<{ id: string }>();
@@ -25,53 +28,65 @@ const ViolatorDetailPage = () => {
 
   if (loading) {
     return (
-      <div className='flex text-lg justify-self-center self-center font-semibold p-12'>
-        Loading...
-      </div>
+      <>
+        <Header />
+        <div className="flex text-lg h-screen w-screen items-center justify-center font-semibold p-12">
+          <Spinner size={50} color="#3A2D28" />
+        </div>
+      </>
     );
   }
 
   return (
     <div>
       <Header />
-      <div className='flex flex-col p-5'>
-        <div className='my-5 bg-color3 p-10 space-y-3 rounded-3xl border-2 border-color1'>
-          <h1 className='lg:text-2xl md:text-xl text-lg font-bold'>
+      <div className="flex flex-col p-5">
+        <div className="my-5 bg-color3 p-10 space-y-3 rounded-3xl border-2 border-color1">
+          <h1 className="lg:text-2xl md:text-xl text-lg font-bold">
             Violator ID : {caughtViolator!.id}
           </h1>
-          <p className='lg:text-lg md:text-base text-sm'>
-            Name :{' '}
-            {caughtViolator!.first_name + ' ' + caughtViolator!.last_name}
+          <p className="lg:text-lg md:text-base text-sm">
+            Name :{" "}
+            {caughtViolator!.first_name + " " + caughtViolator!.last_name}
           </p>
-          <p className='lg:text-lg md:text-base text-sm'>
+          <p className="lg:text-lg md:text-base text-sm">
             Address : {caughtViolator!.address}
           </p>
-          <p className='lg:text-lg md:text-base text-sm'>
+          <p className="lg:text-lg md:text-base text-sm">
             Age : {getAge(caughtViolator!.date_of_birth)}
           </p>
+          <p className="lg:text-lg md:text-base text-sm">
+            Sex : {caughtViolator!.sex}
+          </p>
+          <p className="lg:text-lg md:text-base text-sm">
+            Civil Status : {caughtViolator!.civil_status}
+          </p>
+          <p className="lg:text-lg md:text-base text-sm">
+            Institution : {caughtViolator!.institution}
+          </p>
         </div>
-        <div className='flex flex-col items-center'>
-          <div className='flex justify-between items-center border-2 mb-3 border-black bg-color4 p-3 rounded-t-lg shadow-md w-full lg:text-base text-xs space-x-2'>
-            <div className='flex-1 text-left'>
-              <span className='font-bold'>Violation Date</span>
+        <div className="flex flex-col items-center">
+          <div className="flex justify-between items-center border-2 mb-3 border-black bg-color4 p-3 rounded-t-lg shadow-md w-full lg:text-base text-xs space-x-2">
+            <div className="flex-1 text-left">
+              <span className="font-bold">Violation Date</span>
             </div>
-            <div className='flex-1 text-center'>
-              <span className='font-bold'>Place of Violation</span>
+            <div className="flex-1 text-center">
+              <span className="font-bold">Place of Violation</span>
             </div>
-            <div className='flex-1 text-center'>
-              <span className='font-bold'>Violator Type</span>
+            <div className="flex-1 text-center">
+              <span className="font-bold">Violator Type</span>
             </div>
-            <div className='flex-1 text-center'>
-              <span className='font-bold'>Apprehender Name </span>
+            <div className="flex-1 text-center">
+              <span className="font-bold">Apprehender Name </span>
             </div>
-            <div className='flex-1 text-center'>
-              <span className='font-bold'>Apprehender Type</span>
+            <div className="flex-1 text-center">
+              <span className="font-bold">Apprehender Type</span>
             </div>
-            <div className='flex-1 text-center'>
-              <span className='font-bold'>OR No. </span>
+            <div className="flex-1 text-center">
+              <span className="font-bold">OR No. </span>
             </div>
-            <div className='flex-1 text-center'>
-              <span className='font-bold'>Status</span>
+            <div className="flex-1 text-center">
+              <span className="font-bold">Status</span>
             </div>
           </div>
           {ViolationsList?.map((violations) => (
