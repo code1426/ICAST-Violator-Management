@@ -156,6 +156,7 @@ const FormInputPage: React.FC = () => {
                   name="MiddleName"
                   value={formData.MiddleName}
                   onChange={handleChange}
+                  placeholder="Optional"
                   className={`w-full px-3 py-2 border ${
                     errors.MiddleName ? "border-red-500" : "border-gray-300"
                   } rounded-md`}
