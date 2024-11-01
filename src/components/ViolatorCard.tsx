@@ -17,16 +17,16 @@ const ViolatorCard = ({
 
   return (
     <div
-      className='flex justify-between items-center bg-gray-200 p-4 rounded-lg shadow-md cursor-pointer mb-2 m-4 w-5/6'
+      className='flex justify-between items-center bg-color5 border border-black p-4 rounded-lg shadow-md cursor-pointer my-1 w-5/6 lg:text-base md:text-sm text-xs'
       onClick={() => navigate(`/detail/${id}`)}>
       <div className='flex-1 text-left'>
-        <span className='text-bs font-medium'>{name}</span>
+        <span className=' font-medium'>{name}</span>
       </div>
       <div className='flex-1 text-center'>
-        <span className='text-bs font-medium'>{placeOfViolation}</span>
+        <span className=' font-medium'>{placeOfViolation}</span>
       </div>
       <div className='flex-1 text-center'>
-        <span className='text-bs font-medium'>{latestViolationDate}</span>
+        <span className=' font-medium'>{latestViolationDate}</span>
       </div>
     </div>
   );
