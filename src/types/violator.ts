@@ -12,6 +12,19 @@ export interface Violation {
   violator_type: Database["public"]["Enums"]["Violator_type"];
 }
 
+// This is just the same as the caughtViolator except it does not have the Violations.
+export interface Violator {
+  address: string;
+  civil_status: Database["public"]["Enums"]["Civil_status"];
+  date_of_birth: string;
+  first_name: string;
+  last_name: string;
+  middle_name: string | null;
+  sex: Database["public"]["Enums"]["Sex"];
+  id: string;
+  institution: string | null;
+}
+
 export interface CaughtViolator {
   Violations: Violation[];
   address: string;

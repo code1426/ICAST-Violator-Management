@@ -4,8 +4,12 @@ import ViolationsCard from "../components/ViolationsCard";
 
 const ViolatorDetailPage = () => {
   const { id } = useParams<{ id: string }>();
-  const { caughtViolator, loading } = useViolator(id!);
-  const { violations: ViolationsList } = useViolator(id!);
+  const {
+    caughtViolator,
+    violations: ViolationsList,
+    loading,
+  } = useViolator(id!);
+  // const { violations: ViolationsList } = useViolator(id!); // no need to use the useViolator hook again, just get the violations in the first useViolator hook. and this just makes the fetching longer.
 
   if (loading) {
     return (
@@ -49,10 +53,11 @@ const ViolatorDetailPage = () => {
             <span className="font-bold">Status</span>
           </div>
         </div>
+
         {ViolationsList?.map((violations) => (
           <ViolationsCard
             key={violations.id}
-            id={violations.id}
+            // id={violations.id}
             violation_date={violations.violation_date}
             violation_place={violations.violation_place}
             violator_type={violations.violator_type}

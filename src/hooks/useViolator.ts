@@ -15,14 +15,15 @@ export const useViolator = (violatorId: string) => {
       const { data, error } = await supabase
         .from("CaughtViolators")
         .select(`*, Violations(*)`)
-        .eq("id", violatorId);
+        .eq("id", violatorId)
+        .single();
       setLoading(false);
 
       if (error) {
         setError(error);
       } else if (data) {
-        setViolator(data[0]);
-        setViolations(data[0].Violations);
+        setViolator(data);
+        setViolations(data.Violations);
       }
     };
 
