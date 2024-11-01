@@ -3,14 +3,16 @@ import { useNavigate } from 'react-router-dom';
 interface ViolatorProps {
   id: string;
   name: string;
-  placeOfViolation: string;
+  age: number;
+  sex: string;
   latestViolationDate: string;
 }
 
 const ViolatorCard = ({
   id,
   name,
-  placeOfViolation,
+  age,
+  sex,
   latestViolationDate,
 }: ViolatorProps) => {
   const navigate = useNavigate();
@@ -23,7 +25,10 @@ const ViolatorCard = ({
         <span className=' font-medium'>{name}</span>
       </div>
       <div className='flex-1 text-center'>
-        <span className=' font-medium'>{placeOfViolation}</span>
+        <span className=' font-medium'>{age}</span>
+      </div>
+      <div className='flex-1 text-center'>
+        <span className=' font-medium'>{sex}</span>
       </div>
       <div className='flex-1 text-center'>
         <span className=' font-medium'>{latestViolationDate}</span>

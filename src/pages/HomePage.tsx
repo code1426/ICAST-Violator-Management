@@ -5,24 +5,38 @@ import ViolatorCard from '../components/ViolatorCard';
 import { useViolators } from '../hooks/useViolators';
 import EncodeButton from '../components/EncodeButton';
 import Header from '../components/Header';
+import SearchBar from '../components/SearchBar';
+import { useEffect, useState } from 'react';
 
 const HomePage = () => {
   const { role } = useParams<{ role: string }>();
-  const { caughtViolatorList, setViolators, loading } = useViolators();
+  const { caughtViolatorList, loading } = useViolators();
+  const [filteredUsers, setFilteredUsers] = useState(caughtViolatorList);
+
+  const getAge = (dateString: string) => {
+    var today = new Date();
+    var birthDate = new Date(dateString);
+    var age = today.getFullYear() - birthDate.getFullYear();
+    var m = today.getMonth() - birthDate.getMonth();
+    if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
+      age--;
+    }
+    return age;
+  };
+
+  useEffect(() => {
+    setFilteredUsers(caughtViolatorList);
+  }, [caughtViolatorList]);
 
   return (
     <div className='min-h-screen bg-white p-0'>
       <Header />
       <div className='flex flex-col items-center mb-5 mt-10'>
         <div className='flex rounded-3xl px-6 py-3 w-5/6 bg-color3 space-x-2'>
-          <input
-            type='text'
-            placeholder='Search...'
-            className='border-2 border-black rounded-full px-5 py-1 w-5/6 shadow-sm focus:outline-none focus:ring-2 focus:ring-gray-500 lg:text-base md:text-sm text-xs'
+          <SearchBar
+            entries={caughtViolatorList}
+            setFilteredEntries={setFilteredUsers}
           />
-          <button className='bg-color1 hover:bg-color2 rounded-full py-1 text-white w-1/6 lg:text-base md:text-sm text-xs'>
-            Search
-          </button>
         </div>
         <div
           className={`w-5/6 flex mt-2 ${
@@ -30,8 +44,8 @@ const HomePage = () => {
           }`}>
           {role === 'admin' && <EncodeButton />}
           <SortButton
-            entries={caughtViolatorList!}
-            setEntries={setViolators}
+            entries={filteredUsers!}
+            setEntries={setFilteredUsers}
           />
         </div>
       </div>
@@ -41,19 +55,23 @@ const HomePage = () => {
             <span className='font-bold'>Name</span>
           </div>
           <div className='flex-1 text-center'>
-            <span className='font-bold'>Place of Violation</span>
+            <span className='font-bold'>Age</span>
+          </div>
+          <div className='flex-1 text-center'>
+            <span className='font-bold'>Sex</span>
           </div>
           <div className='flex-1 text-center'>
             <span className='font-bold'>Latest Violation Date</span>
           </div>
         </div>
 
-        {caughtViolatorList?.map((caughtViolator) => (
+        {filteredUsers?.map((caughtViolator) => (
           <ViolatorCard
             key={caughtViolator.id}
             id={caughtViolator.id}
             name={`${caughtViolator.first_name} ${caughtViolator.last_name}`}
-            placeOfViolation={caughtViolator.address}
+            age={getAge(caughtViolator.date_of_birth)}
+            sex={caughtViolator.sex}
             latestViolationDate={
               caughtViolator.Violations.reverse()[0].violation_date
             }

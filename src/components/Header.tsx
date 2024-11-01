@@ -7,7 +7,7 @@ const Header = () => {
         src='../src/assets/ICAST LOGO.png'
         className='mx-3 w-7 h-7'
       />
-      <h1 className='lg:text-xl md:text-base text-sm font-bold text-center text-white'>
+      <h1 className='lg:text-xl md:text-base text-xs font-bold text-center text-white'>
         ILOILO CITY ANTI-SMOKING TASK FORCE
       </h1>
     </header>
