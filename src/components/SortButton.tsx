@@ -37,8 +37,8 @@ const SortButton = ({ entries, setEntries }: SortButtonProps) => {
     <div className='relative inline-block text-left lg:text-base md:text-sm text-xs'>
       <button
         onClick={toggleDropdown}
-        className='bg-color1 hover:bg-color2 border border-gray-300 rounded-lg py-2 px-7 shadow-sm flex items-center text-white'>
-        Sort <span className='ml-2'>▼</span>
+        className='bg-color1 hover:bg-color2 border border-gray-300 rounded-lg py-2 px-4 shadow-sm flex items-center text-white'>
+        Sort <span className='pl-2'>▼</span>
       </button>
 
       {isDropdownOpen && (
