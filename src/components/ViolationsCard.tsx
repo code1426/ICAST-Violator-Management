@@ -1,5 +1,5 @@
 // import { useNavigate } from "react-router-dom";
-import { Violation } from '../types/violator';
+import { Violation } from "../types/violator";
 
 // interface ViolationsProps {
 //   OR_number: number;
@@ -28,29 +28,29 @@ const ViolationsCard = ({
 
   return (
     <div
-      className='flex justify-between self-center items-center bg-color5 p-3 rounded-lg shadow-md cursor-pointer mb-2 m-4 w-full lg:text-base text-xs'
+      className="flex justify-between items-center w-full bg-color5 border border-black p-4 rounded-lg shadow-md cursor-pointer my-1 lg:text-base md:text-sm text-xs"
       // onClick={() => navigate(`/detail/${id}`)} // no need to navigate
     >
-      <div className='flex-1 text-left'>
-        <span className='font-normal'>{violation_date}</span>
+      <div className="flex-1 text-left">
+        <span className="font-normal">{violation_date}</span>
       </div>
-      <div className='flex-1 text-center'>
-        <span className='font-normal'>{violation_place}</span>
+      <div className="flex-1 text-center">
+        <span className="font-normal">{violation_place}</span>
       </div>
-      <div className='flex-1 text-center '>
-        <span className='font-normal'>{violator_type}</span>
+      <div className="flex-1 text-center ">
+        <span className="font-normal">{violator_type}</span>
       </div>
-      <div className='flex-1 text-center '>
-        <span className='font-normal'>{apprehender_name}</span>
+      <div className="flex-1 text-center ">
+        <span className="font-normal">{apprehender_name}</span>
       </div>
-      <div className='flex-1 text-center '>
-        <span className='font-normal'>{apprehender_type}</span>
+      <div className="flex-1 text-center ">
+        <span className="font-normal">{apprehender_type}</span>
       </div>
-      <div className='flex-1 text-center '>
-        <span className='font-normal'>{OR_number}</span>
+      <div className="flex-1 text-center ">
+        <span className="font-normal">{OR_number}</span>
       </div>
-      <div className='flex-1 text-center '>
-        <span className='font-normal'>{paid ? 'Paid' : 'Unpaid'}</span>
+      <div className="flex-1 text-center ">
+        <span className="font-normal">{paid ? "Paid" : "Unpaid"}</span>
       </div>
     </div>
   );

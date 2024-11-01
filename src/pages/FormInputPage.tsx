@@ -1,43 +1,39 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import useInsertViolator from "../hooks/useInsertViolator";
+import { formDataFormatter } from "../utils/formDataFormatter";
+import { Spinner } from "react-activity";
+import "react-activity/dist/Spinner.css";
+import toast, { Toaster } from "react-hot-toast";
+import Header from "../components/Header";
 
-import Header from '../components/Header';
+import type { FormData } from "../types/formData.type";
 
 const FormInputPage: React.FC = () => {
-  const [formData, setFormData] = useState({
-    firstName: "",
-    lastName: "",
-    middleName: "",
-    dateOfBirth: "",
-    address: "",
-    civilStatus: "",
-    sex: "",
-    institution: "",
-    location: "",
-    dateApprehended: "",
-    violatorType: "",
-    apprehender: "",
-    apprehenderType:"",
-    orNumber: "",
-    paymentStatus:""
-  });
+  const formInitialvalues: FormData = {
+    FirstName: "",
+    LastName: "",
+    MiddleName: "",
+    DateOfBirth: "",
+    Address: "",
+    CivilStatus: "",
+    Sex: "",
+    Institution: "",
+    Location: "",
+    DateApprehended: "",
+    ViolatorType: "",
+    ApprehenderName: "",
+    ApprehenderType: "",
+    ORNumber: "",
+    PaymentStatus: "Unpaid",
+  };
 
+  const navigate = useNavigate();
+  const { insertData, loading, setLoading, error } = useInsertViolator();
+  const [formData, setFormData] = useState<FormData>(formInitialvalues);
   const [errors, setErrors] = useState({
-    firstName: "",
-    lastName: "",
-    middleName: "",
-    dateOfBirth: "",
-    address: "",
-    civilStatus: "",
-    sex: "",
-    institution: "",
-    location: "",
-    dateApprehended: "",
-    violatorType: "",
-    apprehender: "",
-    apprehenderType:"",
-    orNumber: "",
-    paymentStatus:""
+    ...formInitialvalues,
+    PaymentStatus: "",
   });
 
   const handleChange = (
@@ -57,298 +53,385 @@ const FormInputPage: React.FC = () => {
     }
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
     let hasErrors = false;
     const newErrors: any = {};
 
     Object.keys(formData).forEach((key) => {
-      if (key === "paymentStatus" && (formData[key as keyof typeof formData] === "Unpaid" || formData[key as keyof typeof formData] === "")) {
-        return; 
-    }
+      if (
+        key === "PaymentStatus" &&
+        (formData[key as keyof typeof formData] === "Unpaid" ||
+          formData[key as keyof typeof formData] === "Paid")
+      ) {
+        return;
+      }
 
       if (formData[key as keyof typeof formData] === "") {
         newErrors[key] = `Please fill out the ${key.replace(
-          /([A-Z])/g,
+          /([A-Q, S-Z])/g,
           " $1"
         )}.`;
         hasErrors = true;
       }
-      
     });
+
+    if (error) {
+      hasErrors = true;
+      console.error("Error inserting data:", error);
+      return;
+    }
 
     setErrors(newErrors);
 
     if (!hasErrors) {
-      console.log("Form Data:", formData);
+      await toast.promise(submitData(formData), {
+        loading: "Saving data… Please wait.",
+        success: <b>Violator record has been added.</b>,
+        error: <b>Something went wrong!</b>,
+      });
+      setLoading(false);
+      setTimeout(() => {
+        navigate("/home/admin");
+      }, 2000);
     }
   };
 
-  const navigate = useNavigate();
-  const handleCancel = () => { 
-    navigate("/home/admin")
-  }
+  const handleCancel = () => {
+    navigate("/home/admin");
+  };
+
+  const submitData = async (data: FormData) => {
+    const { violatorData, ViolationData } = formDataFormatter(data);
+    await insertData(violatorData, ViolationData);
+  };
 
   return (
-    <div className="w-full mx-auto">
-      <Header></Header>
-      <form onSubmit={handleSubmit} noValidate>
+    <>
+      <Header />
+      <Toaster position="top-center" reverseOrder={false} />
       <div className="w-full max-w-4xl mx-auto">
-      <div className="my-10 gap-4">
-          <div className="col-span-2 font-semibold">Personal Details</div>
+        <form onSubmit={handleSubmit} noValidate>
+          <div className="my-10 gap-4">
+            <div className="col-span-2 font-semibold">Personal Details</div>
 
             <div className="flex space-x-4 my-5">
               <div className="flex-1 w-full">
-              <label className="block text-sm">Last Name:</label>
-              <input
-                type="text"
-                name="lastName"
-                value={formData.lastName}
-                onChange={handleChange}
-                className={`w-full px-3 py-2 border ${errors.lastName ? "border-red-500" : "border-gray-300"} rounded-md`}
-                required
-              />
-              {errors.lastName && <p className="text-red-500 text-sm">{errors.lastName}</p>}
+                <label className="block text-sm">Last Name:</label>
+                <input
+                  type="text"
+                  name="LastName"
+                  value={formData.LastName}
+                  onChange={handleChange}
+                  className={`w-full px-3 py-2 border ${
+                    errors.LastName ? "border-red-500" : "border-gray-300"
+                  } rounded-md`}
+                  required
+                />
+                {errors.LastName && (
+                  <p className="text-red-500 text-sm">{errors.LastName}</p>
+                )}
+              </div>
+
+              <div className="flex-1 w-full">
+                <label className="block text-sm">First Name:</label>
+                <input
+                  type="text"
+                  name="FirstName"
+                  value={formData.FirstName}
+                  onChange={handleChange}
+                  className={`w-full px-3 py-2 border ${
+                    errors.FirstName ? "border-red-500" : "border-gray-300"
+                  } rounded-md`}
+                  required
+                />
+                {errors.FirstName && (
+                  <p className="text-red-500 text-sm">{errors.FirstName}</p>
+                )}
+              </div>
+
+              <div className="flex-1 w-full">
+                <label className="block text-sm">Middle Name:</label>
+                <input
+                  type="text"
+                  name="MiddleName"
+                  value={formData.MiddleName}
+                  onChange={handleChange}
+                  className={`w-full px-3 py-2 border ${
+                    errors.MiddleName ? "border-red-500" : "border-gray-300"
+                  } rounded-md`}
+                  required
+                />
+                {errors.MiddleName && (
+                  <p className="text-red-500 text-sm">{errors.MiddleName}</p>
+                )}
+              </div>
             </div>
 
-            <div className="flex-1 w-full">
-              <label className="block text-sm">First Name:</label>
-              <input
-                type="text"
-                name="firstName"
-                value={formData.firstName}
-                onChange={handleChange}
-                className={`w-full px-3 py-2 border ${errors.firstName ? "border-red-500" : "border-gray-300"} rounded-md`}
-                required
-              />
-              {errors.firstName && <p className="text-red-500 text-sm">{errors.firstName}</p>}
-            </div>
-              
-            <div className="flex-1 w-full">
-              <label className="block text-sm">Middle Name:</label>
-              <input
-                type="text"
-                name="middleName"
-                value={formData.middleName}
-                onChange={handleChange}
-                className={`w-full px-3 py-2 border ${errors.middleName ? "border-red-500" : "border-gray-300"} rounded-md`}
-                required
-              />
-              {errors.middleName && <p className="text-red-500 text-sm">{errors.middleName}</p>}
-            </div>
-          </div>
-
-          <div className="flex space-x-4 my-5">
-
-            <div className="flex-1 w-full">
+            <div className="flex space-x-4 my-5">
+              <div className="flex-1 w-full">
                 <label className="block text-sm">Address:</label>
                 <input
                   type="text"
-                  name="address"
-                  value={formData.address}
+                  name="Address"
+                  value={formData.Address}
                   onChange={handleChange}
-                  className={`w-full px-3 py-2 border ${errors.address ? "border-red-500" : "border-gray-300"} rounded-md`}
+                  className={`w-full px-3 py-2 border ${
+                    errors.Address ? "border-red-500" : "border-gray-300"
+                  } rounded-md`}
                   required
                 />
-                {errors.address && <p className="text-red-500 text-sm">{errors.address}</p>}
+                {errors.Address && (
+                  <p className="text-red-500 text-sm">{errors.Address}</p>
+                )}
               </div>
 
-            <div className="flex-1 w-full">
-              <label className="block text-sm">Institution:</label>
-              <input
-                type="text"
-                name="institution"
-                value={formData.institution}
-                onChange={handleChange}
-                className={`w-full px-3 py-2 border ${errors.institution ? "border-red-500" : "border-gray-300"} rounded-md`}
-                required
-              />
-              {errors.institution && <p className="text-red-500 text-sm">{errors.institution}</p>}
-            </div>
-
-          </div>
-
-          <div className="flex space-x-4 my-5">
-
-          <div className="flex-1" >
-              <label className="block text-sm">Sex:</label>
-              <select
-                name="sex"
-                value={formData.sex}
-                onChange={handleChange}
-                className={`w-full px-3 py-2 border ${errors.sex ? "border-red-500" : "border-gray-300"} rounded-md`}
-                required
-              >
-                <option value="">--Select--</option>
-                <option value="Male">Male</option>
-                <option value="Female">Female</option>
-              </select>
-              {errors.sex && <p className="text-red-500 text-sm">{errors.sex}</p>}
-            </div>
-
-            <div className="flex-1">
-              <label className="block text-sm">Date of Birth:</label>
-              <input
-                type="date"
-                name="dateOfBirth"
-                value={formData.dateOfBirth}
-                onChange={handleChange}
-                className={`w-full px-3 py-2 border ${errors.dateOfBirth ? "border-red-500" : "border-gray-300"} rounded-md`}
-                required
-              />
-              {errors.dateOfBirth && <p className="text-red-500 text-sm">{errors.dateOfBirth}</p>}
-            </div>
-            
-            <div className="flex-1">
-              <label className="block text-sm">Civil Status:</label>
-              <select
-                name="civilStatus"
-                value={formData.civilStatus}
-                onChange={handleChange}
-                className={`w-full px-3 py-2 border ${errors.civilStatus ? "border-red-500" : "border-gray-300"} rounded-md`}
-                required
-              >
-                <option value="">--Select--</option>
-                <option value="Single">Single</option>
-                <option value="Married">Married</option>
-              </select>
-              {errors.civilStatus && <p className="text-red-500 text-sm">{errors.civilStatus}</p>}
-            </div>
-          </div>
-
-          <div className="col-span-2 font-semibold ">Violation Details</div>
-          <div className="flex space-x-4 my-5">
-            
-            <div className="flex-1">
-              <label className="block text-sm ">Location:</label>
-              <input
-                type="text"
-                name="location"
-                value={formData.location}
-                onChange={handleChange}
-                className={`w-full px-3 py-2 border ${errors.location ? "border-red-500" : "border-gray-300"} rounded-md`}
-                required
-              />
-              {errors.location && <p className="text-red-500 text-sm">{errors.location}</p>}
-            </div>
-
-            <div className="flex-1">
-              <label className="block text-sm">Apprehender:</label>
-              <input
-                type="text"
-                name="apprehender"
-                value={formData.apprehender}
-                onChange={handleChange}
-                className={`w-full px-3 py-2 border ${errors.apprehender ? "border-red-500" : "border-gray-300"} rounded-md`}
-                required
-              />
-              {errors.apprehender && <p className="text-red-500 text-sm">{errors.apprehender}</p>}
-            </div>
-
-            <div className="flex-1">
-              <label className="block text-sm">Apprehender Type:</label>
-              <select
-                  name="apprehenderType"
-                  value={formData.apprehenderType}
+              <div className="flex-1 w-full">
+                <label className="block text-sm">Institution:</label>
+                <input
+                  type="text"
+                  name="Institution"
+                  value={formData.Institution}
                   onChange={handleChange}
-                  className={`w-full px-3 py-2 border ${errors.apprehenderType ? "border-red-500" : "border-gray-300"} rounded-md`}
+                  className={`w-full px-3 py-2 border ${
+                    errors.Institution ? "border-red-500" : "border-gray-300"
+                  } rounded-md`}
+                  required
+                />
+                {errors.Institution && (
+                  <p className="text-red-500 text-sm">{errors.Institution}</p>
+                )}
+              </div>
+            </div>
+
+            <div className="flex space-x-4 my-5">
+              <div className="flex-1">
+                <label className="block text-sm">Sex:</label>
+                <select
+                  name="Sex"
+                  value={formData.Sex}
+                  onChange={handleChange}
+                  className={`w-full px-3 py-2 border ${
+                    errors.Sex ? "border-red-500" : "border-gray-300"
+                  } rounded-md`}
                   required
                 >
                   <option value="">--Select--</option>
-                  <option value="Student">Police</option>
-                  <option value="Civilian">Agent</option>
+                  <option value="Male">Male</option>
+                  <option value="Female">Female</option>
                 </select>
-                {errors.apprehenderType && <p className="text-red-500 text-sm">{errors.apprehenderType}</p>}
-            </div>
-            
-          </div>
-          
-          <div className="flex space-x-4 my-5">
+                {errors.Sex && (
+                  <p className="text-red-500 text-sm">{errors.Sex}</p>
+                )}
+              </div>
 
-            <div className="flex-1">
+              <div className="flex-1">
+                <label className="block text-sm">Date of Birth:</label>
+                <input
+                  type="date"
+                  name="DateOfBirth"
+                  value={formData.DateOfBirth}
+                  onChange={handleChange}
+                  className={`w-full px-3 py-2 border ${
+                    errors.DateOfBirth ? "border-red-500" : "border-gray-300"
+                  } rounded-md`}
+                  required
+                />
+                {errors.DateOfBirth && (
+                  <p className="text-red-500 text-sm">{errors.DateOfBirth}</p>
+                )}
+              </div>
+
+              <div className="flex-1">
+                <label className="block text-sm">Civil Status:</label>
+                <select
+                  name="CivilStatus"
+                  value={formData.CivilStatus}
+                  onChange={handleChange}
+                  className={`w-full px-3 py-2 border ${
+                    errors.CivilStatus ? "border-red-500" : "border-gray-300"
+                  } rounded-md`}
+                  required
+                >
+                  <option value="">--Select--</option>
+                  <option value="Single">Single</option>
+                  <option value="Married">Married</option>
+                </select>
+                {errors.CivilStatus && (
+                  <p className="text-red-500 text-sm">{errors.CivilStatus}</p>
+                )}
+              </div>
+            </div>
+
+            <div className="col-span-2 font-semibold ">Violation Details</div>
+            <div className="flex space-x-4 my-5">
+              <div className="flex-1">
+                <label className="block text-sm ">Location:</label>
+                <input
+                  type="text"
+                  name="Location"
+                  value={formData.Location}
+                  onChange={handleChange}
+                  className={`w-full px-3 py-2 border ${
+                    errors.Location ? "border-red-500" : "border-gray-300"
+                  } rounded-md`}
+                  required
+                />
+                {errors.Location && (
+                  <p className="text-red-500 text-sm">{errors.Location}</p>
+                )}
+              </div>
+
+              <div className="flex-1">
+                <label className="block text-sm">Apprehender Name:</label>
+                <input
+                  type="text"
+                  name="ApprehenderName"
+                  value={formData.ApprehenderName}
+                  onChange={handleChange}
+                  className={`w-full px-3 py-2 border ${
+                    errors.ApprehenderName
+                      ? "border-red-500"
+                      : "border-gray-300"
+                  } rounded-md`}
+                  required
+                />
+                {errors.ApprehenderName && (
+                  <p className="text-red-500 text-sm">
+                    {errors.ApprehenderName}
+                  </p>
+                )}
+              </div>
+
+              <div className="flex-1">
+                <label className="block text-sm">Apprehender Type:</label>
+                <select
+                  name="ApprehenderType"
+                  value={formData.ApprehenderType}
+                  onChange={handleChange}
+                  className={`w-full px-3 py-2 border ${
+                    errors.ApprehenderType
+                      ? "border-red-500"
+                      : "border-gray-300"
+                  } rounded-md`}
+                  required
+                >
+                  <option value="">--Select--</option>
+                  <option value="Police">Police</option>
+                  <option value="Agent">Agent</option>
+                </select>
+                {errors.ApprehenderType && (
+                  <p className="text-red-500 text-sm">
+                    {errors.ApprehenderType}
+                  </p>
+                )}
+              </div>
+            </div>
+
+            <div className="flex space-x-4 my-5">
+              <div className="flex-1">
                 <label className="block text-sm">Violator Type:</label>
                 <select
-                  name="violatorType"
-                  value={formData.violatorType}
+                  name="ViolatorType"
+                  value={formData.ViolatorType}
                   onChange={handleChange}
-                  className={`w-full px-3 py-2 border ${errors.violatorType ? "border-red-500" : "border-gray-300"} rounded-md`}
+                  className={`w-full px-3 py-2 border ${
+                    errors.ViolatorType ? "border-red-500" : "border-gray-300"
+                  } rounded-md`}
                   required
                 >
                   <option value="">--Select--</option>
                   <option value="Student">Student</option>
                   <option value="Civilian">Civilian</option>
                 </select>
-                {errors.violatorType && <p className="text-red-500 text-sm">{errors.violatorType}</p>}
-            </div>
+                {errors.ViolatorType && (
+                  <p className="text-red-500 text-sm">{errors.ViolatorType}</p>
+                )}
+              </div>
 
-            <div className="flex-1">
-              <label className="block text-sm">Date Apprehended:</label>
-              <input
-                type="date"
-                name="dateApprehended"
-                value={formData.dateApprehended}
-                onChange={handleChange}
-                className={`w-full px-3 py-2 border ${errors.dateApprehended ? "border-red-500" : "border-gray-300"} rounded-md`}
-                required
-              />
-              {errors.dateApprehended && <p className="text-red-500 text-sm">{errors.dateApprehended}</p>}
-            </div>
-
-            <div className="flex-1">
-              <label className="block text-sm">OR Number:</label>
-              <input
-                type="text"
-                name="orNumber"
-                value={formData.orNumber} 
-                onChange={handleChange}
-                className={`w-full px-3 py-2 border ${errors.orNumber ? "border-red-500" : "border-gray-300"} rounded-md`}
-                required
-                />
-                {errors.orNumber && <p className="text-red-500 text-sm">{errors.orNumber}</p>}
-            </div>
-
-            <div className="flex-1">
-              <label className="block text-sm">Payment Status:</label>
-              <select
-                  name="paymentStatus"
-                  value={formData.paymentStatus}
+              <div className="flex-1">
+                <label className="block text-sm">Date Apprehended:</label>
+                <input
+                  type="date"
+                  name="DateApprehended"
+                  value={formData.DateApprehended}
                   onChange={handleChange}
-                  className={`w-full px-3 py-2 border ${errors.paymentStatus ? "border-red-500" : "border-gray-300"} rounded-md`}
+                  className={`w-full px-3 py-2 border ${
+                    errors.DateApprehended
+                      ? "border-red-500"
+                      : "border-gray-300"
+                  } rounded-md`}
+                  required
+                />
+                {errors.DateApprehended && (
+                  <p className="text-red-500 text-sm">
+                    {errors.DateApprehended}
+                  </p>
+                )}
+              </div>
+
+              <div className="flex-1">
+                <label className="block text-sm">OR Number:</label>
+                <input
+                  type="text"
+                  name="ORNumber"
+                  value={formData.ORNumber}
+                  onChange={handleChange}
+                  className={`w-full px-3 py-2 border ${
+                    errors.ORNumber ? "border-red-500" : "border-gray-300"
+                  } rounded-md`}
+                  required
+                />
+                {errors.ORNumber && (
+                  <p className="text-red-500 text-sm">{errors.ORNumber}</p>
+                )}
+              </div>
+
+              <div className="flex-1">
+                <label className="block text-sm">Payment Status:</label>
+                <select
+                  name="PaymentStatus"
+                  value={formData.PaymentStatus}
+                  onChange={handleChange}
+                  className={`w-full px-3 py-2 border ${
+                    errors.PaymentStatus ? "border-red-500" : "border-gray-300"
+                  } rounded-md`}
                   required
                 >
-                  <option value="">Unpaid</option>
-                  <option value="Student">Paid</option>
+                  <option value="Unpaid">Unpaid</option>
+                  <option value="Paid">Paid</option>
                 </select>
-                {errors.paymentStatus && <p className="text-red-500 text-sm">{errors.paymentStatus}</p>}
+                {errors.PaymentStatus && (
+                  <p className="text-red-500 text-sm">{errors.PaymentStatus}</p>
+                )}
+              </div>
             </div>
-       
           </div>
 
-        </div>
-
-        <div className="flex justify-center mt-6 gap-x-96">
-
-        <button 
-            type="button"
-            onClick={handleCancel}
-            className="px-6 py-2 bg-red-800 text-white font-semibold rounded-md hover:bg-graSuby-700"
+          <div className="flex justify-center mt-6 gap-x-96">
+            <button
+              type="button"
+              onClick={handleCancel}
+              className="px-6 py-2 bg-red-800 text-white font-semibold rounded-md hover:bg-graSuby-700"
             >
-             Cancel
+              Cancel
             </button>
 
-          <button
-            type="submit"
-            className="px-6 py-2 bg-gray-800 text-white font-semibold rounded-md hover:bg-graSuby-700"
-          >
-            Submit
-          </button>
-          
-        </div>
+            <button
+              type="submit"
+              className=" flex items-center justify-center bg-gray-800 w-24 text-white font-semibold rounded-md hover:bg-graSuby-700"
+            >
+              {loading ? (
+                <Spinner size={10} color="#fff" animating={loading} />
+              ) : (
+                "Button"
+              )}
+            </button>
+          </div>
+        </form>
       </div>
-      
-      </form>
-    </div>
+    </>
   );
 };
 
