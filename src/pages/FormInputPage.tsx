@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
+import Header from '../components/Header';
+
 const FormInputPage: React.FC = () => {
   const [formData, setFormData] = useState({
     firstName: "",
@@ -85,15 +87,14 @@ const FormInputPage: React.FC = () => {
 
   const navigate = useNavigate();
   const handleCancel = () => { 
-    navigate("/home/:role")
+    navigate("/home/admin")
   }
 
   return (
-    <div className="w-full max-w-4xl mx-auto">
-      <h1 className="text-center text-lg font-semibold mb-4">
-        ILOILO CITY ANTI-SMOKING TASK FORCE
-      </h1>
+    <div className="w-full mx-auto">
+      <Header></Header>
       <form onSubmit={handleSubmit} noValidate>
+      <div className="w-full max-w-4xl mx-auto">
       <div className="my-10 gap-4">
           <div className="col-span-2 font-semibold">Personal Details</div>
 
@@ -236,7 +237,7 @@ const FormInputPage: React.FC = () => {
               <label className="block text-sm">Apprehender:</label>
               <input
                 type="text"
-                name="agentPolice"
+                name="apprehender"
                 value={formData.apprehender}
                 onChange={handleChange}
                 className={`w-full px-3 py-2 border ${errors.apprehender ? "border-red-500" : "border-gray-300"} rounded-md`}
@@ -248,7 +249,7 @@ const FormInputPage: React.FC = () => {
             <div className="flex-1">
               <label className="block text-sm">Apprehender Type:</label>
               <select
-                  name="violatorType"
+                  name="apprehenderType"
                   value={formData.apprehenderType}
                   onChange={handleChange}
                   className={`w-full px-3 py-2 border ${errors.apprehenderType ? "border-red-500" : "border-gray-300"} rounded-md`}
@@ -344,6 +345,8 @@ const FormInputPage: React.FC = () => {
           </button>
           
         </div>
+      </div>
+      
       </form>
     </div>
   );
