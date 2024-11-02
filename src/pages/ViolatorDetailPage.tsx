@@ -5,6 +5,9 @@ import Header from "../components/Header";
 
 import { Spinner } from "react-activity";
 import "react-activity/dist/Spinner.css";
+import { useEffect, useState } from "react";
+import SortButton from "../components/SortButton";
+import FilterButton from "../components/FilterButton";
 
 const ViolatorDetailPage = () => {
   const { id } = useParams<{ id: string }>();
@@ -13,6 +16,12 @@ const ViolatorDetailPage = () => {
     violations: ViolationsList,
     loading,
   } = useViolator(id!);
+  const [filteredViolations, setFilteredViolations] = useState(ViolationsList);
+
+  useEffect(() => {
+    setFilteredViolations(ViolationsList);
+  }, [ViolationsList]);
+
   // const { violations: ViolationsList } = useViolator(id!); // no need to use the useViolator hook again, just get the violations in the first useViolator hook. and this just makes the fetching longer.
 
   const getAge = (dateString: string) => {
@@ -31,7 +40,10 @@ const ViolatorDetailPage = () => {
       <>
         <Header />
         <div className="flex text-lg h-screen w-screen items-center justify-center font-semibold p-12">
-          <Spinner size={50} color="#3A2D28" />
+          <Spinner
+            size={50}
+            color="#3A2D28"
+          />
         </div>
       </>
     );
@@ -65,8 +77,14 @@ const ViolatorDetailPage = () => {
             Institution : {caughtViolator!.institution}
           </p>
         </div>
+        <div className="flex flex-row-reverse mb-2">
+          <FilterButton
+            entries={ViolationsList}
+            setEntries={setFilteredViolations}
+          />
+        </div>
         <div className="flex flex-col items-center">
-          <div className="flex justify-between items-center border-2 mb-3 border-black bg-color4 p-3 rounded-t-lg shadow-md w-full lg:text-base text-xs space-x-2">
+          <div className="flex justify-between items-center border-2 mb-3 border-black bg-color4 p-3 rounded-t-lg shadow-md w-full lg:text-base md:text-sm sm:text-xs text-xxs space-x-2">
             <div className="flex-1 text-left">
               <span className="font-bold">Violation Date</span>
             </div>
@@ -89,7 +107,7 @@ const ViolatorDetailPage = () => {
               <span className="font-bold">Status</span>
             </div>
           </div>
-          {ViolationsList?.map((violations) => (
+          {filteredViolations?.map((violations) => (
             <ViolationsCard
               key={violations.id}
               id={violations.id}

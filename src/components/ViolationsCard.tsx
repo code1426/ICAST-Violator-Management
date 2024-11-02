@@ -28,7 +28,7 @@ const ViolationsCard = ({
 
   return (
     <div
-      className="flex justify-between items-center w-full bg-color5 border border-black p-4 rounded-lg shadow-md cursor-pointer my-1 lg:text-base md:text-sm text-xs"
+      className="flex justify-between items-center w-full bg-color5 border border-black px-3 py-4 rounded-lg shadow-md cursor-pointer my-1 lg:text-base md:text-sm sm:text-xs text-xxs"
       // onClick={() => navigate(`/detail/${id}`)} // no need to navigate
     >
       <div className="flex-1 text-left">

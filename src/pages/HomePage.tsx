@@ -32,10 +32,10 @@ const HomePage = () => {
   }, [caughtViolatorList]);
 
   return (
-    <div className="min-h-screen bg-white p-0">
+    <div className="min-h-screen bg-white p-0 pb-10">
       <Header />
       <div className="flex flex-col items-center mb-5 mt-10">
-        <div className="flex rounded-3xl px-6 py-3 w-5/6 bg-color3 space-x-2">
+        <div className="flex rounded-3xl px-6 py-3 w-4/6 bg-color3 mb-5 space-x-2 border-b-color2 border-b-2 shadow-lg shadow-color2">
           <SearchBar
             entries={caughtViolatorList}
             setFilteredEntries={setFilteredUsers}
@@ -44,10 +44,12 @@ const HomePage = () => {
         <div
           className={`w-5/6 flex mt-2 ${
             role === "admin" ? "justify-between" : "justify-end"
-          }`}
-        >
+          }`}>
           {role === "admin" && <EncodeButton />}
-          <SortButton entries={filteredUsers!} setEntries={setFilteredUsers} />
+          <SortButton
+            entries={filteredUsers!}
+            setEntries={setFilteredUsers}
+          />
         </div>
       </div>
       <div className="flex flex-col items-center">
@@ -64,6 +66,9 @@ const HomePage = () => {
           <div className="flex-1 text-center">
             <span className="font-bold">Latest Violation Date</span>
           </div>
+          <div className="flex-1 text-center">
+            <span className="font-bold">Violation Count</span>
+          </div>
         </div>
 
         {filteredUsers?.map((caughtViolator) => (
@@ -76,11 +81,15 @@ const HomePage = () => {
             latestViolationDate={
               caughtViolator.Violations.reverse()[0].violation_date
             }
+            violationCount={caughtViolator.Violations.length}
           />
         ))}
         {loading && (
           <div className="flex text-lg justify-self-center self-center font-semibold p-16">
-            <Spinner size={50} color="#3A2D28" />
+            <Spinner
+              size={50}
+              color="#3A2D28"
+            />
           </div>
         )}
       </div>
