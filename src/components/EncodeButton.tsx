@@ -11,7 +11,7 @@ const EncodeButton: React.FC = () => {
   return (
     <button
       onClick={handleEncode}
-      className="bg-color1 text-white py-2 px-4 rounded lg:text-base md:text-sm text-xs border-color1 border-2 shadow-md shadow-color1 hover:bg-color2 hover:border-color2 hover:shadow-color2"
+      className="bg-color1 text-white transition-all py-2 px-4 rounded-md lg:text-base md:text-sm text-xs shadow-md shadow-gray-500 hover:bg-color2 w-22 h-11"
     >
       Encode
     </button>

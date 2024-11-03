@@ -1,5 +1,6 @@
 // import React from 'react';
 import React, { useState } from "react";
+import SearchBar from "./SearchBar";
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false); // State to manage menu visibility
@@ -19,7 +20,7 @@ const Header = () => {
   // Notes: href for "a tag" should be whatever your current role is.
 
   return (
-    <header className="flex items-center bg-color1 py-3 px-1 shadow-lg shadow-color1 rounded-b-lg">
+    <header className="flex items-center bg-color1 py-3 px-1 shadow-md shadow-gray-600 ">
       <a href="/home/admin" className="flex"> 
         <img
           src="../src/assets/ICAST LOGO.png"
@@ -35,9 +36,11 @@ const Header = () => {
         <img
           src="../src/assets/menu-bar (1).png"
           alt="Button Icon"
-          className="w-10 h-10 mr-2 bg-white rounded-md"
+          className="w-10 h-10 mr-2 bg-color4 rounded-md"
         />
       </button>
+
+      {/* <SearchBar /> */}
 
       {isMenuOpen && (
         <Menu

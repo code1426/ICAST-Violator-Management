@@ -32,15 +32,13 @@ const HomePage = () => {
   }, [caughtViolatorList]);
 
   return (
-    <div className="min-h-screen bg-white p-0 pb-10">
+    <div className="min-h-screen bg-color6 p-0 pb-10">
       <Header />
       <div className="flex flex-col items-center mb-5 mt-10">
-        <div className="flex rounded-3xl px-6 py-3 w-4/6 bg-color3 mb-5 space-x-2 border-b-color2 border-b-2 shadow-lg shadow-color2">
           <SearchBar
             entries={caughtViolatorList}
             setFilteredEntries={setFilteredUsers}
           />
-        </div>
         <div
           className={`w-5/6 flex mt-2 ${
             role === "admin" ? "justify-between" : "justify-end"
@@ -53,8 +51,8 @@ const HomePage = () => {
         </div>
       </div>
       <div className="flex flex-col items-center">
-        <div className="flex justify-between items-center border-2 mb-3 border-black bg-color4 p-3 rounded-t-lg shadow-md w-5/6 lg:text-base md:text-sm text-xs">
-          <div className="flex-1 text-left">
+        <div className="flex justify-between items-center border-2 mb-3 border-black bg-color3 p-3 rounded-t-lg shadow-md w-5/6 lg:text-base md:text-sm text-xs">
+          <div className="flex-1 text-center">
             <span className="font-bold">Name</span>
           </div>
           <div className="flex-1 text-center">

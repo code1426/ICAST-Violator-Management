@@ -40,24 +40,21 @@ const ViolatorDetailPage = () => {
       <>
         <Header />
         <div className="flex text-lg h-screen w-screen items-center justify-center font-semibold p-12">
-          <Spinner
-            size={50}
-            color="#3A2D28"
-          />
+          <Spinner size={50} color="#3A2D28" />
         </div>
       </>
     );
   }
 
   return (
-    <div>
+    <div className="bg-color6 h-screen">
       <Header />
       <div className="flex flex-col p-5">
         <div className="my-5 bg-color3 p-10 space-y-3 rounded-3xl border-2 border-color1">
-          <h1 className="lg:text-2xl md:text-xl text-lg font-bold">
+          {/* <h1 className="lg:text-2xl md:text-xl text-lg font-bold">
             Violator ID : {caughtViolator!.id}
-          </h1>
-          <p className="lg:text-lg md:text-base text-sm">
+          </h1> */}
+          <p className="lg:text-2xl md:text-xl text-lg font-bold">
             Name :{" "}
             {caughtViolator!.first_name + " " + caughtViolator!.last_name}
           </p>
@@ -84,7 +81,7 @@ const ViolatorDetailPage = () => {
           />
         </div>
         <div className="flex flex-col items-center">
-          <div className="flex justify-between items-center border-2 mb-3 border-black bg-color4 p-3 rounded-t-lg shadow-md w-full lg:text-base md:text-sm sm:text-xs text-xxs space-x-2">
+          <div className="flex justify-between items-center border-2 mb-3 border-black bg-color3 p-3 rounded-t-lg shadow-md w-full lg:text-base md:text-sm sm:text-xs text-xxs space-x-2">
             <div className="flex-1 text-left">
               <span className="font-bold">Violation Date</span>
             </div>
