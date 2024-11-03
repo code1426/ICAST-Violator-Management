@@ -3,6 +3,7 @@ import ViolatorCard from "../components/ViolatorCard";
 import EncodeButton from "../components/EncodeButton";
 import Header from "../components/Header";
 import SearchBar from "../components/SearchBar";
+import OptionsButton from "../components/OptionsButton";
 
 import { Spinner } from "react-activity";
 import "react-activity/dist/Spinner.css";
@@ -15,6 +16,9 @@ const HomePage = () => {
   const { role } = useParams<{ role: string }>();
   const { caughtViolatorList, loading } = useViolators();
   const [filteredUsers, setFilteredUsers] = useState(caughtViolatorList);
+  const [selectedViolatorId, setSelectedViolatorId] = useState<string | null>(
+    null
+  );
 
   const getAge = (dateString: string) => {
     var today = new Date();
@@ -25,6 +29,23 @@ const HomePage = () => {
       age--;
     }
     return age;
+  };
+
+  const handleOpenOptions = (id: string) => {
+    setSelectedViolatorId(selectedViolatorId === id ? null : id);
+  };
+
+  const handleCloseOptions = () => {
+    setSelectedViolatorId(null);
+  };
+  const handleDelete = () => {
+    // Implement delete logic here
+    handleCloseOptions();
+  };
+
+  const handleEdit = () => {
+    // Implement edit logic here
+    handleCloseOptions();
   };
 
   useEffect(() => {
@@ -44,12 +65,10 @@ const HomePage = () => {
         <div
           className={`w-5/6 flex mt-2 ${
             role === "admin" ? "justify-between" : "justify-end"
-          }`}>
+          }`}
+        >
           {role === "admin" && <EncodeButton />}
-          <SortButton
-            entries={filteredUsers!}
-            setEntries={setFilteredUsers}
-          />
+          <SortButton entries={filteredUsers!} setEntries={setFilteredUsers} />
         </div>
       </div>
       <div className="flex flex-col items-center">
@@ -69,27 +88,34 @@ const HomePage = () => {
           <div className="flex-1 text-center">
             <span className="font-bold">Violation Count</span>
           </div>
+          <div className="flex-1 text-center"></div>
         </div>
 
         {filteredUsers?.map((caughtViolator) => (
-          <ViolatorCard
+          <div
             key={caughtViolator.id}
-            id={caughtViolator.id}
-            name={`${caughtViolator.first_name} ${caughtViolator.last_name}`}
-            age={getAge(caughtViolator.date_of_birth)}
-            sex={caughtViolator.sex}
-            latestViolationDate={
-              caughtViolator.Violations.reverse()[0].violation_date
-            }
-            violationCount={caughtViolator.Violations.length}
-          />
+            className="relative w-full flex justify-center"
+          >
+            <ViolatorCard
+              id={caughtViolator.id}
+              name={`${caughtViolator.first_name} ${caughtViolator.last_name}`}
+              age={getAge(caughtViolator.date_of_birth)}
+              sex={caughtViolator.sex}
+              latestViolationDate={
+                [...caughtViolator.Violations].reverse()[0].violation_date
+              }
+              violationCount={caughtViolator.Violations.length}
+              isOptionsVisible={selectedViolatorId === caughtViolator.id}
+              onOptionsClick={() => handleOpenOptions(caughtViolator.id)}
+              onCancel={handleCloseOptions}
+              onDelete={handleDelete}
+              onEdit={handleEdit}
+            />
+          </div>
         ))}
         {loading && (
           <div className="flex text-lg justify-self-center self-center font-semibold p-16">
-            <Spinner
-              size={50}
-              color="#3A2D28"
-            />
+            <Spinner size={50} color="#3A2D28" />
           </div>
         )}
       </div>

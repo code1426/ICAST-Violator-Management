@@ -2,6 +2,7 @@ import { useParams } from "react-router-dom";
 import { useViolator } from "../hooks/useViolator";
 import ViolationsCard from "../components/ViolationsCard";
 import Header from "../components/Header";
+import OptionsButton from "./OptionsButton";
 
 import { Spinner } from "react-activity";
 import "react-activity/dist/Spinner.css";
@@ -17,6 +18,26 @@ const ViolatorDetailPage = () => {
     loading,
   } = useViolator(id!);
   const [filteredViolations, setFilteredViolations] = useState(ViolationsList);
+  const [selectedViolatorId, setSelectedViolatorId] = useState<string | null>(
+    null
+  );
+
+  const handleOpenOptions = (id: string) => {
+    setSelectedViolatorId(selectedViolatorId === id ? null : id);
+  };
+
+  const handleCloseOptions = () => {
+    setSelectedViolatorId(null);
+  };
+  const handleDelete = () => {
+    // Implement delete logic here
+    handleCloseOptions();
+  };
+
+  const handleEdit = () => {
+    // Implement edit logic here
+    handleCloseOptions();
+  };
 
   useEffect(() => {
     setFilteredViolations(ViolationsList);
@@ -40,10 +61,7 @@ const ViolatorDetailPage = () => {
       <>
         <Header />
         <div className="flex text-lg h-screen w-screen items-center justify-center font-semibold p-12">
-          <Spinner
-            size={50}
-            color="#3A2D28"
-          />
+          <Spinner size={50} color="#3A2D28" />
         </div>
       </>
     );
@@ -106,19 +124,30 @@ const ViolatorDetailPage = () => {
             <div className="flex-1 text-center">
               <span className="font-bold">Status</span>
             </div>
+            <div className="flex-1 text-center"></div>
           </div>
-          {filteredViolations?.map((violations) => (
-            <ViolationsCard
-              key={violations.id}
-              id={violations.id}
-              violation_date={violations.violation_date}
-              violation_place={violations.violation_place}
-              violator_type={violations.violator_type}
-              apprehender_name={violations.apprehender_name}
-              apprehender_type={violations.apprehender_type}
-              OR_number={violations.OR_number}
-              paid={violations.paid}
-            />
+          {filteredViolations?.map((violation) => (
+            <div
+              key={violation.id}
+              className="relative w-full flex justify-center"
+            >
+              <ViolationsCard
+                key={violation.id}
+                id={violation.id}
+                violation_date={violation.violation_date}
+                violation_place={violation.violation_place}
+                violator_type={violation.violator_type}
+                apprehender_name={violation.apprehender_name}
+                apprehender_type={violation.apprehender_type}
+                OR_number={violation.OR_number}
+                paid={violation.paid}
+                isOptionsVisible={selectedViolatorId === violation.id}
+                onOptionsClick={() => handleOpenOptions(violation.id)}
+                onCancel={handleCloseOptions}
+                onDelete={handleDelete}
+                onEdit={handleEdit}
+              />
+            </div>
           ))}
         </div>
       </div>
