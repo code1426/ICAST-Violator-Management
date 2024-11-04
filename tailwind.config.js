@@ -11,6 +11,9 @@ export default {
         color5: "#EBE3DB",
         color6: "#F1EDE6",
       },
+      fontSize: {
+        xxs: ["0.5rem", "0.75rem"],
+      },
     },
   },
   plugins: [],
