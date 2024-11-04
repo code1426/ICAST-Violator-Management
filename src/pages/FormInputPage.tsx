@@ -123,7 +123,7 @@ const FormInputPage: React.FC = () => {
                   value={formData.LastName}
                   onChange={handleChange}
                   className={`w-full px-3 py-2 border ${
-                    errors.LastName ? "border-red-500" : "border-gray-400"
+                    errors.LastName ? "border-red-500" : "border-gray-500"
                   } rounded-md`}
                   required
                 />
@@ -140,7 +140,7 @@ const FormInputPage: React.FC = () => {
                   value={formData.FirstName}
                   onChange={handleChange}
                   className={`w-full px-3 py-2 border ${
-                    errors.FirstName ? "border-red-500" : "border-gray-400"
+                    errors.FirstName ? "border-red-500" : "border-gray-500"
                   } rounded-md`}
                   required
                 />
@@ -154,11 +154,11 @@ const FormInputPage: React.FC = () => {
                 <input
                   type="text"
                   name="MiddleName"
+                  placeholder="Optional"
                   value={formData.MiddleName}
                   onChange={handleChange}
-                  placeholder="Optional"
                   className={`w-full px-3 py-2 border ${
-                    errors.MiddleName ? "border-red-500" : "border-gray-400"
+                    errors.MiddleName ? "border-red-500" : "border-gray-500"
                   } rounded-md`}
                   required
                 />
@@ -177,7 +177,7 @@ const FormInputPage: React.FC = () => {
                   value={formData.Address}
                   onChange={handleChange}
                   className={`w-full px-3 py-2 border ${
-                    errors.Address ? "border-red-500" : "border-gray-400"
+                    errors.Address ? "border-red-500" : "border-gray-500"
                   } rounded-md`}
                   required
                 />
@@ -194,7 +194,7 @@ const FormInputPage: React.FC = () => {
                   value={formData.Institution}
                   onChange={handleChange}
                   className={`w-full px-3 py-2 border ${
-                    errors.Institution ? "border-red-500" : "border-gray-400"
+                    errors.Institution ? "border-red-500" : "border-gray-500"
                   } rounded-md`}
                   required
                 />
@@ -212,7 +212,7 @@ const FormInputPage: React.FC = () => {
                   value={formData.Sex}
                   onChange={handleChange}
                   className={`w-full px-3 py-2 border ${
-                    errors.Sex ? "border-red-500" : "border-gray-400"
+                    errors.Sex ? "border-red-500" : "border-gray-500"
                   } rounded-md`}
                   required
                 >
@@ -233,7 +233,7 @@ const FormInputPage: React.FC = () => {
                   value={formData.DateOfBirth}
                   onChange={handleChange}
                   className={`w-full px-3 py-2 border ${
-                    errors.DateOfBirth ? "border-red-500" : "border-gray-400"
+                    errors.DateOfBirth ? "border-red-500" : "border-gray-500"
                   } rounded-md`}
                   required
                 />
@@ -249,7 +249,7 @@ const FormInputPage: React.FC = () => {
                   value={formData.CivilStatus}
                   onChange={handleChange}
                   className={`w-full px-3 py-2 border ${
-                    errors.CivilStatus ? "border-red-500" : "border-gray-400"
+                    errors.CivilStatus ? "border-red-500" : "border-gray-500"
                   } rounded-md`}
                   required
                 >
@@ -273,7 +273,7 @@ const FormInputPage: React.FC = () => {
                   value={formData.Location}
                   onChange={handleChange}
                   className={`w-full px-3 py-2 border ${
-                    errors.Location ? "border-red-500" : "border-gray-400"
+                    errors.Location ? "border-red-500" : "border-gray-500"
                   } rounded-md`}
                   required
                 />
@@ -292,7 +292,7 @@ const FormInputPage: React.FC = () => {
                   className={`w-full px-3 py-2 border ${
                     errors.ApprehenderName
                       ? "border-red-500"
-                      : "border-gray-400"
+                      : "border-gray-500"
                   } rounded-md`}
                   required
                 />
@@ -312,7 +312,7 @@ const FormInputPage: React.FC = () => {
                   className={`w-full px-3 py-2 border ${
                     errors.ApprehenderType
                       ? "border-red-500"
-                      : "border-gray-400"
+                      : "border-gray-500"
                   } rounded-md`}
                   required
                 >
@@ -336,7 +336,7 @@ const FormInputPage: React.FC = () => {
                   value={formData.ViolatorType}
                   onChange={handleChange}
                   className={`w-full px-3 py-2 border ${
-                    errors.ViolatorType ? "border-red-500" : "border-gray-400"
+                    errors.ViolatorType ? "border-red-500" : "border-gray-500"
                   } rounded-md`}
                   required
                 >
@@ -359,7 +359,7 @@ const FormInputPage: React.FC = () => {
                   className={`w-full px-3 py-2 border ${
                     errors.DateApprehended
                       ? "border-red-500"
-                      : "border-gray-400"
+                      : "border-gray-500"
                   } rounded-md`}
                   required
                 />
@@ -378,7 +378,7 @@ const FormInputPage: React.FC = () => {
                   value={formData.ORNumber}
                   onChange={handleChange}
                   className={`w-full px-3 py-2 border ${
-                    errors.ORNumber ? "border-red-500" : "border-gray-400"
+                    errors.ORNumber ? "border-red-500" : "border-gray-500"
                   } rounded-md`}
                   required
                 />
@@ -394,7 +394,7 @@ const FormInputPage: React.FC = () => {
                   value={formData.PaymentStatus}
                   onChange={handleChange}
                   className={`w-full px-3 py-2 border ${
-                    errors.PaymentStatus ? "border-red-500" : "border-gray-400"
+                    errors.PaymentStatus ? "border-red-500" : "border-gray-500"
                   } rounded-md`}
                   required
                 >
@@ -412,14 +412,14 @@ const FormInputPage: React.FC = () => {
             <button
               type="button"
               onClick={handleCancel}
-              className="px-6 py-2 bg-red-800 text-white font-semibold rounded-md hover:bg-graSuby-700"
+              className="px-6 py-2 bg-red-800 hover:bg-red-600 transition-all text-white font-semibold rounded-md hover:bg-graSuby-700"
             >
               Cancel
             </button>
 
             <button
               type="submit"
-              className=" flex items-center justify-center bg-gray-800 w-24 text-white font-semibold rounded-md hover:bg-graSuby-700"
+              className=" flex items-center justify-center hover:bg-gray-600 transition-all bg-gray-800 w-24 text-white font-semibold rounded-md hover:bg-graSuby-700"
             >
               {loading ? (
                 <Spinner size={10} color="#fff" animating={loading} />

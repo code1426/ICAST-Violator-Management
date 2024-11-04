@@ -55,7 +55,7 @@ const ViolatorCard = ({
         <span className="font-medium">{violationCount}</span>
       </div>
         <button
-        className="absolute right-6"
+        className="absolute right-3 p-2"
           onClick={(e) => {
             e.stopPropagation();
             onOptionsClick();
