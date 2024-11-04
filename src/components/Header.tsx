@@ -56,7 +56,7 @@ const Header = () => {
 const Menu = React.forwardRef<HTMLDivElement, { onMenuItemClick: () => void; onLogout: () => void }>(
   ({ onMenuItemClick, onLogout }, ref) => {
     return (
-      <div ref={ref} className="absolute right-0 mt-20 w-48 z-10 bg-white rounded-md shadow-lg mr-1">
+      <div ref={ref} className="absolute right-0 mt-12 w-48 z-10 bg-white rounded-md shadow-lg mr-1">
         <ul className="flex flex-col">
 
           <li 
