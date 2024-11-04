@@ -3,7 +3,6 @@ import ViolatorCard from "../components/ViolatorCard";
 import EncodeButton from "../components/EncodeButton";
 import Header from "../components/Header";
 import SearchBar from "../components/SearchBar";
-import OptionsButton from "../components/OptionsButton";
 
 import { Spinner } from "react-activity";
 import "react-activity/dist/Spinner.css";

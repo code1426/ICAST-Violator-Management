@@ -71,7 +71,10 @@ const ViolatorCard = ({
       {isOptionsVisible && (
         <div className="absolute top-[-60px] md:top-[-70px] lg:top-[-75px] right-0 transform translate-x-full ml-2 z-10">
           <OptionsButton
-            onCancelButtonClick={onCancel}
+            onCancelButtonClick={(e) => {
+              e.stopPropagation();
+              onCancel();
+            }}
             onDeleteButtonCLick={onDelete}
             onEditButtonClick={onEdit}
           />

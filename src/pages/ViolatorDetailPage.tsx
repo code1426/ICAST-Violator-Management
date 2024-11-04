@@ -2,7 +2,6 @@ import { useParams } from "react-router-dom";
 import { useViolator } from "../hooks/useViolator";
 import ViolationsCard from "../components/ViolationsCard";
 import Header from "../components/Header";
-import OptionsButton from "./OptionsButton";
 
 import { Spinner } from "react-activity";
 import "react-activity/dist/Spinner.css";
