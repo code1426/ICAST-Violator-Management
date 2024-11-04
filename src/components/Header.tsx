@@ -33,7 +33,7 @@ const Header = () => {
   }, [isMenuOpen]);
 
   return (
-    <header className="flex items-center bg-color1 py-2 px-1">
+    <header className="flex items-center bg-color1 py-2 px-1 shadow-md shadow-gray-500">
       <img src="../src/assets/ICAST LOGO.png" className="mx-3 w-7 h-7" />
       <h1 className="lg:text-xl md:text-base text-xs font-bold text-center text-white">
         ILOILO CITY ANTI-SMOKING TASK FORCE
