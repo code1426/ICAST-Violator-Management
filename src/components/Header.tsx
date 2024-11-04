@@ -2,13 +2,14 @@
 import React, { useState } from 'react';
 
 const Header = () => {
-  const [isMenuOpen, setIsMenuOpen] = useState(false); 
+  const [isMenuOpen, setIsMenuOpen] = useState(false); // State to manage menu visibility
+
   const handleButtonClick = () => {
-    setIsMenuOpen((prev) => !prev); 
+    setIsMenuOpen((prev) => !prev); // Toggle menu visibility
   };
 
   const handleMenuItemClick = () => {
-    setIsMenuOpen(false); 
+    setIsMenuOpen(false); // Close menu when an item is clicked
   };
 
   const handleLogout = () => { 
