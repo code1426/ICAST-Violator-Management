@@ -60,12 +60,12 @@ const Menu = React.forwardRef<HTMLDivElement, { onMenuItemClick: () => void; onL
         <ul className="flex flex-col">
 
           <li 
-            className="p-2 hover:bg-gray-200 cursor-pointer" 
+            className="p-2 hover:bg-gray-200 cursor-pointer rounded-md" 
             onClick={onMenuItemClick}>Account
           </li>
 
           <li 
-            className="p-2 hover:bg-gray-200 cursor-pointer" 
+            className="p-2 hover:bg-gray-200 cursor-pointer rounded-md" 
             onClick={onLogout}>Log Out
           </li>
           
