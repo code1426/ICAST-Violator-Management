@@ -42,9 +42,9 @@ const Header = () => {
       <button 
         onClick={handleButtonClick}
         className="flex items-center ml-auto">
-        <img src="../src/assets/menu-bar (1).png" 
+        <img src="../src/assets/image.png" 
         alt="Button Icon" 
-        className="w-10 h-10 mr-2 bg-white rounded-md"/>
+        className="w-10 h-10 mr-2 bg-color1 rounded-md"/>
       </button>
 
       {isMenuOpen && <Menu ref={menuRef} onMenuItemClick={handleMenuItemClick} onLogout={handleLogout}/>}
