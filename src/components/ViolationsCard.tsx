@@ -22,13 +22,11 @@ const ViolationsCard = ({
   violator_type,
   isOptionsVisible,
   onOptionsClick,
-  onCancel,
   onDelete,
   onEdit,
 }: Partial<Violation> & {
   isOptionsVisible: boolean;
   onOptionsClick: () => void;
-  onCancel: () => void;
   onDelete: () => void;
   onEdit: () => void;
 }) => {
@@ -58,23 +56,18 @@ const ViolationsCard = ({
       <div className="flex-1 text-center ">
         <span className="font-normal">{paid ? "Paid" : "Unpaid"}</span>
       </div>
-        <button
+      <button
         className="absolute right-4"
-          onClick={(e) => {
-            e.stopPropagation();
-            onOptionsClick();
-          }}
-        >
-          <img
-            src="../src/assets/option.png"
-            alt="Options"
-            className="w-6 h-4"
-          />
-        </button>
+        onClick={(e) => {
+          e.stopPropagation();
+          onOptionsClick();
+        }}
+      >
+        <img src="../src/assets/option.png" alt="Options" className="w-6 h-4" />
+      </button>
       {isOptionsVisible && (
         <div className="absolute top-[-60px] md:top-[-70px] lg:top-[-75px] right-0 transform translate-x-full ml-2 z-10">
           <OptionsButton
-            onCancelButtonClick={onCancel}
             onDeleteButtonCLick={onDelete}
             onEditButtonClick={onEdit}
           />

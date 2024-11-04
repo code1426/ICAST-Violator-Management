@@ -5,7 +5,7 @@ import Header from "../components/Header";
 
 import { Spinner } from "react-activity";
 import "react-activity/dist/Spinner.css";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import FilterButton from "../components/FilterButton";
 
 const ViolatorDetailPage = () => {
@@ -19,6 +19,7 @@ const ViolatorDetailPage = () => {
   const [selectedViolatorId, setSelectedViolatorId] = useState<string | null>(
     null
   );
+  const violatorRefs = useRef(new Map<string, HTMLDivElement | null>());
 
   const handleOpenOptions = (id: string) => {
     setSelectedViolatorId(selectedViolatorId === id ? null : id);
@@ -27,20 +28,39 @@ const ViolatorDetailPage = () => {
   const handleCloseOptions = () => {
     setSelectedViolatorId(null);
   };
+
   const handleDelete = () => {
-    // Implement delete logic here
     handleCloseOptions();
+    // Delete logic here
   };
 
   const handleEdit = () => {
-    // Implement edit logic here
     handleCloseOptions();
+    // Edit logic here
   };
 
   useEffect(() => {
     setFilteredViolations(ViolationsList);
   }, [ViolationsList]);
 
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      const isClickedOutside = !Array.from(violatorRefs.current.values()).some(
+        (ref) => ref?.contains(event.target as Node)
+      );
+      if (isClickedOutside) {
+        handleCloseOptions();
+      }
+    };
+
+    if (selectedViolatorId) {
+      document.addEventListener("mousedown", handleClickOutside);
+    }
+
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [selectedViolatorId]);
   // const { violations: ViolationsList } = useViolator(id!); // no need to use the useViolator hook again, just get the violations in the first useViolator hook. and this just makes the fetching longer.
 
   const getAge = (dateString: string) => {
@@ -140,7 +160,6 @@ const ViolatorDetailPage = () => {
                 paid={violation.paid}
                 isOptionsVisible={selectedViolatorId === violation.id}
                 onOptionsClick={() => handleOpenOptions(violation.id)}
-                onCancel={handleCloseOptions}
                 onDelete={handleDelete}
                 onEdit={handleEdit}
               />

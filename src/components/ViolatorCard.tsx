@@ -10,7 +10,6 @@ interface ViolatorProps {
   violationCount: number;
   isOptionsVisible: boolean;
   onOptionsClick: () => void;
-  onCancel: () => void;
   onDelete: () => void;
   onEdit: () => void;
 }
@@ -24,7 +23,6 @@ const ViolatorCard = ({
   violationCount,
   isOptionsVisible,
   onOptionsClick,
-  onCancel,
   onDelete,
   onEdit,
 }: ViolatorProps) => {
@@ -54,26 +52,18 @@ const ViolatorCard = ({
       <div className="flex-1 text-center">
         <span className="font-medium">{violationCount}</span>
       </div>
-        <button
+      <button
         className="absolute right-3 p-2"
-          onClick={(e) => {
-            e.stopPropagation();
-            onOptionsClick();
-          }}
-        >
-          <img
-            src="../src/assets/option.png"
-            alt="Options"
-            className="w-6 h-4"
-          />
-        </button>
+        onClick={(e) => {
+          e.stopPropagation();
+          onOptionsClick();
+        }}
+      >
+        <img src="../src/assets/option.png" alt="Options" className="w-6 h-4" />
+      </button>
       {isOptionsVisible && (
         <div className="absolute top-[-60px] md:top-[-70px] lg:top-[-75px] right-0 transform translate-x-full ml-2 z-10">
           <OptionsButton
-            onCancelButtonClick={(e) => {
-              e.stopPropagation();
-              onCancel();
-            }}
             onDeleteButtonCLick={onDelete}
             onEditButtonClick={onEdit}
           />

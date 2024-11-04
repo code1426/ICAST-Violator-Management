@@ -3,13 +3,11 @@ import ViolatorCard from "../components/ViolatorCard";
 import EncodeButton from "../components/EncodeButton";
 import Header from "../components/Header";
 import SearchBar from "../components/SearchBar";
-
 import { Spinner } from "react-activity";
 import "react-activity/dist/Spinner.css";
-
 import { useViolators } from "../hooks/useViolators";
 import { useParams } from "react-router-dom";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 
 const HomePage = () => {
   const { role } = useParams<{ role: string }>();
@@ -18,12 +16,13 @@ const HomePage = () => {
   const [selectedViolatorId, setSelectedViolatorId] = useState<string | null>(
     null
   );
+  const violatorRefs = useRef(new Map<string, HTMLDivElement | null>());
 
   const getAge = (dateString: string) => {
-    var today = new Date();
-    var birthDate = new Date(dateString);
-    var age = today.getFullYear() - birthDate.getFullYear();
-    var m = today.getMonth() - birthDate.getMonth();
+    const today = new Date();
+    const birthDate = new Date(dateString);
+    let age = today.getFullYear() - birthDate.getFullYear();
+    const m = today.getMonth() - birthDate.getMonth();
     if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
       age--;
     }
@@ -37,19 +36,39 @@ const HomePage = () => {
   const handleCloseOptions = () => {
     setSelectedViolatorId(null);
   };
+
   const handleDelete = () => {
-    // Implement delete logic here
     handleCloseOptions();
+    // Delete logic here
   };
 
   const handleEdit = () => {
-    // Implement edit logic here
     handleCloseOptions();
+    // Edit logic here
   };
 
   useEffect(() => {
     setFilteredUsers(caughtViolatorList);
   }, [caughtViolatorList]);
+
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      const isClickedOutside = !Array.from(violatorRefs.current.values()).some(
+        (ref) => ref?.contains(event.target as Node)
+      );
+      if (isClickedOutside) {
+        handleCloseOptions();
+      }
+    };
+
+    if (selectedViolatorId) {
+      document.addEventListener("mousedown", handleClickOutside);
+    }
+
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [selectedViolatorId]);
 
   return (
     <div className="min-h-screen bg-color6 p-0 pb-10">
@@ -98,7 +117,6 @@ const HomePage = () => {
               violationCount={caughtViolator.Violations.length}
               isOptionsVisible={selectedViolatorId === caughtViolator.id}
               onOptionsClick={() => handleOpenOptions(caughtViolator.id)}
-              onCancel={handleCloseOptions}
               onDelete={handleDelete}
               onEdit={handleEdit}
             />
