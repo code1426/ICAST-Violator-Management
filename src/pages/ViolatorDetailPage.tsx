@@ -2,12 +2,10 @@ import { useParams } from "react-router-dom";
 import { useViolator } from "../hooks/useViolator";
 import ViolationsCard from "../components/ViolationsCard";
 import Header from "../components/Header";
-import OptionsButton from "../components/OptionsButton";
 
 import { Spinner } from "react-activity";
 import "react-activity/dist/Spinner.css";
 import { useEffect, useState } from "react";
-import SortButton from "../components/SortButton";
 import FilterButton from "../components/FilterButton";
 
 const ViolatorDetailPage = () => {
@@ -103,7 +101,7 @@ const ViolatorDetailPage = () => {
         </div>
         <div className="flex flex-col items-center">
           <div className="flex justify-between items-center border-2 mb-3 border-black bg-color3 p-3 rounded-t-lg shadow-md w-full lg:text-base md:text-sm sm:text-xs text-xxs space-x-2">
-            <div className="flex-1 text-left">
+            <div className="flex-1 text-center">
               <span className="font-bold">Violation Date</span>
             </div>
             <div className="flex-1 text-center">
@@ -124,7 +122,6 @@ const ViolatorDetailPage = () => {
             <div className="flex-1 text-center">
               <span className="font-bold">Status</span>
             </div>
-            <div className="flex-1 text-center"></div>
           </div>
           {filteredViolations?.map((violation) => (
             <div

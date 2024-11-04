@@ -3,7 +3,7 @@ interface OptionsButtonProps {
 
   onEditButtonClick: () => void;
 
-  onCancelButtonClick: () => void;
+  onCancelButtonClick: (e: React.MouseEvent<HTMLLIElement>) => void;
 }
 
 const OptionsButton: React.FC<OptionsButtonProps> = ({

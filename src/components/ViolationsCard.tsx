@@ -34,10 +34,10 @@ const ViolationsCard = ({
 }) => {
   return (
     <div
-      className="flex justify-between items-center w-full bg-color5 border border-black px-3 py-4 rounded-lg shadow-md cursor-pointer my-1 lg:text-base md:text-sm sm:text-xs text-xxs"
+      className="flex justify-between items-center w-full bg-color5 border border-black px-3 py-4 rounded-lg shadow-md cursor-pointer my-1 lg:text-base md:text-sm sm:text-xs text-xxs relative"
       // onClick={() => navigate(`/detail/${id}`)} // no need to navigate
     >
-      <div className="flex-1 text-left">
+      <div className="flex-1 text-center">
         <span className="font-normal">{violation_date}</span>
       </div>
       <div className="flex-1 text-center">
@@ -58,8 +58,8 @@ const ViolationsCard = ({
       <div className="flex-1 text-center ">
         <span className="font-normal">{paid ? "Paid" : "Unpaid"}</span>
       </div>
-      <div className="flex-1 text-right">
         <button
+        className="absolute right-4"
           onClick={(e) => {
             e.stopPropagation();
             onOptionsClick();
@@ -71,7 +71,6 @@ const ViolationsCard = ({
             className="w-6 h-4"
           />
         </button>
-      </div>
       {isOptionsVisible && (
         <div className="absolute top-[-60px] md:top-[-70px] lg:top-[-75px] right-0 transform translate-x-full ml-2 z-10">
           <OptionsButton

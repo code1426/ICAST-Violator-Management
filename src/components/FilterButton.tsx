@@ -32,7 +32,7 @@ const FilterButton = ({ entries, setEntries }: FilterButtonProps) => {
     <div className="relative inline-block text-left lg:text-base md:text-sm text-xs">
       <button
         onClick={toggleDropdown}
-        className="bg-color1 hover:bg-color2 transition-all shadow-gray-500 rounded-lg py-2 px-4 shadow-md flex items-center text-white">
+        className="bg-color1 hover:bg-color2 transition-all shadow-gray-500 rounded-lg py-2 px-4 shadow-md flex items-center text-white w-22 h-11">
         Filter <span className="pl-2">▼</span>
       </button>
 

@@ -3,7 +3,6 @@ import ViolatorCard from "../components/ViolatorCard";
 import EncodeButton from "../components/EncodeButton";
 import Header from "../components/Header";
 import SearchBar from "../components/SearchBar";
-import OptionsButton from "../components/OptionsButton";
 
 import { Spinner } from "react-activity";
 import "react-activity/dist/Spinner.css";
@@ -55,19 +54,13 @@ const HomePage = () => {
   return (
     <div className="min-h-screen bg-color6 p-0 pb-10">
       <Header />
-      <div className="flex flex-col items-center mb-5 mt-10">
-          <SearchBar
-            entries={caughtViolatorList}
-            setFilteredEntries={setFilteredUsers}
-          />
-        <div
-          className={`w-5/6 flex mt-2 ${
-            role === "admin" ? "justify-between" : "justify-end"
-          }`}
-        >
-          {role === "admin" && <EncodeButton />}
-          <SortButton entries={filteredUsers!} setEntries={setFilteredUsers} />
-        </div>
+      <div className="flex flex-row w-5/6 items-center justify-between justify-self-center mb-5 mt-8">
+        <EncodeButton role={role} />
+        <SearchBar
+          entries={caughtViolatorList}
+          setFilteredEntries={setFilteredUsers}
+        />
+        <SortButton entries={filteredUsers!} setEntries={setFilteredUsers} />
       </div>
       <div className="flex flex-col items-center">
         <div className="flex justify-between items-center border-2 mb-3 border-black bg-color3 p-3 rounded-t-lg shadow-md w-5/6 lg:text-base md:text-sm text-xs">
@@ -86,7 +79,7 @@ const HomePage = () => {
           <div className="flex-1 text-center">
             <span className="font-bold">Violation Count</span>
           </div>
-          <div className="flex-1 text-center"></div>
+          {/* <div className="flex-1 text-center"></div> */}
         </div>
 
         {filteredUsers?.map((caughtViolator) => (
