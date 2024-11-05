@@ -73,16 +73,19 @@ const HomePage = () => {
   return (
     <div className="min-h-screen bg-color6 p-0 pb-10">
       <Header />
-      <div className="flex flex-row w-5/6 items-center justify-between justify-self-center mb-5 mt-8">
+      <div className="flex flex-row w-5/6 items-center justify-between justify-self-center mb-5 mt-8 space-x-2">
         <EncodeButton role={role} />
         <SearchBar
           entries={caughtViolatorList}
           setFilteredEntries={setFilteredUsers}
         />
-        <SortButton entries={filteredUsers!} setEntries={setFilteredUsers} />
+        <SortButton
+          entries={filteredUsers!}
+          setEntries={setFilteredUsers}
+        />
       </div>
       <div className="flex flex-col items-center">
-        <div className="flex justify-between items-center border-2 mb-3 border-black bg-color3 p-3 rounded-t-lg shadow-md w-5/6 lg:text-base md:text-sm text-xs">
+        <div className="flex justify-between items-center border-2 mb-3 border-black bg-color3 p-3 rounded-t-lg shadow-md w-5/6 lg:text-base md:text-sm sm:text-xs text-xxs">
           <div className="flex-1 text-center">
             <span className="font-bold">Name</span>
           </div>
@@ -104,8 +107,7 @@ const HomePage = () => {
         {filteredUsers?.map((caughtViolator) => (
           <div
             key={caughtViolator.id}
-            className="relative w-full flex justify-center"
-          >
+            className="relative w-full flex justify-center">
             <ViolatorCard
               id={caughtViolator.id}
               name={`${caughtViolator.first_name} ${caughtViolator.last_name}`}
@@ -124,7 +126,10 @@ const HomePage = () => {
         ))}
         {loading && (
           <div className="flex text-lg justify-self-center self-center font-semibold p-16">
-            <Spinner size={50} color="#3A2D28" />
+            <Spinner
+              size={50}
+              color="#3A2D28"
+            />
           </div>
         )}
       </div>

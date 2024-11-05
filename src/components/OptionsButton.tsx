@@ -9,18 +9,16 @@ const OptionsButton: React.FC<OptionsButtonProps> = ({
   onEditButtonClick,
 }) => {
   return (
-    <div className="absolute right-0 mt-20 w-48 bg-white rounded-md shadow-lg mr-1">
+    <div className="absolute right-0 mt-20 lg:w-48 md:w-36 sm:w-24 w-16 bg-white rounded-md shadow-lg mr-1">
       <ul className="flex flex-col">
         <li
           className="p-2 hover:bg-gray-200 cursor-pointer"
-          onClick={onEditButtonClick}
-        >
+          onClick={onEditButtonClick}>
           Edit
         </li>
         <li
           className="p-2 hover:bg-gray-200 cursor-pointer"
-          onClick={onDeleteButtonCLick}
-        >
+          onClick={onDeleteButtonCLick}>
           Delete
         </li>
       </ul>

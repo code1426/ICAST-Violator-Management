@@ -24,7 +24,7 @@ const SearchBar = ({ entries, setFilteredEntries }: SearchBarProps) => {
   };
 
   return (
-    <div className="flex rounded-full py-3 px-4 w-5/6 bg-color3 space-x-2 border-b-color2 shadow-md shadow-gray-500">
+    <div className="flex rounded-full md:py-3 md:px-4 py-2 px-3 w-5/6 bg-color3 space-x-2 border-b-color2 shadow-md shadow-gray-500">
       <input
         type="text"
         value={searchValue}
