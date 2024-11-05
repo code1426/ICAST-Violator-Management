@@ -25,7 +25,7 @@ const LoginPage = () => {
       <div className="bg-white p-8 rounded-lg shadow-lg w-full max-w-md">
         <div className="flex justify-center mb-4">
           <img
-            src="assets\ICAST_Logo.png"
+            src="../assets/ICAST-Logo.png"
             alt="Logo"
             className="w-32 h-32 rounded-full"
           />

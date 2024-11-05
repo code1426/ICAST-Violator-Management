@@ -34,7 +34,7 @@ const ViolatorCard = ({
 
   return (
     <div
-      className="flex justify-between items-center bg-color5 border transition-all hover:bg-[#c2bbb5] border-black p-4 rounded-lg shadow-md cursor-pointer my-1 w-5/6 lg:text-base md:text-sm text-xs relative"
+      className="flex justify-between items-center active:bg-[#a7a09b] bg-color5 border transition-all hover:bg-[#c2bbb5] border-black p-4 rounded-lg shadow-md cursor-pointer my-1 w-5/6 lg:text-base md:text-sm text-xs relative"
       onClick={handleCardClick}
     >
       <div className="flex-1 text-center">
@@ -59,7 +59,7 @@ const ViolatorCard = ({
           onOptionsClick();
         }}
       >
-        <img src="../src/assets/option.png" alt="Options" className="w-6 h-4" />
+        <img src="../assets/option.png" alt="Options" className="w-6 h-4" />
       </button>
       {isOptionsVisible && (
         <div className="absolute top-[-60px] md:top-[-70px] lg:top-[-75px] right-0 transform translate-x-full ml-2 z-10">

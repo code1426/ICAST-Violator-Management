@@ -1,16 +1,5 @@
-// import { useNavigate } from "react-router-dom";
 import { Violation } from "../types/violator";
 import OptionsButton from "./OptionsButton";
-// interface ViolationsProps {
-//   OR_number: number;
-//   apprehender_name: string;
-//   apprehender_type: string;
-//   paid: boolean;
-//   violation_date: string;
-//   id: string;
-//   violation_place: string;
-//   violator_type: string;
-// }
 
 const ViolationsCard = ({
   OR_number,
@@ -33,7 +22,6 @@ const ViolationsCard = ({
   return (
     <div
       className="flex justify-between items-center w-full bg-color5 border border-black px-3 py-4 rounded-lg shadow-md cursor-pointer my-1 lg:text-base md:text-sm sm:text-xs text-xxs relative"
-      // onClick={() => navigate(`/detail/${id}`)} // no need to navigate
     >
       <div className="flex-1 text-center">
         <span className="font-normal">{violation_date}</span>
@@ -63,7 +51,7 @@ const ViolationsCard = ({
           onOptionsClick();
         }}
       >
-        <img src="../src/assets/option.png" alt="Options" className="w-6 h-4" />
+        <img src="../assets/option.png" alt="Options" className="w-6 h-4" />
       </button>
       {isOptionsVisible && (
         <div className="absolute top-[-60px] md:top-[-70px] lg:top-[-75px] right-0 transform translate-x-full ml-2 z-10">

@@ -106,7 +106,7 @@ const FormInputPage: React.FC = () => {
   };
 
   return (
-    <div className="bg-color6 h-screen">
+    <div className="bg-color6 min-h-screen pb-12">
       <Header />
       <Toaster position="top-center" reverseOrder={false} />
       <div className="w-full max-w-4xl mx-auto">
