@@ -34,9 +34,8 @@ const ViolatorCard = ({
 
   return (
     <div
-      className="flex justify-between items-center active:bg-[#a7a09b] bg-color5 border transition-all hover:bg-[#c2bbb5] border-black p-4 rounded-lg shadow-md cursor-pointer my-1 w-5/6 lg:text-base md:text-sm text-xs relative"
-      onClick={handleCardClick}
-    >
+      className="flex justify-between items-center active:bg-[#a7a09b] bg-color5 border transition-all hover:bg-[#c2bbb5] border-black p-4 rounded-lg shadow-md cursor-pointer my-1 w-5/6 lg:text-base md:text-sm sm:text-xs text-xxs relative"
+      onClick={handleCardClick}>
       <div className="flex-1 text-center">
         <span className="font-medium">{name}</span>
       </div>
@@ -53,16 +52,19 @@ const ViolatorCard = ({
         <span className="font-medium">{violationCount}</span>
       </div>
       <button
-        className="absolute right-3 p-2"
+        className="absolute p-2 lg:right-4 right-[1px] lg:scale-100 scale-50"
         onClick={(e) => {
           e.stopPropagation();
           onOptionsClick();
-        }}
-      >
-        <img src="../assets/option.png" alt="Options" className="w-6 h-4" />
+        }}>
+        <img
+          src="../assets/option.png"
+          alt="Options"
+          className="w-6 h-4"
+        />
       </button>
       {isOptionsVisible && (
-        <div className="absolute top-[-60px] md:top-[-70px] lg:top-[-75px] right-0 transform translate-x-full ml-2 z-10">
+        <div className="absolute top-[-40px] md:top-[-35px] lg:top-[-30px] right-0 transform translate-x-full ml-2 z-10">
           <OptionsButton
             onDeleteButtonCLick={onDelete}
             onEditButtonClick={onEdit}

@@ -86,7 +86,7 @@ const ViolatorDetailPage = () => {
   }
 
   return (
-    <div className="bg-color6 h-screen">
+    <div className="bg-color6 h-auto">
       <Header />
       <div className="flex flex-col p-5">
         <div className="my-5 bg-color3 p-10 space-y-3 rounded-3xl border-2 border-color1">
@@ -166,6 +166,7 @@ const ViolatorDetailPage = () => {
             </div>
           ))}
         </div>
+        <div className="mb-16"></div>
       </div>
     </div>
   );

@@ -106,7 +106,7 @@ const FormInputPage: React.FC = () => {
   };
 
   return (
-    <div className="bg-color6 min-h-screen pb-12">
+    <div className="bg-color6 h-auto">
       <Header />
       <Toaster position="top-center" reverseOrder={false} />
       <div className="w-full max-w-4xl mx-auto">
@@ -408,7 +408,7 @@ const FormInputPage: React.FC = () => {
             </div>
           </div>
 
-          <div className="flex justify-center mt-6 gap-x-96">
+          <div className="flex justify-center mt-6 pb-10 gap-x-96">
             <button
               type="button"
               onClick={handleCancel}
