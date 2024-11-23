@@ -7,7 +7,7 @@ import "react-activity/dist/Spinner.css";
 import { useEffect, useState, useRef } from "react";
 import FilterButton from "../components/FilterButton";
 
-import useCaughtViolator from "../hooks/db/useCaughtViolator";
+import useCaughtViolator from "../hooks/useCaughtViolator";
 
 const ViolatorDetailPage = () => {
   const { id } = useParams<{ id: string }>();

@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
-import { CaughtViolator } from "../../types/violator.types";
-import db from "../../utils/localDB";
+import { CaughtViolator } from "../types/violator.types";
+import db from "../utils/localDB";
 
 const useCaughtViolators = () => {
   const [caughtViolators, setCaughtViolators] = useState<

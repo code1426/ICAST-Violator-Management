@@ -7,7 +7,7 @@ import toast, { Toaster } from "react-hot-toast";
 import Header from "../components/Header";
 
 import type { FormData } from "../types/formData.type";
-import useInsertViolator from "../hooks/db/useInsertViolator";
+import useInsertViolator from "../hooks/useInsertViolator";
 
 const FormInputPage: React.FC = () => {
   const formInitialvalues: FormData = {
@@ -92,7 +92,7 @@ const FormInputPage: React.FC = () => {
         error: <b>Something went wrong!</b>,
       });
       setLoading(false);
-      setFormData(formInitialvalues)
+      setFormData(formInitialvalues);
     }
   };
 

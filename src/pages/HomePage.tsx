@@ -8,7 +8,7 @@ import "react-activity/dist/Spinner.css";
 import { useParams } from "react-router-dom";
 import { useEffect, useState, useRef } from "react";
 
-import useCaughtViolators from "../hooks/db/useCaughtViolators";
+import useCaughtViolators from "../hooks/useCaughtViolators";
 
 const HomePage = () => {
   const { role } = useParams<{ role: string }>();
@@ -80,10 +80,7 @@ const HomePage = () => {
           entries={caughtViolators}
           setFilteredEntries={setFilteredUsers}
         />
-        <SortButton
-          entries={filteredUsers!}
-          setEntries={setFilteredUsers}
-        />
+        <SortButton entries={filteredUsers!} setEntries={setFilteredUsers} />
       </div>
       <div className="flex flex-col items-center">
         <div className="flex justify-between items-center border-2 mb-3 border-black bg-color3 p-3 rounded-t-lg shadow-md w-5/6 lg:text-base md:text-sm sm:text-xs text-xxs">
@@ -108,7 +105,8 @@ const HomePage = () => {
         {filteredUsers?.map((caughtViolator) => (
           <div
             key={caughtViolator.id}
-            className="relative w-full flex justify-center">
+            className="relative w-full flex justify-center"
+          >
             <ViolatorCard
               id={caughtViolator.id}
               name={`${caughtViolator.first_name} ${caughtViolator.last_name}`}
@@ -127,10 +125,7 @@ const HomePage = () => {
         ))}
         {loading && (
           <div className="flex text-lg justify-self-center self-center font-semibold p-16">
-            <Spinner
-              size={50}
-              color="#3A2D28"
-            />
+            <Spinner size={50} color="#3A2D28" />
           </div>
         )}
       </div>

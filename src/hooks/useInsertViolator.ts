@@ -1,63 +1,60 @@
-// import { useState } from "react";
-// import supabase from "../utils/supabase";
-// import type { Violator, Violation } from "../types/violator";
-// import { PostgrestError } from "@supabase/supabase-js";
+import { useState } from "react";
+import { Violation, Violator } from "../types/violator.types";
+import db from "../utils/localDB";
+import pushToSupabase from "../utils/PushToSupabase";
 
-// const useInsertViolator = () => {
-//   const [loading, setLoading] = useState(false);
-//   const [error, setError] = useState<PostgrestError | null>(null);
+const useInsertViolator = () => {
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState<unknown | null>(null);
 
-//   const insertData = async (
-//     violatorData: Violator,
-//     violationData: Omit<Violation, "violator_id">
-//   ) => {
-//     setLoading(true);
+  const insertData = async (
+    violatorData: Violator,
+    violationData: Omit<Violation, "violator_id">
+  ) => {
+    setLoading(true);
+    let violatorId = violatorData.id;
 
-//     try {
-//       // Check if the violator already exists
-//       const { data: existingViolator, error: findError } = await supabase
-//         .from("CaughtViolators")
-//         .select("id")
-//         .eq("first_name", violatorData.first_name)
-//         .eq("last_name", violatorData.last_name)
-//         .eq("date_of_birth", violatorData.date_of_birth)
-//         .single();
+    try {
+      // check if the violator is already existing
+      const existingViolator = await db.CaughtViolators.where({
+        first_name: violatorData.first_name,
+        last_name: violatorData.last_name,
+        date_of_birth: violatorData.date_of_birth,
+      }).first();
 
-//       let violatorId = violatorData.id;
+      if (existingViolator) {
+        violatorId = existingViolator.id;
+      } else {
+        await db.CaughtViolators.add({ ...violatorData, Violations: [] });
+        await db.SyncQueue.add({
+          table_name: "CaughtViolators",
+          action: "add",
+          payload: violatorData,
+        }).then(() => {
+          console.log("added violator into syncQueue");
+        });
+      }
+      await db.Violations.add({ ...violationData, violator_id: violatorId });
+      await db.SyncQueue.add({
+        table_name: "Violations",
+        action: "add",
+        payload: { ...violationData, violator_id: violatorId },
+      }).then(() => {
+        console.log("added violation into syncQueue");
+      });
+    } catch (error) {
+      setError(error);
+    } finally {
+      setLoading(false);
+      pushToSupabase()
+        .then(() => console.log("Data synced with Supabase"))
+        .catch((error) => {
+          console.error("pushError: ", error);
+        });
+    }
+  };
 
-//       if (findError || !existingViolator) {
-//         // Insert a new violator
-//         const { error: insertError } = await supabase
-//           .from("CaughtViolators")
-//           .insert([violatorData])
-//           .single();
+  return { insertData, loading, setLoading, error };
+};
 
-//         if (insertError) {
-//           setLoading(false);
-//           setError(insertError);
-//         }
-//       } else {
-//         // Use existing violator ID
-//         violatorId = existingViolator.id;
-//       }
-
-//       // Insert the violation data
-//       const { error: violationError } = await supabase
-//         .from("Violations")
-//         .insert([{ ...violationData, violator_id: violatorId }]);
-
-//       if (violationError) {
-//         setError(violationError);
-//         setLoading(false);
-//       }
-//     } catch (error: any) {
-//       setError(error);
-//     } finally {
-//       setLoading(false);
-//     }
-//   };
-
-//   return { insertData, loading, setLoading, error };
-// };
-
-// export default useInsertViolator;
+export default useInsertViolator;
