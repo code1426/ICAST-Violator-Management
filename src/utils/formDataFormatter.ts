@@ -1,8 +1,10 @@
 import type { FormData } from "../types/formData.type";
-import type { Violation, Violator } from "../types/localDB.types";
+import type { Violation, Violator } from "../types/violator.types";
 import { v4 as uuid } from "uuid";
 
 export const formDataFormatter = (data: FormData) => {
+  const currentDate = new Date().toISOString().slice(0, 10);
+
   const violatorData: Violator = {
     address: data.Address,
     date_of_birth: data.DateOfBirth,
@@ -13,10 +15,7 @@ export const formDataFormatter = (data: FormData) => {
     civil_status: data.CivilStatus === "Single" ? "Single" : "Married",
     id: uuid(),
     institution: data.Institution,
-    created_at: Date.now().toString(),
-    synced: false,
-    synced_at: null,
-    Violations: []
+    created_at: currentDate,
   };
 
   const ViolationData: Omit<Violation, "violator_id"> = {
@@ -28,9 +27,7 @@ export const formDataFormatter = (data: FormData) => {
     id: uuid(),
     violation_place: data.Location,
     violator_type: data.ViolatorType === "Student" ? "Student" : "Civilian",
-    created_at: Date.now().toString(),
-    synced: false,
-    synced_at: Date.now().toString(),
+    created_at: currentDate,
   };
 
   return { violatorData, ViolationData };

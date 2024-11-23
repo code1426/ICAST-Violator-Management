@@ -1,11 +1,11 @@
 import React, { useState } from "react";
 // import { CaughtViolator } from "../types/violator";
-import { Violator } from "../types/localDB.types";
+import { CaughtViolator } from "../types/violator.types";
 
 interface SortButtonProps {
-  entries: Violator[];
+  entries: CaughtViolator[];
   setEntries: React.Dispatch<
-    React.SetStateAction<Violator[] | undefined>
+    React.SetStateAction<CaughtViolator[] | undefined>
   >;
 }
 
@@ -38,7 +38,8 @@ const SortButton = ({ entries, setEntries }: SortButtonProps) => {
     <div className="relative inline-block text-left lg:text-base md:text-sm text-xs">
       <button
         onClick={toggleDropdown}
-        className="bg-color1 hover:bg-color2 active:bg-color1 border-gray-300 transition-all rounded-lg py-2 px-4 shadow-md shadow-gray-500 flex items-center text-white w-22 h-11">
+        className="bg-color1 hover:bg-color2 active:bg-color1 border-gray-300 transition-all rounded-lg py-2 px-4 shadow-md shadow-gray-500 flex items-center text-white w-22 h-11"
+      >
         Sort <span className="pl-2">▼</span>
       </button>
 
@@ -48,15 +49,18 @@ const SortButton = ({ entries, setEntries }: SortButtonProps) => {
             className="py-1"
             role="menu"
             aria-orientation="vertical"
-            aria-labelledby="options-menu">
+            aria-labelledby="options-menu"
+          >
             <button
               onClick={sortByName}
-              className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 w-full text-left">
+              className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 w-full text-left"
+            >
               Sort by Name
             </button>
             <button
               onClick={sortByDate}
-              className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 w-full text-left">
+              className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 w-full text-left"
+            >
               Sort by Date
             </button>
           </div>

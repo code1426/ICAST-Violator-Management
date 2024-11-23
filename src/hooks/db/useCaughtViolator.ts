@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
-import { Violation, Violator } from "../../types/localDB.types";
+import { Violation, CaughtViolator } from "../../types/violator.types";
 import db from "../../utils/localDB";
 
 const useCaughtViolator = (violatorId: string) => {
-  const [caughtViolator, setCaughtViolator] = useState<Violator>();
+  const [caughtViolator, setCaughtViolator] = useState<CaughtViolator>();
   const [violations, setViolations] = useState<Violation[]>([]);
   const [error, setError] = useState<unknown | null>(null);
   const [loading, setLoading] = useState(true);

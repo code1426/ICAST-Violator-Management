@@ -1,5 +1,5 @@
 // import { Violation } from "../types/violator";
-import { Violation } from "../types/localDB.types";
+import { Violation } from "../types/violator.types";
 import OptionsButton from "./OptionsButton";
 
 const ViolationsCard = ({
@@ -48,12 +48,9 @@ const ViolationsCard = ({
         onClick={(e) => {
           e.stopPropagation();
           onOptionsClick();
-        }}>
-        <img
-          src="../assets/option.png"
-          alt="Options"
-          className="w-6 h-4"
-        />
+        }}
+      >
+        <img src="../assets/option.png" alt="Options" className="w-6 h-4" />
       </button>
       {isOptionsVisible && (
         <div className="absolute top-[-40px] md:top-[-35px] lg:top-[-30px] right-0 transform translate-x-full ml-2 z-10">

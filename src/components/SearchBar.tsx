@@ -1,11 +1,11 @@
 import React, { SetStateAction, useState } from "react";
 // import { CaughtViolator } from "../types/violator";
-import { Violator } from "../types/localDB.types";
+import { CaughtViolator } from "../types/violator.types";
 
 interface SearchBarProps {
-  entries: Violator[] | undefined;
+  entries: CaughtViolator[] | undefined;
   setFilteredEntries: React.Dispatch<
-    SetStateAction<Violator[] | undefined>
+    SetStateAction<CaughtViolator[] | undefined>
   >;
 }
 
@@ -33,7 +33,7 @@ const SearchBar = ({ entries, setFilteredEntries }: SearchBarProps) => {
         className="border-2 border-black rounded-full hover:ring-2 bg-color6 hover:ring-gray-600 transition-all px-5 py-1 w-full shadow-sm focus:outline-none focus:ring-2 focus:ring-gray-600 lg:text-base md:text-sm text-xs "
         onChange={handleInputChange}
       />
-    </div> 
+    </div>
   );
 };
 

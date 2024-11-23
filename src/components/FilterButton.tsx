@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 // import { Violation } from "../types/violator";
-import { Violation } from "../types/localDB.types";
+import { Violation } from "../types/violator.types";
 
 interface FilterButtonProps {
   entries: Violation[];
@@ -33,7 +33,8 @@ const FilterButton = ({ entries, setEntries }: FilterButtonProps) => {
     <div className="relative inline-block text-left lg:text-base md:text-sm text-xs">
       <button
         onClick={toggleDropdown}
-        className="bg-color1 hover:bg-color2 active:bg-color1 transition-all shadow-gray-500 rounded-lg py-2 px-4 shadow-md flex items-center text-white w-22 h-11">
+        className="bg-color1 hover:bg-color2 active:bg-color1 transition-all shadow-gray-500 rounded-lg py-2 px-4 shadow-md flex items-center text-white w-22 h-11"
+      >
         Filter <span className="pl-2">▼</span>
       </button>
 
@@ -43,20 +44,24 @@ const FilterButton = ({ entries, setEntries }: FilterButtonProps) => {
             className="py-1"
             role="menu"
             aria-orientation="vertical"
-            aria-labelledby="options-menu">
+            aria-labelledby="options-menu"
+          >
             <button
               onClick={filterAll}
-              className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 w-full text-left">
+              className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 w-full text-left"
+            >
               All Violations
             </button>
             <button
               onClick={filterUnpaid}
-              className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 w-full text-left">
+              className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 w-full text-left"
+            >
               Unpaid
             </button>
             <button
               onClick={filterPaid}
-              className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 w-full text-left">
+              className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 w-full text-left"
+            >
               Paid
             </button>
           </div>

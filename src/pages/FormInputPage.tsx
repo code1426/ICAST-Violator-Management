@@ -120,7 +120,7 @@ const FormInputPage: React.FC = () => {
                 <input
                   type="text"
                   name="LastName"
-                  placeholder="ex. Doe"
+                  placeholder="e.g., Doe"
                   value={formData.LastName}
                   onChange={handleChange}
                   className={`w-full px-3 py-2 border ${
@@ -139,7 +139,7 @@ const FormInputPage: React.FC = () => {
                   type="text"
                   name="FirstName"
                   value={formData.FirstName}
-                  placeholder="ex. John"
+                  placeholder="e.g., John"
                   onChange={handleChange}
                   className={`w-full px-3 py-2 border ${
                     errors.FirstName ? "border-red-500" : "border-gray-500"
@@ -156,7 +156,7 @@ const FormInputPage: React.FC = () => {
                 <input
                   type="text"
                   name="MiddleName"
-                  placeholder="ex. David"
+                  placeholder="e.g., David"
                   value={formData.MiddleName}
                   onChange={handleChange}
                   className={`w-full px-3 py-2 border ${
@@ -176,7 +176,7 @@ const FormInputPage: React.FC = () => {
                 <input
                   type="text"
                   name="Address"
-                  placeholder="ex. Jaro, Iloilo"
+                  placeholder="e.g., Jaro, Iloilo"
                   value={formData.Address}
                   onChange={handleChange}
                   className={`w-full px-3 py-2 border ${
@@ -194,7 +194,7 @@ const FormInputPage: React.FC = () => {
                 <input
                   type="text"
                   name="Institution"
-                  placeholder="ex. CPU"
+                  placeholder="e.g., CPU"
                   value={formData.Institution}
                   onChange={handleChange}
                   className={`w-full px-3 py-2 border ${
@@ -274,7 +274,7 @@ const FormInputPage: React.FC = () => {
                 <input
                   type="text"
                   name="Location"
-                  placeholder="ex. Jaro, Iloilo"
+                  placeholder="e.g., Jaro, Iloilo"
                   value={formData.Location}
                   onChange={handleChange}
                   className={`w-full px-3 py-2 border ${
@@ -292,7 +292,7 @@ const FormInputPage: React.FC = () => {
                 <input
                   type="text"
                   name="ApprehenderName"
-                  placeholder="ex. Dela Cruz"
+                  placeholder="e.g., Dela Cruz"
                   value={formData.ApprehenderName}
                   onChange={handleChange}
                   className={`w-full px-3 py-2 border ${

@@ -46,8 +46,6 @@ export type Database = {
           last_name: string
           middle_name: string
           sex: Database["public"]["Enums"]["Sex"]
-          synced: boolean
-          synced_at: string
         }
         Insert: {
           address: string
@@ -60,8 +58,6 @@ export type Database = {
           last_name: string
           middle_name: string
           sex: Database["public"]["Enums"]["Sex"]
-          synced: boolean
-          synced_at: string
         }
         Update: {
           address?: string
@@ -74,8 +70,6 @@ export type Database = {
           last_name?: string
           middle_name?: string
           sex?: Database["public"]["Enums"]["Sex"]
-          synced?: boolean
-          synced_at?: string
         }
         Relationships: []
       }
@@ -87,8 +81,6 @@ export type Database = {
           id: string
           OR_number: number
           paid: boolean
-          synced: boolean
-          synced_at: string
           violation_date: string
           violation_place: string
           violator_id: string
@@ -101,8 +93,6 @@ export type Database = {
           id: string
           OR_number: number
           paid?: boolean
-          synced: boolean
-          synced_at: string
           violation_date: string
           violation_place: string
           violator_id?: string
@@ -115,8 +105,6 @@ export type Database = {
           id?: string
           OR_number?: number
           paid?: boolean
-          synced?: boolean
-          synced_at?: string
           violation_date?: string
           violation_place?: string
           violator_id?: string
