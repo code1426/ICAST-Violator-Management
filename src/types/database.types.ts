@@ -38,35 +38,44 @@ export type Database = {
         Row: {
           address: string
           civil_status: Database["public"]["Enums"]["Civil_status"]
+          created_at: string
           date_of_birth: string
           first_name: string
           id: string
-          institution: string | null
+          institution: string
           last_name: string
-          middle_name: string | null
+          middle_name: string
           sex: Database["public"]["Enums"]["Sex"]
+          synced: boolean
+          synced_at: string
         }
         Insert: {
           address: string
           civil_status: Database["public"]["Enums"]["Civil_status"]
+          created_at: string
           date_of_birth: string
           first_name: string
-          id?: string
-          institution?: string | null
+          id: string
+          institution: string
           last_name: string
-          middle_name?: string | null
+          middle_name: string
           sex: Database["public"]["Enums"]["Sex"]
+          synced: boolean
+          synced_at: string
         }
         Update: {
           address?: string
           civil_status?: Database["public"]["Enums"]["Civil_status"]
+          created_at?: string
           date_of_birth?: string
           first_name?: string
           id?: string
-          institution?: string | null
+          institution?: string
           last_name?: string
-          middle_name?: string | null
+          middle_name?: string
           sex?: Database["public"]["Enums"]["Sex"]
+          synced?: boolean
+          synced_at?: string
         }
         Relationships: []
       }
@@ -74,9 +83,12 @@ export type Database = {
         Row: {
           apprehender_name: string
           apprehender_type: Database["public"]["Enums"]["Apprehendor_type"]
+          created_at: string
           id: string
           OR_number: number
           paid: boolean
+          synced: boolean
+          synced_at: string
           violation_date: string
           violation_place: string
           violator_id: string
@@ -85,9 +97,12 @@ export type Database = {
         Insert: {
           apprehender_name: string
           apprehender_type: Database["public"]["Enums"]["Apprehendor_type"]
-          id?: string
+          created_at: string
+          id: string
           OR_number: number
           paid?: boolean
+          synced: boolean
+          synced_at: string
           violation_date: string
           violation_place: string
           violator_id?: string
@@ -96,9 +111,12 @@ export type Database = {
         Update: {
           apprehender_name?: string
           apprehender_type?: Database["public"]["Enums"]["Apprehendor_type"]
+          created_at?: string
           id?: string
           OR_number?: number
           paid?: boolean
+          synced?: boolean
+          synced_at?: string
           violation_date?: string
           violation_place?: string
           violator_id?: string

@@ -1,4 +1,5 @@
-import { Violation } from "../types/violator";
+// import { Violation } from "../types/violator";
+import { Violation } from "../types/localDB.types";
 import OptionsButton from "./OptionsButton";
 
 const ViolationsCard = ({

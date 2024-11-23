@@ -1,5 +1,4 @@
 import { useParams } from "react-router-dom";
-import { useViolator } from "../hooks/useViolator";
 import ViolationsCard from "../components/ViolationsCard";
 import Header from "../components/Header";
 
@@ -8,13 +7,15 @@ import "react-activity/dist/Spinner.css";
 import { useEffect, useState, useRef } from "react";
 import FilterButton from "../components/FilterButton";
 
+import useCaughtViolator from "../hooks/db/useCaughtViolator";
+
 const ViolatorDetailPage = () => {
   const { id } = useParams<{ id: string }>();
   const {
     caughtViolator,
     violations: ViolationsList,
     loading,
-  } = useViolator(id!);
+  } = useCaughtViolator(id!);
   const [filteredViolations, setFilteredViolations] = useState(ViolationsList);
   const [selectedViolatorId, setSelectedViolatorId] = useState<string | null>(
     null
@@ -61,13 +62,12 @@ const ViolatorDetailPage = () => {
       document.removeEventListener("mousedown", handleClickOutside);
     };
   }, [selectedViolatorId]);
-  // const { violations: ViolationsList } = useViolator(id!); // no need to use the useViolator hook again, just get the violations in the first useViolator hook. and this just makes the fetching longer.
 
   const getAge = (dateString: string) => {
-    var today = new Date();
-    var birthDate = new Date(dateString);
-    var age = today.getFullYear() - birthDate.getFullYear();
-    var m = today.getMonth() - birthDate.getMonth();
+    const today = new Date();
+    const birthDate = new Date(dateString);
+    let age = today.getFullYear() - birthDate.getFullYear();
+    const m = today.getMonth() - birthDate.getMonth();
     if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
       age--;
     }
@@ -86,7 +86,7 @@ const ViolatorDetailPage = () => {
   }
 
   return (
-    <div className="bg-color6 h-auto">
+    <div className="bg-color6 min-h-screen">
       <Header />
       <div className="flex flex-col p-5">
         <div className="my-5 bg-color3 p-10 space-y-3 rounded-3xl border-2 border-color1">

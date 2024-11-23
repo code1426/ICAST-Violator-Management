@@ -65,7 +65,7 @@ const Menu = React.forwardRef<
   return (
     <div
       ref={ref}
-      className="absolute right-0 mt-12 w-48 z-10 bg-white rounded-md shadow-lg mr-1"
+      className="absolute right-0 top-0  mt-12 w-48 z-10 bg-white rounded-md shadow-lg mr-1"
     >
       <ul className="flex flex-col">
         <li

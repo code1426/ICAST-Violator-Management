@@ -5,14 +5,15 @@ import Header from "../components/Header";
 import SearchBar from "../components/SearchBar";
 import { Spinner } from "react-activity";
 import "react-activity/dist/Spinner.css";
-import { useViolators } from "../hooks/useViolators";
 import { useParams } from "react-router-dom";
 import { useEffect, useState, useRef } from "react";
 
+import useCaughtViolators from "../hooks/db/useCaughtViolators";
+
 const HomePage = () => {
   const { role } = useParams<{ role: string }>();
-  const { caughtViolatorList, loading } = useViolators();
-  const [filteredUsers, setFilteredUsers] = useState(caughtViolatorList);
+  const { caughtViolators, loading } = useCaughtViolators();
+  const [filteredUsers, setFilteredUsers] = useState(caughtViolators);
   const [selectedViolatorId, setSelectedViolatorId] = useState<string | null>(
     null
   );
@@ -48,8 +49,8 @@ const HomePage = () => {
   };
 
   useEffect(() => {
-    setFilteredUsers(caughtViolatorList);
-  }, [caughtViolatorList]);
+    setFilteredUsers(caughtViolators);
+  }, [caughtViolators]);
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
@@ -73,10 +74,10 @@ const HomePage = () => {
   return (
     <div className="min-h-screen bg-color6 p-0 pb-10">
       <Header />
-      <div className="flex flex-row w-5/6 items-center justify-between justify-self-center mb-5 mt-8 space-x-2">
+      <div className="flex flex-row w-5/6 items-center justify-between justify-self-center my-5 space-x-2">
         <EncodeButton role={role} />
         <SearchBar
-          entries={caughtViolatorList}
+          entries={caughtViolators}
           setFilteredEntries={setFilteredUsers}
         />
         <SortButton

@@ -1,10 +1,11 @@
 import React, { SetStateAction, useState } from "react";
-import { CaughtViolator } from "../types/violator";
+// import { CaughtViolator } from "../types/violator";
+import { Violator } from "../types/localDB.types";
 
 interface SearchBarProps {
-  entries: CaughtViolator[] | undefined;
+  entries: Violator[] | undefined;
   setFilteredEntries: React.Dispatch<
-    SetStateAction<CaughtViolator[] | undefined>
+    SetStateAction<Violator[] | undefined>
   >;
 }
 
@@ -17,8 +18,8 @@ const SearchBar = ({ entries, setFilteredEntries }: SearchBarProps) => {
 
     const filteredItems = entries!.filter(
       (entry) =>
-        entry.first_name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        entry.last_name.toLowerCase().includes(searchTerm.toLowerCase())
+        entry!.first_name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        entry!.last_name.toLowerCase().includes(searchTerm.toLowerCase())
     );
     if (searchValue != null || "") setFilteredEntries(filteredItems);
   };

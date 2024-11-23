@@ -4,7 +4,7 @@ export interface FormData {
   MiddleName: string;
   DateOfBirth: string;
   Address: string;
-  CivilStatus: "Single" | "Married" | string;
+  CivilStatus: string;
   Sex: string;
   Institution: string;
   Location: string;

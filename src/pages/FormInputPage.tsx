@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import useInsertViolator from "../hooks/useInsertViolator";
 import { formDataFormatter } from "../utils/formDataFormatter";
 import { Spinner } from "react-activity";
 import "react-activity/dist/Spinner.css";
@@ -8,6 +7,7 @@ import toast, { Toaster } from "react-hot-toast";
 import Header from "../components/Header";
 
 import type { FormData } from "../types/formData.type";
+import useInsertViolator from "../hooks/db/useInsertViolator";
 
 const FormInputPage: React.FC = () => {
   const formInitialvalues: FormData = {
@@ -106,7 +106,7 @@ const FormInputPage: React.FC = () => {
   };
 
   return (
-    <div className="bg-color6 h-auto">
+    <div className="bg-color6 min-h-screen">
       <Header />
       <Toaster position="top-center" reverseOrder={false} />
       <div className="w-full max-w-4xl mx-auto">
@@ -120,6 +120,7 @@ const FormInputPage: React.FC = () => {
                 <input
                   type="text"
                   name="LastName"
+                  placeholder="ex. Doe"
                   value={formData.LastName}
                   onChange={handleChange}
                   className={`w-full px-3 py-2 border ${
@@ -138,6 +139,7 @@ const FormInputPage: React.FC = () => {
                   type="text"
                   name="FirstName"
                   value={formData.FirstName}
+                  placeholder="ex. John"
                   onChange={handleChange}
                   className={`w-full px-3 py-2 border ${
                     errors.FirstName ? "border-red-500" : "border-gray-500"
@@ -154,7 +156,7 @@ const FormInputPage: React.FC = () => {
                 <input
                   type="text"
                   name="MiddleName"
-                  placeholder="Optional"
+                  placeholder="ex. David"
                   value={formData.MiddleName}
                   onChange={handleChange}
                   className={`w-full px-3 py-2 border ${
@@ -174,6 +176,7 @@ const FormInputPage: React.FC = () => {
                 <input
                   type="text"
                   name="Address"
+                  placeholder="ex. Jaro, Iloilo"
                   value={formData.Address}
                   onChange={handleChange}
                   className={`w-full px-3 py-2 border ${
@@ -191,6 +194,7 @@ const FormInputPage: React.FC = () => {
                 <input
                   type="text"
                   name="Institution"
+                  placeholder="ex. CPU"
                   value={formData.Institution}
                   onChange={handleChange}
                   className={`w-full px-3 py-2 border ${
@@ -270,6 +274,7 @@ const FormInputPage: React.FC = () => {
                 <input
                   type="text"
                   name="Location"
+                  placeholder="ex. Jaro, Iloilo"
                   value={formData.Location}
                   onChange={handleChange}
                   className={`w-full px-3 py-2 border ${
@@ -287,6 +292,7 @@ const FormInputPage: React.FC = () => {
                 <input
                   type="text"
                   name="ApprehenderName"
+                  placeholder="ex. Dela Cruz"
                   value={formData.ApprehenderName}
                   onChange={handleChange}
                   className={`w-full px-3 py-2 border ${

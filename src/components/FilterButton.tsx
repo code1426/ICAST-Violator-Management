@@ -1,5 +1,6 @@
 import React, { useState } from "react";
-import { Violation } from "../types/violator";
+// import { Violation } from "../types/violator";
+import { Violation } from "../types/localDB.types";
 
 interface FilterButtonProps {
   entries: Violation[];
