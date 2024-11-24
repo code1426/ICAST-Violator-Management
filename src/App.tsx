@@ -9,7 +9,7 @@ import Loading from "./components/Loading";
 import useInitializeDB from "./hooks/useInitializeDB";
 
 const App = () => {
-  const { loading, error } = useInitializeDB(); // Initialize the database if it's not already set up
+  const { loading, error } = useInitializeDB();
   let role = "admin"; // for testing
 
   if (loading) {
@@ -18,7 +18,7 @@ const App = () => {
 
   if (error && role !== "admin") {
     return (
-      <div className="flex flex-col h-full w-screen items-center justify-center bg-color6">
+      <div className="flex flex-col h-screen w-screen items-center justify-center bg-color6">
         {error}
       </div>
     );

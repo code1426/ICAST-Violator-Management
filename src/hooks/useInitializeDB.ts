@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 
 import pushToSupabase from "../utils/PushToSupabase";
-import pullFromSupabase from "../utils/pullfromSupabase";
+import pullFromSupabase from "../utils/pullFromSupabase";
 
 const useInitializeDB = () => {
   const [loading, setLoading] = useState(true);
