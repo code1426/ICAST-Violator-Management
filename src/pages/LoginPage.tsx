@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useLayoutEffect, useRef, useState } from "react";
 import useLogin from "../hooks/useLogin";
 import { Spinner } from "react-activity";
 import toast, { Toaster } from "react-hot-toast";
@@ -6,17 +6,22 @@ import toast, { Toaster } from "react-hot-toast";
 const LoginPage = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const { submitLogin, loading, error } = useLogin();
+  const { submitLogin, loading, error, setError } = useLogin();
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
-
     await submitLogin({ email, password });
-
-    if (error) {
-      toast.error(error);
-    }
   };
+
+  // Error Handling
+  useEffect(() => {
+    if (!error) {
+      return;
+    }
+
+    toast.error(error!);
+    setError(undefined)
+  }, [error]);
 
   return (
     <div className="flex justify-center items-center h-screen bg-gray-100">
