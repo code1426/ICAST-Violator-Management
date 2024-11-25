@@ -25,7 +25,7 @@ const useCaughtViolators = () => {
             return violator;
           })
         );
-        setCaughtViolators(violatorsWithViolations);
+        setCaughtViolators(violatorsWithViolations.reverse());
       } catch (error) {
         setError(error);
       } finally {

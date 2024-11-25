@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-// import { CaughtViolator } from "../types/violator";
 import { CaughtViolator } from "../types/violator.types";
 
 interface SortButtonProps {
@@ -24,15 +23,32 @@ const SortButton = ({ entries, setEntries }: SortButtonProps) => {
     setDropdownOpen(false);
   };
 
+
+  // const sortByDate = () => {
+  //   const sortedEntries = [...entries].sort((a, b) => {
+  //     const dateA = new Date(a.Violations.reverse()[0].violation_date);
+  //     const dateB = new Date(b.Violations.reverse()[0].violation_date);
+  //     return dateB.getTime() - dateA.getTime();
+  //   });
+  //   setEntries(sortedEntries);
+  //   setDropdownOpen(false);
+  // };
+
   const sortByDate = () => {
     const sortedEntries = [...entries].sort((a, b) => {
-      const dateA = new Date(a.Violations.reverse()[0].violation_date);
-      const dateB = new Date(b.Violations.reverse()[0].violation_date);
-      return dateB.getTime() - dateA.getTime();
+      const latestDateA = new Date(
+        Math.max(...a.Violations.map((violation) => new Date(violation.violation_date).getTime()))
+      );
+      const latestDateB = new Date(
+        Math.max(...b.Violations.map((violation) => new Date(violation.violation_date).getTime()))
+      );
+      return latestDateB.getTime() - latestDateA.getTime();
     });
+    
     setEntries(sortedEntries);
     setDropdownOpen(false);
   };
+  
 
   return (
     <div className="relative inline-block text-left lg:text-base md:text-sm text-xs">

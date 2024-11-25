@@ -9,6 +9,7 @@ import { useParams } from "react-router-dom";
 import { useEffect, useState, useRef } from "react";
 
 import useCaughtViolators from "../hooks/useCaughtViolators";
+import { CaughtViolator } from "../types/violator.types";
 
 const HomePage = () => {
   const { role } = useParams<{ role: string }>();
@@ -18,6 +19,29 @@ const HomePage = () => {
     null
   );
   const violatorRefs = useRef(new Map<string, HTMLDivElement | null>());
+
+  useEffect(() => {
+    setFilteredUsers(caughtViolators);
+  }, [caughtViolators]);
+
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      const isClickedOutside = !Array.from(violatorRefs.current.values()).some(
+        (ref) => ref?.contains(event.target as Node)
+      );
+      if (isClickedOutside) {
+        handleCloseOptions();
+      }
+    };
+
+    if (selectedViolatorId) {
+      document.addEventListener("mousedown", handleClickOutside);
+    }
+
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [selectedViolatorId]);
 
   const getAge = (dateString: string) => {
     const today = new Date();
@@ -48,28 +72,19 @@ const HomePage = () => {
     // Edit logic here
   };
 
-  useEffect(() => {
-    setFilteredUsers(caughtViolators);
-  }, [caughtViolators]);
+  const getLatestViolationDate = (violator: CaughtViolator) => {
+    return new Date(
+      Math.max(
+        ...violator.Violations.map((violation) =>
+          new Date(violation.violation_date).getTime()
+        )
+      )
+    )
+      .toISOString()
+      .split("T")[0];
+  };
 
-  useEffect(() => {
-    const handleClickOutside = (event: MouseEvent) => {
-      const isClickedOutside = !Array.from(violatorRefs.current.values()).some(
-        (ref) => ref?.contains(event.target as Node)
-      );
-      if (isClickedOutside) {
-        handleCloseOptions();
-      }
-    };
 
-    if (selectedViolatorId) {
-      document.addEventListener("mousedown", handleClickOutside);
-    }
-
-    return () => {
-      document.removeEventListener("mousedown", handleClickOutside);
-    };
-  }, [selectedViolatorId]);
 
   return (
     <div className="min-h-screen bg-color6 p-0 pb-10">
@@ -112,9 +127,7 @@ const HomePage = () => {
               name={`${caughtViolator.first_name} ${caughtViolator.last_name}`}
               age={getAge(caughtViolator.date_of_birth)}
               sex={caughtViolator.sex}
-              latestViolationDate={
-                [...caughtViolator.Violations].reverse()[0].violation_date
-              }
+              latestViolationDate={getLatestViolationDate(caughtViolator)}
               violationCount={caughtViolator.Violations.length}
               isOptionsVisible={selectedViolatorId === caughtViolator.id}
               onOptionsClick={() => handleOpenOptions(caughtViolator.id)}
