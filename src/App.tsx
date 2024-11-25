@@ -13,7 +13,7 @@ import { useContext } from "react";
 
 const App = () => {
   const { loading, error } = useInitializeDB();
-  const { role }: RoleContextType = useContext(RoleContext)
+  const { role }: RoleContextType = useContext(RoleContext);
   // let role = "admin"; // for testing
 
   if (loading) {
@@ -50,7 +50,7 @@ const App = () => {
             element={<FormInputPage />}
           />
           <Route
-            path="/home/:role"
+            path="/home"
             element={<HomePage />}
           />
           <Route

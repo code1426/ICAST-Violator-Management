@@ -1,20 +1,29 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
 import useLogin from "../hooks/useLogin";
+import { Spinner } from "react-activity";
+import toast, { Toaster } from "react-hot-toast";
 
 const LoginPage = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const { submitLogin, loading } = useLogin();
-  const navigate = useNavigate();
+  const { submitLogin, loading, error } = useLogin();
 
-  const handleLogin = (e: React.FormEvent) => {
+  const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
-    submitLogin({ email, password });
+
+    await submitLogin({ email, password });
+
+    if (error) {
+      toast.error(error);
+    }
   };
 
   return (
     <div className="flex justify-center items-center h-screen bg-gray-100">
+      <Toaster
+        position="top-center"
+        reverseOrder={false}
+      />
       <div className="bg-white p-8 rounded-lg shadow-lg w-full max-w-md">
         <div className="flex justify-center mb-4">
           <img
@@ -61,8 +70,16 @@ const LoginPage = () => {
           </div>
           <button
             type="submit"
-            className="w-full bg-blue-500 text-white py-2 rounded-md hover:bg-blue-600 transition-colors">
-            Login
+            className="flex w-full bg-blue-500 text-white py-2 rounded-md hover:bg-blue-600 transition-colors justify-center items-center">
+            {loading ? (
+              <Spinner
+                size={10}
+                color="#fff"
+                animating={loading}
+              />
+            ) : (
+              "Login"
+            )}
           </button>
         </form>
       </div>

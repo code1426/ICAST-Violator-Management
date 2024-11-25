@@ -5,11 +5,14 @@ import RoleContext from "../context/RoleProvider";
 import { useNavigate } from "react-router-dom";
 
 const useLogin = () => {
-  const [loading, setLoading] = useState<boolean>(true);
+  const [loading, setLoading] = useState<boolean>(false);
+  const [error, setError] = useState<string>();
+
   const { setRole }: RoleContextType = useContext(RoleContext);
   const navigate = useNavigate();
 
   const submitLogin = async ({ email, password }: AuthDetailsType) => {
+    setLoading(true);
     const { data: authDetails, error: authError } =
       await supabase.auth.signInWithPassword({
         email,
@@ -17,7 +20,8 @@ const useLogin = () => {
       });
 
     if (authError) {
-      alert(authError);
+      setError(authError.message);
+      setLoading(false);
       return;
     }
 
@@ -29,20 +33,20 @@ const useLogin = () => {
       .eq("user_id", authDetails.user?.id!);
 
     if (roleFetchingError) {
-      alert(roleFetchingError);
+      setError(roleFetchingError.message);
+      setLoading(false);
       return;
     }
 
     console.log(roles);
     const userRole = roles[0].role_name;
     setRole!(userRole);
-
-    navigate(`/home/${userRole}`);
-
     setLoading(false);
+
+    navigate(`/home`);
   };
 
-  return { submitLogin, loading };
+  return { submitLogin, loading, error };
 };
 
 export default useLogin;
