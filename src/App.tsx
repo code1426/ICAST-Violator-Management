@@ -7,10 +7,14 @@ import FormInputPage from "./pages/FormInputPage";
 import Loading from "./components/Loading";
 
 import useInitializeDB from "./hooks/useInitializeDB";
+import RoleContext, { RoleProvider } from "./context/RoleProvider";
+import { RoleContextType } from "./types/auth.types";
+import { useContext } from "react";
 
 const App = () => {
   const { loading, error } = useInitializeDB();
-  const role = "admin"; // for testing
+  const { role }: RoleContextType = useContext(RoleContext)
+  // let role = "admin"; // for testing
 
   if (loading) {
     return <Loading message="Initializing..." />;
@@ -26,13 +30,35 @@ const App = () => {
 
   return (
     <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<Navigate to="/login" replace />} />
-        <Route path="/login" element={<LoginPage />} />
-        <Route path="/formInput" element={<FormInputPage />} />
-        <Route path="/home/:role" element={<HomePage />} />
-        <Route path="detail/:id" element={<ViolatorDetailPage />} />
-      </Routes>
+      <RoleProvider>
+        <Routes>
+          <Route
+            path="/"
+            element={
+              <Navigate
+                to="/login"
+                replace
+              />
+            }
+          />
+          <Route
+            path="/login"
+            element={<LoginPage />}
+          />
+          <Route
+            path="/formInput"
+            element={<FormInputPage />}
+          />
+          <Route
+            path="/home/:role"
+            element={<HomePage />}
+          />
+          <Route
+            path="detail/:id"
+            element={<ViolatorDetailPage />}
+          />
+        </Routes>
+      </RoleProvider>
     </BrowserRouter>
   );
 };
