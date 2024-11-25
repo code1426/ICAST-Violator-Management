@@ -3,6 +3,7 @@ import supabase from "../utils/supabase";
 import { AuthDetailsType, RoleContextType } from "../types/auth.types";
 import RoleContext from "../context/RoleProvider";
 import { useNavigate } from "react-router-dom";
+import toast from "react-hot-toast";
 
 const useLogin = () => {
   const [loading, setLoading] = useState<boolean>(false);
@@ -46,7 +47,7 @@ const useLogin = () => {
     navigate(`/home`);
   };
 
-  return { submitLogin, loading, error };
+  return { submitLogin, loading, error, setError };
 };
 
 export default useLogin;

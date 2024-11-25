@@ -22,6 +22,8 @@ const HomePage = () => {
   );
   const violatorRefs = useRef(new Map<string, HTMLDivElement | null>());
 
+  console.log(role);
+
   useEffect(() => {
     setFilteredUsers(caughtViolators);
   }, [caughtViolators]);
