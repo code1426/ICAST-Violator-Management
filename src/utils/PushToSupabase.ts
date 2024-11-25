@@ -7,10 +7,11 @@ const pushToSupabase = async () => {
   for (const item of syncQueue) {
     const { table_name, action, payload } = item;
     console.log("table_data: ", payload);
+
     try {
       if (navigator.onLine) {
         switch (action) {
-          case "add":
+          case "add": {
             const { error: InsertError } = await supabase
               .from(table_name)
               .insert([payload]);
@@ -18,7 +19,8 @@ const pushToSupabase = async () => {
               throw InsertError;
             }
             break;
-          case "update":
+          }
+          case "update": {
             const { error: updateError } = await supabase
               .from(table_name)
               .update(payload)
@@ -27,7 +29,8 @@ const pushToSupabase = async () => {
               throw updateError;
             }
             break;
-          case "delete":
+          }
+          case "delete": {
             const { error: deleteError } = await supabase
               .from(table_name)
               .delete()
@@ -36,9 +39,11 @@ const pushToSupabase = async () => {
               throw deleteError;
             }
             break;
-          default:
+          }
+          default: {
             console.error(`Invalid action: ${action}`);
             continue;
+          }
         }
 
         // Remove successfully synced item from SyncQueue

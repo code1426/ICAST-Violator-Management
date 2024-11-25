@@ -10,7 +10,7 @@ import useInitializeDB from "./hooks/useInitializeDB";
 
 const App = () => {
   const { loading, error } = useInitializeDB();
-  let role = "admin"; // for testing
+  const role = "admin"; // for testing
 
   if (loading) {
     return <Loading message="Initializing..." />;
