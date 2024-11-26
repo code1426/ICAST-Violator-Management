@@ -2,10 +2,39 @@ import { useState } from "react";
 import { Violation, Violator } from "../types/violator.types";
 import db from "../utils/localDB";
 import pushToSupabase from "../utils/PushToSupabase";
+import { FormData } from "../types/formData.type";
 
 const useInsertViolator = () => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<unknown | null>(null);
+  const [existingViolator, setExistingViolator] = useState<Violator | null>(
+    null
+  );
+
+  const checkViolatorExists = async (
+    InitialViolatorData: Partial<FormData>
+  ): Promise<boolean> => {
+    try {
+      setLoading(true);
+      const existingViolator = await db.CaughtViolators.where({
+        first_name: InitialViolatorData.FirstName,
+        last_name: InitialViolatorData.LastName,
+        middle_name: InitialViolatorData.MiddleName,
+        date_of_birth: InitialViolatorData.DateOfBirth,
+      }).first();
+
+      if (existingViolator) {
+        setExistingViolator(existingViolator);
+        return true;
+      }
+      return false;
+    } catch (error) {
+      setError(error);
+      return false;
+    } finally {
+      setLoading(false);
+    }
+  };
 
   const insertData = async (
     violatorData: Violator,
@@ -15,13 +44,6 @@ const useInsertViolator = () => {
     let violatorId = violatorData.id;
 
     try {
-      // check if the violator is already existing
-      const existingViolator = await db.CaughtViolators.where({
-        first_name: violatorData.first_name,
-        last_name: violatorData.last_name,
-        date_of_birth: violatorData.date_of_birth,
-      }).first();
-
       if (existingViolator) {
         violatorId = existingViolator.id;
       } else {
@@ -54,7 +76,14 @@ const useInsertViolator = () => {
     }
   };
 
-  return { insertData, loading, setLoading, error };
+  return {
+    insertData,
+    loading,
+    setLoading,
+    error,
+    existingViolator,
+    checkViolatorExists,
+  };
 };
 
 export default useInsertViolator;

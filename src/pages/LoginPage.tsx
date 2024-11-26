@@ -1,4 +1,4 @@
-import React, { useEffect, useLayoutEffect, useRef, useState } from "react";
+import React, { useEffect, useState } from "react";
 import useLogin from "../hooks/useLogin";
 import { Spinner } from "react-activity";
 import toast, { Toaster } from "react-hot-toast";
@@ -21,7 +21,7 @@ const LoginPage = () => {
 
     toast.error(error!);
     setError(undefined)
-  }, [error]);
+  }, []);
 
   return (
     <div className="flex justify-center items-center h-screen bg-gray-100">

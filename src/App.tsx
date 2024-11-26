@@ -7,14 +7,14 @@ import FormInputPage from "./pages/FormInputPage";
 import Loading from "./components/Loading";
 
 import useInitializeDB from "./hooks/useInitializeDB";
-import RoleContext, { RoleProvider } from "./context/RoleProvider";
+import RoleContext from "./context/RoleProvider";
 import { RoleContextType } from "./types/auth.types";
 import {
   useContext,
-  useEffect,
-  useLayoutEffect,
-  useRef,
-  useState,
+  // useEffect,
+  // useLayoutEffect,
+  // useRef,
+  // useState,
 } from "react";
 
 const App = () => {

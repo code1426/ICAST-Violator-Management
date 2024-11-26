@@ -1,9 +1,9 @@
-import React, { useContext, useState } from "react";
+import { useContext, useState } from "react";
 import supabase from "../utils/supabase";
 import { AuthDetailsType, RoleContextType } from "../types/auth.types";
 import RoleContext from "../context/RoleProvider";
 import { useNavigate } from "react-router-dom";
-import toast from "react-hot-toast";
+// import toast from "react-hot-toast";
 
 const useLogin = () => {
   const [loading, setLoading] = useState<boolean>(false);
@@ -43,8 +43,7 @@ const useLogin = () => {
     const userRole = roles[0].role_name;
     setRole!(userRole);
     setLoading(false);
-
-    navigate(`/home`);
+    navigate("/home");
   };
 
   return { submitLogin, loading, error, setError };
