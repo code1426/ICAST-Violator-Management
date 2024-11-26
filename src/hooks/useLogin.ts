@@ -1,50 +1,33 @@
-import { useContext, useState } from "react";
+import { useState } from "react";
 import supabase from "../utils/supabase";
-import { AuthDetailsType, RoleContextType } from "../types/auth.types";
-import RoleContext from "../context/RoleProvider";
-import { useNavigate } from "react-router-dom";
-// import toast from "react-hot-toast";
+import { AuthDetailsType } from "../types/auth.types";
 
 const useLogin = () => {
   const [loading, setLoading] = useState<boolean>(false);
-  const [error, setError] = useState<string>();
+  const [error, setError] = useState<string | null>(null);
 
-  const { setRole }: RoleContextType = useContext(RoleContext);
-  const navigate = useNavigate();
-
-  const submitLogin = async ({ email, password }: AuthDetailsType) => {
+  const submitLogin = async ({ email, password }: AuthDetailsType): Promise<boolean> => {
     setLoading(true);
-    const { data: authDetails, error: authError } =
-      await supabase.auth.signInWithPassword({
+
+    try {
+      const { error: authError } = await supabase.auth.signInWithPassword({
         email,
         password,
       });
 
-    if (authError) {
-      setError(authError.message);
+      if (authError) {
+        setError(authError.message);
+        return false;
+      }
+
+      return true;
+    } catch (err: unknown) {
+      console.error("Unexpected error during login:", err);
+      setError("An unexpected error occurred. Please try again later.");
+      return false
+    } finally {
       setLoading(false);
-      return;
     }
-
-    console.log(authDetails);
-
-    const { data: roles, error: roleFetchingError } = await supabase
-      .from("Roles")
-      .select("role_name")
-      .eq("user_id", authDetails.user?.id!)
-      .single()
-
-    if (roleFetchingError) {
-      setError(roleFetchingError.message);
-      setLoading(false);
-      return;
-    }
-
-    console.log(roles);
-    const userRole = roles.role_name;
-    setRole!(userRole);
-    setLoading(false);
-    navigate("/home");
   };
 
   return { submitLogin, loading, error, setError };

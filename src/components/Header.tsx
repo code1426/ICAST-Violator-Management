@@ -1,4 +1,5 @@
 import React, { useState, useRef, useEffect } from "react";
+import supabase from "../utils/supabase";
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -13,7 +14,7 @@ const Header = () => {
   };
 
   const handleLogout = () => {
-    window.location.href = "/login";
+    supabase.auth.signOut()
   };
 
   useEffect(() => {

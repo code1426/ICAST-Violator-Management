@@ -5,7 +5,6 @@ import Header from "../components/Header";
 import SearchBar from "../components/SearchBar";
 import { Spinner } from "react-activity";
 import "react-activity/dist/Spinner.css";
-// import { useParams } from "react-router-dom";
 import { useEffect, useState, useRef, useContext } from "react";
 
 import useCaughtViolators from "../hooks/useCaughtViolators";

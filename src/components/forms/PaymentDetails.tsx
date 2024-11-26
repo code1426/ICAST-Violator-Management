@@ -19,13 +19,15 @@ const PaymentDetails = ({ formData, errors, handleChange }: Props) => {
           name="ORNumber"
           value={formData.ORNumber}
           onChange={handleChange}
-          className={`w-full px-3 py-2 border ${
-            errors.ORNumber ? "border-red-500" : "border-gray-500"
+          className={`w-full px-3 py-2 border-2 focus:outline-none focus:ring-1 focus:ring-${
+            errors.ORNumber ? "red-700" : "black"
+          } ${
+            errors.ORNumber ? "border-red-700" : "border-gray-500"
           } rounded-md`}
           required
         />
         {errors.ORNumber && (
-          <p className="text-red-500 text-sm">{errors.ORNumber}</p>
+          <p className="text-red-700 text-sm">{errors.ORNumber}</p>
         )}
 
         <div>
@@ -34,8 +36,10 @@ const PaymentDetails = ({ formData, errors, handleChange }: Props) => {
             name="PaymentStatus"
             value={formData.PaymentStatus}
             onChange={handleChange}
-            className={`w-full px-3 py-2 border ${
-              errors.PaymentStatus ? "border-red-500" : "border-gray-500"
+            className={`w-full px-3 py-2 border-2 focus:outline-none focus:ring-1 focus:ring-${
+              errors.PaymentStatus ? "red-700" : "black"
+            } ${
+              errors.PaymentStatus ? "border-red-700" : "border-gray-500"
             } rounded-md`}
             required
           >
@@ -44,9 +48,9 @@ const PaymentDetails = ({ formData, errors, handleChange }: Props) => {
             <option value="Unpaid">Unpaid</option>
           </select>
           {errors.PaymentStatus && (
-            <p className="text-red-500 text-sm">{errors.PaymentStatus}</p>
+            <p className="text-red-700 mt-2 text-sm">{errors.PaymentStatus}</p>
           )}
-        </div>  
+        </div>
       </div>
     </div>
   );

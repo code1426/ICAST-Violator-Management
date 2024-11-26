@@ -19,13 +19,15 @@ const AddressAndDemographics = ({ formData, errors, handleChange }: Props) => {
           name="Address"
           value={formData.Address}
           onChange={handleChange}
-          className={`w-full px-3 py-2 border ${
-            errors.Address ? "border-red-500" : "border-gray-500"
+          className={`w-full px-3 py-2 border-2 focus:outline-none focus:ring-1 focus:ring-${
+            errors.Address ? "red-700" : "black"
+          } ${
+            errors.Address ? "border-red-700" : "border-gray-500"
           } rounded-md`}
           required
         />
         {errors.Address && (
-          <p className="text-red-500 text-sm">{errors.Address}</p>
+          <p className="text-red-700 text-sm">{errors.Address}</p>
         )}
 
         {/* civi status and sex */}
@@ -36,8 +38,10 @@ const AddressAndDemographics = ({ formData, errors, handleChange }: Props) => {
               name="CivilStatus"
               value={formData.CivilStatus}
               onChange={handleChange}
-              className={`w-full px-3 py-2 border ${
-                errors.CivilStatus ? "border-red-500" : "border-gray-500"
+              className={`w-full px-3 py-2 border-2 focus:outline-none focus:ring-1 focus:ring-${
+                errors.CivilStatus ? "red-700" : "black"
+              } ${
+                errors.CivilStatus ? "border-red-700" : "border-gray-500"
               } rounded-md`}
               required
             >
@@ -46,7 +50,7 @@ const AddressAndDemographics = ({ formData, errors, handleChange }: Props) => {
               <option value="Married">Married</option>
             </select>
             {errors.CivilStatus && (
-              <p className="text-red-500 text-sm">{errors.CivilStatus}</p>
+              <p className="text-red-700 text-sm">{errors.CivilStatus}</p>
             )}
           </div>
 
@@ -56,8 +60,10 @@ const AddressAndDemographics = ({ formData, errors, handleChange }: Props) => {
               name="Sex"
               value={formData.Sex}
               onChange={handleChange}
-              className={`w-full px-3 py-2 border ${
-                errors.Sex ? "border-red-500" : "border-gray-500"
+              className={`w-full px-3 py-2 border-2 focus:outline-none focus:ring-1 focus:ring-${
+                errors.Sex ? "red-700" : "black"
+              } ${
+                errors.Sex ? "border-red-700" : "border-gray-500"
               } rounded-md`}
               required
             >
@@ -65,10 +71,9 @@ const AddressAndDemographics = ({ formData, errors, handleChange }: Props) => {
               <option value="Male">Male</option>
               <option value="Female">Female</option>
             </select>
-            {errors.Sex && <p className="text-red-500 text-sm">{errors.Sex}</p>}
+            {errors.Sex && <p className="text-red-700 text-sm">{errors.Sex}</p>}
           </div>
         </div>
-
 
         <div>
           <label className="block text-sm">Institution:</label>
@@ -77,13 +82,15 @@ const AddressAndDemographics = ({ formData, errors, handleChange }: Props) => {
             name="Institution"
             value={formData.Institution}
             onChange={handleChange}
-            className={`w-full px-3 py-2 border ${
-              errors.Institution ? "border-red-500" : "border-gray-500"
+            className={`w-full px-3 py-2 border-2 focus:outline-none focus:ring-1 focus:ring-${
+              errors.Institution ? "red-700" : "black"
+            } ${
+              errors.Institution ? "border-red-700" : "border-gray-500"
             } rounded-md`}
             required
           />
           {errors.Institution && (
-            <p className="text-red-500 text-sm">{errors.Institution}</p>
+            <p className="text-red-700 text-sm">{errors.Institution}</p>
           )}
         </div>
       </div>

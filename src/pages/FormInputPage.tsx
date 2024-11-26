@@ -92,19 +92,22 @@ const FormInputPage: React.FC = () => {
 
   const handleCheckErrors = (): boolean => {
     let hasErrors = false;
-    const newErrors: any = {};
+    const newErrors: FormData = { ...formInitialvalues, PaymentStatus: "" };
 
     Object.keys(formData)
       .slice(getStartSliceValue(), getEndSliceValue())
       .forEach((key) => {
-
-        if (key === "ORNumber" && isNaN(parseInt(formData[key as keyof typeof formData]))) {
-          newErrors[key] = "OR Number must be a valid number.";
+        if (
+          key === "ORNumber" &&
+          isNaN(parseInt(formData[key as keyof typeof formData]))
+        ) {
+          newErrors[key as keyof FormData] =
+            "OR Number must be a valid number.";
           hasErrors = true;
         }
 
         if (formData[key as keyof typeof formData] === "") {
-          newErrors[key] = `Please fill out the ${key.replace(
+          newErrors[key as keyof FormData] = `Please fill out the ${key.replace(
             /([A-Q, S-Z])/g,
             " $1"
           )}.`;
@@ -175,7 +178,7 @@ const FormInputPage: React.FC = () => {
     <div className="bg-color6 min-h-screen">
       <Header />
       <Toaster position="top-center" reverseOrder={false} />
-      <div className=" flex flex-col w-full h-[92vh] justify-center items-center">   
+      <div className=" flex flex-col w-full h-[92vh] justify-center items-center">
         <div className=" text-white main-form flex flex-col w-[60%] min-h-[70%] justify-between bg-color3 border-2 border-black shadow-md shadow-gray-500 p-6 rounded-lg">
           <div className=" flex w-full items-center justify-center">
             {currentStep === 1 && (

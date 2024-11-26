@@ -20,13 +20,15 @@ const ViolationDetails = ({ formData, errors, handleChange }: Props) => {
             name="Location"
             value={formData.Location}
             onChange={handleChange}
-            className={`w-full px-3 py-2 border ${
-              errors.Location ? "border-red-500" : "border-gray-500"
+            className={`w-full px-3 py-2 border-2 focus:outline-none focus:ring-1 focus:ring-${
+              errors.Location ? "red-700" : "black"
+            } ${
+              errors.Location ? "border-red-700" : "border-gray-500"
             } rounded-md`}
             required
           />
           {errors.Location && (
-            <p className="text-red-500 text-sm">{errors.Location}</p>
+            <p className="text-red-700 text-sm">{errors.Location}</p>
           )}
         </div>
 
@@ -37,13 +39,15 @@ const ViolationDetails = ({ formData, errors, handleChange }: Props) => {
             name="ApprehenderName"
             value={formData.ApprehenderName}
             onChange={handleChange}
-            className={`w-full px-3 py-2 border ${
-              errors.ApprehenderName ? "border-red-500" : "border-gray-500"
+            className={`w-full px-3 py-2 border-2 focus:outline-none focus:ring-1 focus:ring-${
+              errors.ApprehenderName ? "red-700" : "black"
+            } ${
+              errors.ApprehenderName ? "border-red-700" : "border-gray-500"
             } rounded-md`}
             required
           />
           {errors.ApprehenderName && (
-            <p className="text-red-500 text-sm">{errors.ApprehenderName}</p>
+            <p className="text-red-700 text-sm">{errors.ApprehenderName}</p>
           )}
         </div>
 
@@ -54,13 +58,15 @@ const ViolationDetails = ({ formData, errors, handleChange }: Props) => {
             name="DateApprehended"
             value={formData.DateApprehended}
             onChange={handleChange}
-            className={`w-full px-3 py-2 border ${
-              errors.DateApprehended ? "border-red-500" : "border-gray-500"
+            className={`w-full px-3 py-2 border-2 focus:outline-none focus:ring-1 focus:ring-${
+              errors.DateApprehended ? "red-700" : "black"
+            } ${
+              errors.DateApprehended ? "border-red-700" : "border-gray-500"
             } rounded-md`}
             required
           />
           {errors.DateApprehended && (
-            <p className="text-red-500 text-sm">{errors.DateApprehended}</p>
+            <p className="text-red-700 text-sm">{errors.DateApprehended}</p>
           )}
         </div>
 
@@ -71,8 +77,10 @@ const ViolationDetails = ({ formData, errors, handleChange }: Props) => {
               name="ApprehenderType"
               value={formData.ApprehenderType}
               onChange={handleChange}
-              className={`w-full px-3 py-2 border ${
-                errors.ApprehenderType ? "border-red-500" : "border-gray-500"
+              className={`w-full px-3 py-2 border-2 focus:outline-none focus:ring-1 focus:ring-${
+                errors.ApprehenderType ? "red-700" : "black"
+              } ${
+                errors.ApprehenderType ? "border-red-700" : "border-gray-500"
               } rounded-md`}
               required
             >
@@ -81,7 +89,7 @@ const ViolationDetails = ({ formData, errors, handleChange }: Props) => {
               <option value="Agent">Agent</option>
             </select>
             {errors.ApprehenderType && (
-              <p className="text-red-500 text-sm">{errors.ApprehenderType}</p>
+              <p className="text-red-700 text-sm">{errors.ApprehenderType}</p>
             )}
           </div>
 
@@ -91,8 +99,10 @@ const ViolationDetails = ({ formData, errors, handleChange }: Props) => {
               name="ViolatorType"
               value={formData.ViolatorType}
               onChange={handleChange}
-              className={`w-full px-3 py-2 border ${
-                errors.ViolatorType ? "border-red-500" : "border-gray-500"
+              className={`w-full px-3 py-2 border-2 focus:outline-none focus:ring-1 focus:ring-${
+                errors.ViolatorType ? "red-700" : "black"
+              } ${
+                errors.ViolatorType ? "border-red-700" : "border-gray-500"
               } rounded-md`}
               required
             >
@@ -102,7 +112,7 @@ const ViolationDetails = ({ formData, errors, handleChange }: Props) => {
               <option value="Civilian">Civilian</option>
             </select>
             {errors.ViolatorType && (
-              <p className="text-red-500 text-sm">{errors.ViolatorType}</p>
+              <p className="text-red-700 text-sm">{errors.ViolatorType}</p>
             )}
           </div>
         </div>

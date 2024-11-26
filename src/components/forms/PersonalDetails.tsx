@@ -3,11 +3,13 @@ import { FormData } from "../../types/formData.type";
 interface Props {
   formData: FormData;
   errors: FormData;
-  handleChange: (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => void;
+  handleChange: (
+    e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
+  ) => void;
   checkViolatorExists: (value: Partial<FormData>) => Promise<boolean>;
 }
 
-const PersonalDetails = ({formData, errors, handleChange}: Props) => {
+const PersonalDetails = ({ formData, errors, handleChange }: Props) => {
   return (
     <div className="text-black flex flex-col w-full">
       <h2 className="font-semibold text-lg mb-4">Personal Details</h2>
@@ -20,10 +22,16 @@ const PersonalDetails = ({formData, errors, handleChange}: Props) => {
             name="FirstName"
             value={formData.FirstName}
             onChange={handleChange}
-            className={`w-full px-3 py-2 border bg-color6 ${errors.FirstName ? "border-red-500" : "border-gray-500"} rounded-md`}
+            className={`w-full px-3 py-2 border-2 focus:outline-none focus:ring-1 focus:ring-${
+              errors.FirstName ? "red-700" : "black"
+            } ${
+              errors.FirstName ? "border-red-700" : "border-gray-500"
+            } rounded-md`}
             required
           />
-          {errors.FirstName && <p className="text-red-500 text-sm">{errors.FirstName}</p>}
+          {errors.FirstName && (
+            <p className="text-red-700 text-sm">{errors.FirstName}</p>
+          )}
         </div>
 
         {/* Last Name */}
@@ -34,10 +42,16 @@ const PersonalDetails = ({formData, errors, handleChange}: Props) => {
             name="LastName"
             value={formData.LastName}
             onChange={handleChange}
-            className={`w-full px-3 py-2 border bg-color6 ${errors.LastName ? "border-red-500" : "border-gray-500"} rounded-md`}
+            className={`w-full px-3 py-2 border-2 focus:outline-none focus:ring-1 focus:ring-${
+              errors.LastName ? "red-700" : "black"
+            } ${
+              errors.LastName ? "border-red-700" : "border-gray-500"
+            } rounded-md`}
             required
           />
-          {errors.LastName && <p className="text-red-500 text-sm">{errors.LastName}</p>}
+          {errors.LastName && (
+            <p className="text-red-700 text-sm">{errors.LastName}</p>
+          )}
         </div>
 
         {/* Middle Name */}
@@ -48,9 +62,15 @@ const PersonalDetails = ({formData, errors, handleChange}: Props) => {
             name="MiddleName"
             value={formData.MiddleName}
             onChange={handleChange}
-            className={`w-full px-3 py-2 border bg-color6 ${errors.MiddleName ? "border-red-500" : "border-gray-500"} rounded-md`}
+            className={`w-full px-3 py-2 border-2 focus:outline-none focus:ring-1 focus:ring-${
+              errors.MiddleName ? "red-700" : "black"
+            } ${
+              errors.MiddleName ? "border-red-700" : "border-gray-500"
+            } rounded-md`}
           />
-          {errors.MiddleName && <p className="text-red-500 text-sm">{errors.MiddleName}</p>}
+          {errors.MiddleName && (
+            <p className="text-red-700 text-sm">{errors.MiddleName}</p>
+          )}
         </div>
 
         <div className="flex-col">
@@ -60,14 +80,20 @@ const PersonalDetails = ({formData, errors, handleChange}: Props) => {
             name="DateOfBirth"
             value={formData.DateOfBirth}
             onChange={handleChange}
-            className={`w-full px-3 py-2 border bg-color6 ${errors.DateOfBirth ? "border-red-500" : "border-gray-500"} rounded-md`}
+            className={`w-full px-3 py-2 border-2 focus:outline-none focus:ring-1 focus:ring-${
+              errors.DateApprehended ? "red-700" : "black"
+            } ${
+              errors.DateOfBirth ? "border-red-700" : "border-gray-500"
+            } rounded-md`}
             required
           />
-          {errors.DateOfBirth && <p className="text-red-500 text-sm">{errors.DateOfBirth}</p>}
+          {errors.DateOfBirth && (
+            <p className="text-red-700 text-sm">{errors.DateOfBirth}</p>
+          )}
         </div>
       </div>
     </div>
-  )
-}
+  );
+};
 
 export default PersonalDetails;

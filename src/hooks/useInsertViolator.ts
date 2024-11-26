@@ -1,8 +1,9 @@
 import { useState } from "react";
 import { Violation, Violator } from "../types/violator.types";
+import { FormData } from "../types/formData.type";
 import db from "../utils/localDB";
 import pushToSupabase from "../utils/PushToSupabase";
-import { FormData } from "../types/formData.type";
+import insertUnsyncedTable from "../utils/insertUnsyncedTable";
 
 const useInsertViolator = () => {
   const [loading, setLoading] = useState(false);
@@ -48,21 +49,12 @@ const useInsertViolator = () => {
         violatorId = existingViolator.id;
       } else {
         await db.CaughtViolators.add({ ...violatorData, Violations: [] });
-        await db.SyncQueue.add({
-          table_name: "CaughtViolators",
-          action: "add",
-          payload: violatorData,
-        }).then(() => {
-          console.log("added violator into syncQueue");
-        });
+        await insertUnsyncedTable("CaughtViolators", "add", violatorData);
       }
       await db.Violations.add({ ...violationData, violator_id: violatorId });
-      await db.SyncQueue.add({
-        table_name: "Violations",
-        action: "add",
-        payload: { ...violationData, violator_id: violatorId },
-      }).then(() => {
-        console.log("added violation into syncQueue");
+      await insertUnsyncedTable("Violations", "add", {
+        ...violationData,
+        violator_id: violatorId,
       });
     } catch (error) {
       setError(error);
