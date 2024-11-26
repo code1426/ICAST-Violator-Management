@@ -218,7 +218,7 @@ const FormInputPage: React.FC = () => {
                 <button
                   type="button"
                   onClick={handleCancel}
-                  className="px-4 py-2 w-20 h-11 bg-red-700 text-white rounded-md"
+                  className="px-4 py-2 w-20 h-11 bg-red-700 hover:bg-[#e93b3b] transition-all text-white rounded-md"
                 >
                   Cancel
                 </button>
@@ -239,7 +239,7 @@ const FormInputPage: React.FC = () => {
                   <button
                     type="button"
                     onClick={handleNextClick}
-                    className="flex px-4 py-2 bg-color1 h-11 w-20 text-white rounded-md items-center justify-center"
+                    className="flex px-4 py-2 bg-color1 hover:bg-color2 transition-all h-11 w-20 text-white rounded-md items-center justify-center"
                   >
                     {loading ? (
                       <Spinner size={10} color="#fff" animating={loading} />
@@ -251,7 +251,7 @@ const FormInputPage: React.FC = () => {
                   <button
                     type="submit"
                     onClick={handleSubmit}
-                    className="flex px-4 py-2 h-11 w-20 bg-green-700 text-white rounded-md items-center justify-center"
+                    className="flex px-4 py-2 h-11 w-20 bg-green-700 hover:bg-[#24b258] text-white rounded-md items-center justify-center"
                   >
                     {loading ? (
                       <Spinner size={10} color="#fff" animating={loading} />

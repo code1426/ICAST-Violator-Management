@@ -31,7 +31,8 @@ const useLogin = () => {
     const { data: roles, error: roleFetchingError } = await supabase
       .from("Roles")
       .select("role_name")
-      .eq("user_id", authDetails.user?.id!);
+      .eq("user_id", authDetails.user?.id!)
+      .single()
 
     if (roleFetchingError) {
       setError(roleFetchingError.message);
@@ -40,7 +41,7 @@ const useLogin = () => {
     }
 
     console.log(roles);
-    const userRole = roles[0].role_name;
+    const userRole = roles.role_name;
     setRole!(userRole);
     setLoading(false);
     navigate("/home");
