@@ -4,19 +4,23 @@ import EncodeButton from "../components/EncodeButton";
 import Header from "../components/Header";
 import SearchBar from "../components/SearchBar";
 import { Spinner } from "react-activity";
+import { Violator, Violation } from "../types/violator.types";
 import "react-activity/dist/Spinner.css";
 import { useParams } from "react-router-dom";
 import { useEffect, useState, useRef } from "react";
+import toast, { Toaster } from "react-hot-toast";
 
 import useCaughtViolators from "../hooks/useCaughtViolators";
+import useDeleteViolator from "../hooks/useDeleteViolator";
 
 const HomePage = () => {
   const { role } = useParams<{ role: string }>();
-  const { caughtViolators, loading } = useCaughtViolators();
+  const { caughtViolators, loading: violatorsLoading } = useCaughtViolators();
   const [filteredUsers, setFilteredUsers] = useState(caughtViolators);
   const [selectedViolatorId, setSelectedViolatorId] = useState<string | null>(
     null
   );
+  const { deleteData, loading: deleteLoading } = useDeleteViolator();
   const violatorRefs = useRef(new Map<string, HTMLDivElement | null>());
 
   const getAge = (dateString: string) => {
@@ -38,9 +42,21 @@ const HomePage = () => {
     setSelectedViolatorId(null);
   };
 
-  const handleDelete = () => {
-    handleCloseOptions();
-    // Delete logic here
+  const handleDelete = async (violatorData: Violator) => {
+    const previousUsers = [...(filteredUsers || [])];
+    const updatedUsers = (filteredUsers || []).filter(
+      (user) => user.id !== violatorData.id
+    );
+    setFilteredUsers(updatedUsers);
+
+    try {
+      await deleteData(violatorData);
+      toast.success("Deleted successfully!");
+    } catch (err) {
+      console.error(err);
+      toast.error("Failed to delete!");
+      setFilteredUsers(previousUsers); // Revert on failure
+    }
   };
 
   const handleEdit = () => {
@@ -74,6 +90,7 @@ const HomePage = () => {
   return (
     <div className="min-h-screen bg-color6 p-0 pb-10">
       <Header />
+      <Toaster position="top-center" reverseOrder={false} />
       <div className="flex flex-row w-5/6 items-center justify-between justify-self-center my-5 space-x-2">
         <EncodeButton role={role} />
         <SearchBar
@@ -99,7 +116,6 @@ const HomePage = () => {
           <div className="flex-1 text-center">
             <span className="font-bold">Violation Count</span>
           </div>
-          {/* <div className="flex-1 text-center"></div> */}
         </div>
 
         {filteredUsers?.map((caughtViolator) => (
@@ -118,12 +134,16 @@ const HomePage = () => {
               violationCount={caughtViolator.Violations.length}
               isOptionsVisible={selectedViolatorId === caughtViolator.id}
               onOptionsClick={() => handleOpenOptions(caughtViolator.id)}
-              onDelete={handleDelete}
+              onDelete={() =>
+                handleDelete(
+                  caughtViolator as Violator & { Violations: Violation[] }
+                )
+              }
               onEdit={handleEdit}
             />
           </div>
         ))}
-        {loading && (
+        {(violatorsLoading || deleteLoading) && (
           <div className="flex text-lg justify-self-center self-center font-semibold p-16">
             <Spinner size={50} color="#3A2D28" />
           </div>

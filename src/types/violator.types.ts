@@ -45,5 +45,5 @@ export interface SyncQueue {
   id: Int8Array;
   table_name: "CaughtViolators" | "Violations";
   action: string;
-  payload: Violation | Violator;
+  payload: Violation | Violator | Violation[] | Violator[];
 }
