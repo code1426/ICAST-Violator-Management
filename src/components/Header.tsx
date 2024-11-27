@@ -1,5 +1,6 @@
 import React, { useState, useRef, useEffect } from "react";
 import supabase from "../utils/supabase";
+import { Link } from "react-router-dom";
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -14,7 +15,7 @@ const Header = () => {
   };
 
   const handleLogout = () => {
-    supabase.auth.signOut()
+    supabase.auth.signOut();
   };
 
   useEffect(() => {
@@ -35,10 +36,16 @@ const Header = () => {
 
   return (
     <header className="flex items-center bg-color1 py-2 px-1 shadow-md shadow-gray-500">
-      <img src="../assets/ICAST-Logo.png" alt="Logo" className="mx-3 w-7 h-7" />
-      <h1 className="lg:text-xl md:text-base text-xs font-bold text-center text-white">
-        ILOILO CITY ANTI-SMOKING TASK FORCE
-      </h1>
+      <Link to="/home" className="flex flex-row">
+        <img
+          src="../assets/ICAST-Logo.png"
+          alt="Logo"
+          className="mx-3 w-7 h-7"
+        />
+        <h1 className="lg:text-xl md:text-base text-xs font-bold text-center text-white">
+          ILOILO CITY ANTI-SMOKING TASK FORCE
+        </h1>
+      </Link>
 
       <button onClick={handleButtonClick} className="flex items-center ml-auto">
         <img
