@@ -4,7 +4,7 @@ import supabase from "./supabase";
 const pullFromSupabase = async () => {
   const { data: violators, error: violatorsError } = await supabase
     .from("CaughtViolators")
-    .select(`*, Violations (*)`);
+    .select("*, Violations (*)");
 
   if (!violatorsError && violators) {
     await db.CaughtViolators.bulkPut(violators); // Upserts violators

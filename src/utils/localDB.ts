@@ -7,8 +7,8 @@ const db = new Dexie("ICAST-DB") as Dexie & {
   SyncQueue: EntityTable<SyncQueue, "id">;
 };
 
-db.version(3).stores({
-  CaughtViolators: "id, [first_name+last_name+date_of_birth], created_at",
+db.version(4).stores({
+  CaughtViolators: "id, [first_name+last_name+middle_name+date_of_birth], created_at",
   Violations: "id, violator_id, violation_place, created_at",
   SyncQueue: "++id, table_name, action, payload",
 });

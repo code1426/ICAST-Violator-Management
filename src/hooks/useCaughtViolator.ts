@@ -1,12 +1,17 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
 import { Violation, CaughtViolator } from "../types/violator.types";
 import db from "../utils/localDB";
+
+import RoleContext from "../context/RoleProvider";
+import type { RoleContextType } from "../types/auth.types";
 
 const useCaughtViolator = (violatorId: string) => {
   const [caughtViolator, setCaughtViolator] = useState<CaughtViolator>();
   const [violations, setViolations] = useState<Violation[]>([]);
   const [error, setError] = useState<unknown | null>(null);
   const [loading, setLoading] = useState(true);
+
+  const { role }: RoleContextType = useContext(RoleContext);
 
   useEffect(() => {
     const fetchViolator = async () => {
@@ -18,7 +23,15 @@ const useCaughtViolator = (violatorId: string) => {
           .equals(violatorId)
           .toArray();
         setCaughtViolator(violator);
-        setViolations(violations);
+
+        if (role === "Police") {
+          const policeViolations = violations.filter((violation) => {
+            return violation.apprehender_type === "Officer";
+          });
+          setViolations(policeViolations);
+        } else {
+          setViolations(violations);
+        }
       } catch (error) {
         setError(error);
       } finally {
@@ -27,7 +40,7 @@ const useCaughtViolator = (violatorId: string) => {
     };
 
     fetchViolator();
-  }, [violatorId]);
+  }, [violatorId, role]);
 
   return { caughtViolator, violations, loading, error };
 };

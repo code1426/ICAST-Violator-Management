@@ -6,63 +6,27 @@ import SearchBar from "../components/SearchBar";
 import { Spinner } from "react-activity";
 import { Violator, Violation } from "../types/violator.types";
 import "react-activity/dist/Spinner.css";
+import { useEffect, useState, useRef, useContext } from "react";
 import { useParams } from "react-router-dom";
 import { useEffect, useState, useRef } from "react";
 import toast, { Toaster } from "react-hot-toast";
 
 import useCaughtViolators from "../hooks/useCaughtViolators";
-import useDeleteViolator from "../hooks/useDeleteViolator";
+import { CaughtViolator } from "../types/violator.types";
+import RoleContext from "../context/RoleProvider";
+import { RoleContextType } from "../types/auth.types";
 
 const HomePage = () => {
-  const { role } = useParams<{ role: string }>();
-  const { caughtViolators, loading: violatorsLoading } = useCaughtViolators();
+  const { role }: RoleContextType = useContext(RoleContext);
+  const { caughtViolators, loading } = useCaughtViolators();
   const [filteredUsers, setFilteredUsers] = useState(caughtViolators);
   const [selectedViolatorId, setSelectedViolatorId] = useState<string | null>(
     null
   );
-  const { deleteData, loading: deleteLoading } = useDeleteViolator();
+
   const violatorRefs = useRef(new Map<string, HTMLDivElement | null>());
 
-  const getAge = (dateString: string) => {
-    const today = new Date();
-    const birthDate = new Date(dateString);
-    let age = today.getFullYear() - birthDate.getFullYear();
-    const m = today.getMonth() - birthDate.getMonth();
-    if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
-      age--;
-    }
-    return age;
-  };
-
-  const handleOpenOptions = (id: string) => {
-    setSelectedViolatorId(selectedViolatorId === id ? null : id);
-  };
-
-  const handleCloseOptions = () => {
-    setSelectedViolatorId(null);
-  };
-
-  const handleDelete = async (violatorData: Violator) => {
-    const previousUsers = [...(filteredUsers || [])];
-    const updatedUsers = (filteredUsers || []).filter(
-      (user) => user.id !== violatorData.id
-    );
-    setFilteredUsers(updatedUsers);
-
-    try {
-      await deleteData(violatorData);
-      toast.success("Deleted successfully!");
-    } catch (err) {
-      console.error(err);
-      toast.error("Failed to delete!");
-      setFilteredUsers(previousUsers); // Revert on failure
-    }
-  };
-
-  const handleEdit = () => {
-    handleCloseOptions();
-    // Edit logic here
-  };
+  console.log(role);
 
   useEffect(() => {
     setFilteredUsers(caughtViolators);
@@ -86,6 +50,47 @@ const HomePage = () => {
       document.removeEventListener("mousedown", handleClickOutside);
     };
   }, [selectedViolatorId]);
+
+  const getAge = (dateString: string) => {
+    const today = new Date();
+    const birthDate = new Date(dateString);
+    let age = today.getFullYear() - birthDate.getFullYear();
+    const m = today.getMonth() - birthDate.getMonth();
+    if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
+      age--;
+    }
+    return age;
+  };
+
+  const handleOpenOptions = (id: string) => {
+    setSelectedViolatorId(selectedViolatorId === id ? null : id);
+  };
+
+  const handleCloseOptions = () => {
+    setSelectedViolatorId(null);
+  };
+
+  const handleDelete = () => {
+    handleCloseOptions();
+    // Delete logic here
+  };
+
+  const handleEdit = () => {
+    handleCloseOptions();
+    // Edit logic here
+  };
+
+  const getLatestViolationDate = (violator: CaughtViolator) => {
+    return new Date(
+      Math.max(
+        ...violator.Violations.map((violation) =>
+          new Date(violation.violation_date).getTime()
+        )
+      )
+    )
+      .toISOString()
+      .split("T")[0];
+  };
 
   return (
     <div className="min-h-screen bg-color6 p-0 pb-10">
@@ -128,22 +133,16 @@ const HomePage = () => {
               name={`${caughtViolator.first_name} ${caughtViolator.last_name}`}
               age={getAge(caughtViolator.date_of_birth)}
               sex={caughtViolator.sex}
-              latestViolationDate={
-                [...caughtViolator.Violations].reverse()[0].violation_date
-              }
+              latestViolationDate={getLatestViolationDate(caughtViolator)}
               violationCount={caughtViolator.Violations.length}
               isOptionsVisible={selectedViolatorId === caughtViolator.id}
               onOptionsClick={() => handleOpenOptions(caughtViolator.id)}
-              onDelete={() =>
-                handleDelete(
-                  caughtViolator as Violator & { Violations: Violation[] }
-                )
-              }
+              onDelete={() => handleDelete()}
               onEdit={handleEdit}
             />
           </div>
         ))}
-        {(violatorsLoading || deleteLoading) && (
+        {loading && (
           <div className="flex text-lg justify-self-center self-center font-semibold p-16">
             <Spinner size={50} color="#3A2D28" />
           </div>

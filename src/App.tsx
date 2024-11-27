@@ -7,19 +7,24 @@ import FormInputPage from "./pages/FormInputPage";
 import Loading from "./components/Loading";
 
 import useInitializeDB from "./hooks/useInitializeDB";
+import RoleContext from "./context/RoleProvider";
+import { RoleContextType } from "./types/auth.types";
+import { useContext } from "react";
+import useAuth from "./hooks/useAuth";
 
 const App = () => {
-  const { loading, error } = useInitializeDB(); // Initialize the database if it's not already set up
-  let role = "admin"; // for testing
+  const { loading: loadingDB, error: errorDB } = useInitializeDB();
+  const { isAuthenticated, loading: authLoading, error: errorAuth } = useAuth();
+  const { role }: RoleContextType = useContext(RoleContext);
 
-  if (loading) {
+  if (loadingDB || authLoading) {
     return <Loading message="Initializing..." />;
   }
 
-  if (error && role !== "admin") {
+  if ((errorDB || errorAuth) && role !== "Encoder") {
     return (
-      <div className="flex flex-col h-full w-screen items-center justify-center bg-color6">
-        {error}
+      <div className="flex flex-col h-screen w-screen items-center justify-center bg-color6">
+        {errorDB || errorAuth}
       </div>
     );
   }
@@ -27,11 +32,27 @@ const App = () => {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<Navigate to="/login" replace />} />
-        <Route path="/login" element={<LoginPage />} />
-        <Route path="/formInput" element={<FormInputPage />} />
-        <Route path="/home/:role" element={<HomePage />} />
-        <Route path="detail/:id" element={<ViolatorDetailPage />} />
+        <Route path="/" element={<Navigate to="/login" />} />
+        <Route
+          path="/login"
+          element={!isAuthenticated ? <LoginPage /> : <Navigate to="/home" />}
+        />
+        <Route
+          path="/formInput"
+          element={
+            isAuthenticated ? <FormInputPage /> : <Navigate to="/login" />
+          }
+        />
+        <Route
+          path="/home"
+          element={isAuthenticated ? <HomePage /> : <Navigate to="/login" />}
+        />
+        <Route
+          path="detail/:id"
+          element={
+            isAuthenticated ? <ViolatorDetailPage /> : <Navigate to="/login" />
+          }
+        />
       </Routes>
     </BrowserRouter>
   );

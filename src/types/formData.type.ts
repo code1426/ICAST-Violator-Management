@@ -15,3 +15,10 @@ export interface FormData {
   ORNumber: string;
   PaymentStatus: string;
 }
+
+export interface InitialViolatorData {
+  first_name: string;
+  last_name: string;
+  middle_name: string;
+  date_of_birth: string;
+}
