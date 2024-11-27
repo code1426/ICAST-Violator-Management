@@ -22,10 +22,10 @@ const PersonalDetails = ({ formData, errors, handleChange }: Props) => {
             name="FirstName"
             value={formData.FirstName}
             onChange={handleChange}
-            className={`w-full px-3 py-2 border-2 focus:outline-none focus:ring-1 focus:ring-${
-              errors.FirstName ? "red-700" : "black"
+            className={`w-full px-3 py-2 border-2 focus:outline-none focus:ring-1 ${
+              errors.FirstName ? "focus:ring-red-700" : "focus:ring-gray-700"
             } ${
-              errors.FirstName ? "border-red-700" : "border-gray-500"
+              errors.FirstName ? "border-red-700" : "border-gray-700"
             } rounded-md`}
             required
           />
@@ -43,9 +43,9 @@ const PersonalDetails = ({ formData, errors, handleChange }: Props) => {
             value={formData.LastName}
             onChange={handleChange}
             className={`w-full px-3 py-2 border-2 focus:outline-none focus:ring-1 focus:ring-${
-              errors.LastName ? "red-700" : "black"
+              errors.LastName ? "red-700" : "gray-700"
             } ${
-              errors.LastName ? "border-red-700" : "border-gray-500"
+              errors.LastName ? "border-red-700" : "border-gray-700"
             } rounded-md`}
             required
           />
@@ -63,9 +63,9 @@ const PersonalDetails = ({ formData, errors, handleChange }: Props) => {
             value={formData.MiddleName}
             onChange={handleChange}
             className={`w-full px-3 py-2 border-2 focus:outline-none focus:ring-1 focus:ring-${
-              errors.MiddleName ? "red-700" : "black"
+              errors.MiddleName ? "red-700" : "gray-700"
             } ${
-              errors.MiddleName ? "border-red-700" : "border-gray-500"
+              errors.MiddleName ? "border-red-700" : "border-gray-700"
             } rounded-md`}
           />
           {errors.MiddleName && (
@@ -81,9 +81,9 @@ const PersonalDetails = ({ formData, errors, handleChange }: Props) => {
             value={formData.DateOfBirth}
             onChange={handleChange}
             className={`w-full px-3 py-2 border-2 focus:outline-none focus:ring-1 focus:ring-${
-              errors.DateApprehended ? "red-700" : "black"
+              errors.DateApprehended ? "red-700" : "gray-700"
             } ${
-              errors.DateOfBirth ? "border-red-700" : "border-gray-500"
+              errors.DateOfBirth ? "border-red-700" : "border-gray-700"
             } rounded-md`}
             required
           />

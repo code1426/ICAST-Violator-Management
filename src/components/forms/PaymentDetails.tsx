@@ -20,9 +20,9 @@ const PaymentDetails = ({ formData, errors, handleChange }: Props) => {
           value={formData.ORNumber}
           onChange={handleChange}
           className={`w-full px-3 py-2 border-2 focus:outline-none focus:ring-1 focus:ring-${
-            errors.ORNumber ? "red-700" : "black"
+            errors.ORNumber ? "red-700" : "gray-700"
           } ${
-            errors.ORNumber ? "border-red-700" : "border-gray-500"
+            errors.ORNumber ? "border-red-700" : "border-gray-700"
           } rounded-md`}
           required
         />
@@ -37,9 +37,9 @@ const PaymentDetails = ({ formData, errors, handleChange }: Props) => {
             value={formData.PaymentStatus}
             onChange={handleChange}
             className={`w-full px-3 py-2 border-2 focus:outline-none focus:ring-1 focus:ring-${
-              errors.PaymentStatus ? "red-700" : "black"
+              errors.PaymentStatus ? "red-700" : "gray-700"
             } ${
-              errors.PaymentStatus ? "border-red-700" : "border-gray-500"
+              errors.PaymentStatus ? "border-red-700" : "border-gray-700"
             } rounded-md`}
             required
           >

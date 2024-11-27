@@ -20,9 +20,9 @@ const AddressAndDemographics = ({ formData, errors, handleChange }: Props) => {
           value={formData.Address}
           onChange={handleChange}
           className={`w-full px-3 py-2 border-2 focus:outline-none focus:ring-1 focus:ring-${
-            errors.Address ? "red-700" : "black"
+            errors.Address ? "red-700" : "gray-700"
           } ${
-            errors.Address ? "border-red-700" : "border-gray-500"
+            errors.Address ? "border-red-700" : "border-gray-700"
           } rounded-md`}
           required
         />
@@ -39,9 +39,9 @@ const AddressAndDemographics = ({ formData, errors, handleChange }: Props) => {
               value={formData.CivilStatus}
               onChange={handleChange}
               className={`w-full px-3 py-2 border-2 focus:outline-none focus:ring-1 focus:ring-${
-                errors.CivilStatus ? "red-700" : "black"
+                errors.CivilStatus ? "red-700" : "gray-700"
               } ${
-                errors.CivilStatus ? "border-red-700" : "border-gray-500"
+                errors.CivilStatus ? "border-red-700" : "border-gray-700"
               } rounded-md`}
               required
             >
@@ -61,9 +61,9 @@ const AddressAndDemographics = ({ formData, errors, handleChange }: Props) => {
               value={formData.Sex}
               onChange={handleChange}
               className={`w-full px-3 py-2 border-2 focus:outline-none focus:ring-1 focus:ring-${
-                errors.Sex ? "red-700" : "black"
+                errors.Sex ? "red-700" : "gray-700"
               } ${
-                errors.Sex ? "border-red-700" : "border-gray-500"
+                errors.Sex ? "border-red-700" : "border-gray-700"
               } rounded-md`}
               required
             >
@@ -83,9 +83,9 @@ const AddressAndDemographics = ({ formData, errors, handleChange }: Props) => {
             value={formData.Institution}
             onChange={handleChange}
             className={`w-full px-3 py-2 border-2 focus:outline-none focus:ring-1 focus:ring-${
-              errors.Institution ? "red-700" : "black"
+              errors.Institution ? "red-700" : "gray-700"
             } ${
-              errors.Institution ? "border-red-700" : "border-gray-500"
+              errors.Institution ? "border-red-700" : "border-gray-700"
             } rounded-md`}
             required
           />

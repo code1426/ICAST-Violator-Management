@@ -21,9 +21,9 @@ const ViolationDetails = ({ formData, errors, handleChange }: Props) => {
             value={formData.Location}
             onChange={handleChange}
             className={`w-full px-3 py-2 border-2 focus:outline-none focus:ring-1 focus:ring-${
-              errors.Location ? "red-700" : "black"
+              errors.Location ? "red-700" : "gray-700"
             } ${
-              errors.Location ? "border-red-700" : "border-gray-500"
+              errors.Location ? "border-red-700" : "border-gray-700"
             } rounded-md`}
             required
           />
@@ -40,9 +40,9 @@ const ViolationDetails = ({ formData, errors, handleChange }: Props) => {
             value={formData.ApprehenderName}
             onChange={handleChange}
             className={`w-full px-3 py-2 border-2 focus:outline-none focus:ring-1 focus:ring-${
-              errors.ApprehenderName ? "red-700" : "black"
+              errors.ApprehenderName ? "red-700" : "gray-700"
             } ${
-              errors.ApprehenderName ? "border-red-700" : "border-gray-500"
+              errors.ApprehenderName ? "border-red-700" : "border-gray-700"
             } rounded-md`}
             required
           />
@@ -59,9 +59,9 @@ const ViolationDetails = ({ formData, errors, handleChange }: Props) => {
             value={formData.DateApprehended}
             onChange={handleChange}
             className={`w-full px-3 py-2 border-2 focus:outline-none focus:ring-1 focus:ring-${
-              errors.DateApprehended ? "red-700" : "black"
+              errors.DateApprehended ? "red-700" : "gray-700"
             } ${
-              errors.DateApprehended ? "border-red-700" : "border-gray-500"
+              errors.DateApprehended ? "border-red-700" : "border-gray-700"
             } rounded-md`}
             required
           />
@@ -78,9 +78,9 @@ const ViolationDetails = ({ formData, errors, handleChange }: Props) => {
               value={formData.ApprehenderType}
               onChange={handleChange}
               className={`w-full px-3 py-2 border-2 focus:outline-none focus:ring-1 focus:ring-${
-                errors.ApprehenderType ? "red-700" : "black"
+                errors.ApprehenderType ? "red-700" : "gray-700"
               } ${
-                errors.ApprehenderType ? "border-red-700" : "border-gray-500"
+                errors.ApprehenderType ? "border-red-700" : "border-gray-700"
               } rounded-md`}
               required
             >
@@ -100,9 +100,9 @@ const ViolationDetails = ({ formData, errors, handleChange }: Props) => {
               value={formData.ViolatorType}
               onChange={handleChange}
               className={`w-full px-3 py-2 border-2 focus:outline-none focus:ring-1 focus:ring-${
-                errors.ViolatorType ? "red-700" : "black"
+                errors.ViolatorType ? "red-700" : "gray-700"
               } ${
-                errors.ViolatorType ? "border-red-700" : "border-gray-500"
+                errors.ViolatorType ? "border-red-700" : "border-gray-700"
               } rounded-md`}
               required
             >
