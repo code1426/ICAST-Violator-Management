@@ -1,4 +1,4 @@
-import { BrowserRouter, Route, Routes, Navigate } from "react-router-dom";
+import { Route, Routes, Navigate, HashRouter } from "react-router-dom";
 import { StrictMode } from "react";
 
 import ViolatorDetailPage from "./pages/ViolatorDetailPage";
@@ -32,7 +32,7 @@ const App = () => {
 
   return (
     <StrictMode>
-      <BrowserRouter>
+      <HashRouter>
         <Routes>
           <Route path="/" element={<Navigate to="/home" />} />
           {/* <Route path="/login" element={<LoginPage />} /> */}
@@ -40,7 +40,7 @@ const App = () => {
           <Route path="/home" element={<HomePage />} />
           <Route path="detail/:id" element={<ViolatorDetailPage />} />
         </Routes>
-      </BrowserRouter>
+      </HashRouter>
     </StrictMode>
   );
 };
