@@ -2,6 +2,9 @@ import React, { useState, useRef, useEffect } from "react";
 import supabase from "../utils/supabase";
 import { Link } from "react-router-dom";
 
+// import logo from "./Logo.png"
+// import menu from "./menu.png"
+
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const menuRef = useRef<HTMLDivElement | null>(null);
@@ -38,7 +41,7 @@ const Header = () => {
     <header className="flex items-center bg-color1 py-2 px-1 shadow-md shadow-gray-500">
       <Link to="/home" className="flex flex-row">
         <img
-          src="../assets/ICAST-Logo.png"
+          src="./Logo.png"
           alt="Logo"
           className="mx-3 w-7 h-7"
         />
@@ -49,7 +52,7 @@ const Header = () => {
 
       <button onClick={handleButtonClick} className="flex items-center ml-auto">
         <img
-          src="../assets/burger-menu.png"
+          src="./menu.png"
           alt="Button Icon"
           className="w-10 h-10 mr-2 bg-color1 rounded-md"
         />

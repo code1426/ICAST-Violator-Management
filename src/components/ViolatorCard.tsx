@@ -1,6 +1,8 @@
 import { useNavigate } from "react-router-dom";
 import OptionsButton from "./OptionsButton";
 
+import option from "@/assets/option.png";
+
 interface ViolatorProps {
   id: string;
   name: string;
@@ -35,7 +37,8 @@ const ViolatorCard = ({
   return (
     <div
       className="flex justify-between items-center active:bg-[#a7a09b] bg-color5 border transition-all hover:bg-[#c2bbb5] border-black p-4 rounded-lg shadow-md cursor-pointer my-1 w-5/6 lg:text-base md:text-sm sm:text-xs text-xxs relative"
-      onClick={handleCardClick}>
+      onClick={handleCardClick}
+    >
       <div className="flex-1 text-center">
         <span className="font-medium">{name}</span>
       </div>
@@ -56,12 +59,9 @@ const ViolatorCard = ({
         onClick={(e) => {
           e.stopPropagation();
           onOptionsClick();
-        }}>
-        <img
-          src="../assets/option.png"
-          alt="Options"
-          className="w-6 h-4"
-        />
+        }}
+      >
+        <img src={option} alt="Options" className="w-6 h-4" />
       </button>
       {isOptionsVisible && (
         <div className="absolute top-[-40px] md:top-[-35px] lg:top-[-30px] right-0 transform translate-x-full ml-2 z-10">

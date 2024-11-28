@@ -3,6 +3,8 @@ import useLogin from "../hooks/useLogin";
 import { Spinner } from "react-activity";
 import toast, { Toaster } from "react-hot-toast";
 
+import logo from "@/assets/logo.png"
+
 interface LoginFormData {
   email: string;
   password: string;
@@ -75,7 +77,7 @@ const LoginPage = () => {
       <div className="bg-white p-8 rounded-lg shadow-lg w-full max-w-md">
         <div className="flex justify-center mb-4">
           <img
-            src="../assets/ICAST-Logo.png"
+            src={logo}
             alt="Logo"
             className="w-32 h-32 rounded-full"
           />

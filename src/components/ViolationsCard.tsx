@@ -2,6 +2,8 @@
 import { Violation } from "../types/violator.types";
 import OptionsButton from "./OptionsButton";
 
+import option from "@/assets/option.png"
+
 const ViolationsCard = ({
   OR_number,
   apprehender_name,
@@ -50,7 +52,7 @@ const ViolationsCard = ({
           onOptionsClick();
         }}
       >
-        <img src="../assets/option.png" alt="Options" className="w-6 h-4" />
+        <img src={option} alt="Options" className="w-6 h-4" />
       </button>
       {isOptionsVisible && (
         <div className="absolute top-[-40px] md:top-[-35px] lg:top-[-30px] right-0 transform translate-x-full ml-2 z-10">
