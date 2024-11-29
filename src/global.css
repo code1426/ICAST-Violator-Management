@@ -1,3 +1,11 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* src/index.css or src/tailwind.css */
+@layer base {
+  html,
+  body {
+    @apply bg-color6; /* Example: Set background color and text color */
+  }
+}

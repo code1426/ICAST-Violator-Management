@@ -1,7 +1,10 @@
-// preload.js
-const { contextBridge } = require("electron");
+const { contextBridge, ipcRenderer } = require("electron");
 
-contextBridge.exposeInMainWorld("electron", {
-  // Example of exposing Node.js functionality safely to the renderer
-  myFunction: () => console.log("Function from Electron's main process")
+contextBridge.exposeInMainWorld("electronAPI", {
+  minimize: () => ipcRenderer.send("minimize-window"),
+  toggleMaximize: () => ipcRenderer.send("toggle-maximize"),
+  close: () => ipcRenderer.send("close-window"),
+  isMaximized: () => ipcRenderer.invoke("is-window-maximized"),
 });
+
+

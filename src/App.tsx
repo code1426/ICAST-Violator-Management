@@ -13,6 +13,8 @@ import { RoleContextType } from "./types/auth.types";
 import { useContext } from "react";
 // import useAuth from "./hooks/useAuth";
 
+import WindowHeader from "./components/WindowHeader";
+
 const App = () => {
   const { loading: loadingDB, error: errorDB } = useInitializeDB();
   // const { isAuthenticated, loading: authLoading, error: errorAuth } = useAuth();
@@ -33,6 +35,7 @@ const App = () => {
   return (
     <StrictMode>
       <HashRouter>
+        <WindowHeader />
         <Routes>
           <Route path="/" element={<Navigate to="/home" />} />
           {/* <Route path="/login" element={<LoginPage />} /> */}

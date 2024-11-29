@@ -88,9 +88,10 @@ const HomePage = () => {
   };
 
   return (
-    <div className="min-h-screen bg-color6 p-0 pb-10">
+    <>
+    <div className="min-h-full bg-color6 p-0 pb-10 mt-7">
       <Header />
-      <div className="flex flex-row w-5/6 items-center justify-between justify-self-center my-5 space-x-2">
+      <div className="flex flex-row w-5/6 items-center justify-between justify-self-center my-5 space-x-2 ">
         <EncodeButton role={role} />
         <SearchBar
           entries={caughtViolators}
@@ -149,6 +150,7 @@ const HomePage = () => {
         )}
       </div>
     </div>
+    </>
   );
 };
 

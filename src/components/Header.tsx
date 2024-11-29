@@ -38,8 +38,8 @@ const Header = () => {
   }, [isMenuOpen]);
 
   return (
-    <header className="flex items-center bg-color1 py-2 px-1 shadow-md shadow-gray-500">
-      <Link to="/home" className="flex flex-row">
+    <header className="flex items-center bg-color1 py-2 px-1 shadow-md shadow-gray-500 sticky top-7 left-0 right-0">
+      <Link to="/home" className="flex flex-row items-center">
         <img
           src="./Logo.png"
           alt="Logo"
