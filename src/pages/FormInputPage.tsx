@@ -4,7 +4,6 @@ import { formDataFormatter } from "../utils/formDataFormatter";
 import { Spinner } from "react-activity";
 import "react-activity/dist/Spinner.css";
 import toast, { Toaster } from "react-hot-toast";
-import Header from "../components/Header";
 
 import type { FormData } from "../types/formData.type";
 import useInsertViolator from "../hooks/useInsertViolator";
@@ -175,8 +174,7 @@ const FormInputPage: React.FC = () => {
   };
 
   return (
-    <div className="bg-color6 min-h-screen">
-      <Header />
+    <div className="bg-color6 min-h-[89vh] mt-14">
       <Toaster position="top-center" reverseOrder={false} />
       <div className=" flex flex-col w-full h-[92vh] justify-center items-center">
         <div className=" text-white main-form flex flex-col w-[60%] min-h-[70%] justify-between bg-color3 border-2 border-black shadow-md shadow-gray-500 p-6 rounded-lg">

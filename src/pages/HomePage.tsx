@@ -1,11 +1,7 @@
-import SortButton from "../components/SortButton";
 import ViolatorCard from "../components/ViolatorCard";
-import EncodeButton from "../components/EncodeButton";
-import Header from "../components/Header";
-import SearchBar from "../components/SearchBar";
-import { Spinner } from "react-activity";
-import "react-activity/dist/Spinner.css";
+import Loading from "../components/Loading";
 import { useEffect, useState, useRef, useContext } from "react";
+import HomeSubHeader from "../components/HomeSubHeader";
 
 import useCaughtViolators from "../hooks/useCaughtViolators";
 import { CaughtViolator } from "../types/violator.types";
@@ -89,45 +85,19 @@ const HomePage = () => {
 
   return (
     <>
-    <div className="min-h-full bg-color6 p-0 pb-10 mt-7">
-      <Header />
-      <div className="flex flex-row w-5/6 items-center justify-between justify-self-center my-5 space-x-2 ">
-        <EncodeButton role={role} />
-        <SearchBar
-          entries={caughtViolators}
-          setFilteredEntries={setFilteredUsers}
+      <div className=" bg-color6 h-[90vh] mt-20 overflow-y-auto overflow-x-hidden">
+        <HomeSubHeader
+          caughtViolators={caughtViolators}
+          role={role}
+          filteredUsers={filteredUsers}
+          setFilteredUsers={setFilteredUsers}
         />
-        <SortButton
-          entries={filteredUsers!}
-          setEntries={setFilteredUsers}
-        />
-      </div>
-      <div className="flex flex-col items-center">
-        <div className="flex justify-between items-center border-2 mb-3 border-black bg-color3 p-3 rounded-t-lg shadow-md w-5/6 lg:text-base md:text-sm sm:text-xs text-xxs">
-          <div className="flex-1 text-center">
-            <span className="font-bold">Name</span>
-          </div>
-          <div className="flex-1 text-center">
-            <span className="font-bold">Age</span>
-          </div>
-          <div className="flex-1 text-center">
-            <span className="font-bold">Sex</span>
-          </div>
-          <div className="flex-1 text-center">
-            <span className="font-bold">Latest Violation Date</span>
-          </div>
-          <div className="flex-1 text-center">
-            <span className="font-bold">Violation Count</span>
-          </div>
-          {/* <div className="flex-1 text-center"></div> */}
-        </div>
 
-        {filteredUsers?.map((caughtViolator) => (
-          <div
-            key={caughtViolator.id}
-            className="relative w-full flex justify-center">
+        <div className="card-container flex flex-col items-center justify-center">
+          {filteredUsers?.map((caughtViolator) => (
             <ViolatorCard
               id={caughtViolator.id}
+              key={caughtViolator.id}
               name={`${caughtViolator.first_name} ${caughtViolator.last_name}`}
               age={getAge(caughtViolator.date_of_birth)}
               sex={caughtViolator.sex}
@@ -138,18 +108,10 @@ const HomePage = () => {
               onDelete={handleDelete}
               onEdit={handleEdit}
             />
-          </div>
-        ))}
-        {loading && (
-          <div className="flex text-lg justify-self-center self-center font-semibold p-16">
-            <Spinner
-              size={50}
-              color="#3A2D28"
-            />
-          </div>
-        )}
+          ))}
+          {loading && <Loading message="" />}
+        </div>
       </div>
-    </div>
     </>
   );
 };
